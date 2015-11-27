@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_VER 0.6.7
-ENV TERRAFORM_ZIP terraform_"${TERRAFORM_VER}"_linux_amd64.zip
+ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
 
 RUN apt-get update && apt-get -y install wget unzip openssh-client ruby
 RUN set -ex \
