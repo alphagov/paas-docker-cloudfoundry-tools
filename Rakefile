@@ -1,27 +1,21 @@
-require 'rake'
+namespace :build do
+  desc "Build bosh-init image"
+  task :bosh_init do
+    system "cd bosh-init && docker build -t bosh-init ."
+  end
+end
+
 require 'rspec/core/rake_task'
 
-task :spec    => 'spec:all'
+RSpec::Core::RakeTask.new
+
 task :default => :spec
 
 namespace :spec do
-  targets = []
-  Dir.glob('./spec/*').each do |dir|
-    next unless File.directory?(dir)
-    target = File.basename(dir)
-    target = "_#{target}" if target == "default"
-    targets << target
+
+  desc "Run all specs for bosh-init"
+  RSpec::Core::RakeTask.new("bosh-init") do |t|
+    t.pattern = "spec/bosh-init/**/*_spec.rb"
   end
 
-  task :all     => targets
-  task :default => :all
-
-  targets.each do |target|
-    original_target = target == "_default" ? target[1..-1] : target
-    desc "Run serverspec tests to #{original_target}"
-    RSpec::Core::RakeTask.new(target.to_sym) do |t|
-      ENV['TARGET_HOST'] = original_target
-      t.pattern = "spec/#{original_target}/*_spec.rb"
-    end
-  end
 end
