@@ -4,8 +4,9 @@ services:
   - docker
 
 before_install:
-  - cd bosh-init && docker build -t bosh-init .
-  - docker run bosh-init bosh-init --version
+  - bundle install
+  - bundle exec rake build:bosh_init
+  - bundle exec rake build:spruce
 
 script:
-  - cd ${TRAVIS_BUILD_DIR} && bundle exec rspec
+  - cd ${TRAVIS_BUILD_DIR} && bundle exec rake
