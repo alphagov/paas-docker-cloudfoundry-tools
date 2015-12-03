@@ -1,0 +1,11 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - cd bosh-init && docker build -t bosh-init .
+  - docker run bosh-init bosh-init --version
+
+script:
+  - cd ${TRAVIS_BUILD_DIR} && bundle exec rspec
