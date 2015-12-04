@@ -8,7 +8,7 @@ describe "bosh-init image" do
     set :docker_image, @image.id
   }
 
-  it "should be availble" do
+  it "should be available" do
     expect(@image).to_not be_nil
   end
 
