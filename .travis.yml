@@ -5,7 +5,7 @@ services:
 
 before_install:
   - docker build -t terraform .
-  - docker run -d terraform bash -c "terraform version"
+  - docker run -d terraform sh -c "terraform version"
   - docker ps -a
 
 script:
