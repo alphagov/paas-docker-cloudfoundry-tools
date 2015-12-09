@@ -14,6 +14,10 @@ end
          expect(file("/etc/alpine-release")).to be_file
     end
 
+    it "installs Root Certificates" do
+         expect(file("/usr/share/ca-certificates/mozilla/GlobalSign_Root_CA.crt")).to be_file
+    end
+
     it "checks if terraform binary is executable" do
          expect(file("/usr/local/bin/terraform")).to be_mode 755
     end
