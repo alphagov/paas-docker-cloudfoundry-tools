@@ -29,7 +29,7 @@ describe "spruce image" do
   end
 
   it "has the spruce version #{SPRUCE_VERSION}" do
-    expect(spruce_version).to eq("spruce - Version #{SPRUCE_VERSION} (master)")
+    expect(spruce_version).to eq("spruce - Version #{SPRUCE_VERSION}")
   end
 
   def spruce_version
