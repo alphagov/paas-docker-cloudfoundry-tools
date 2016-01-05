@@ -29,7 +29,7 @@ describe "spruce image" do
   end
 
   it "has the spruce version #{SPRUCE_VERSION}" do
-    expect(spruce_version).to eq("spruce - Version #{SPRUCE_VERSION}")
+    expect(spruce_version).to match(/spruce - Version #{SPRUCE_VERSION}( \(master\))?/)
   end
 
   def spruce_version
