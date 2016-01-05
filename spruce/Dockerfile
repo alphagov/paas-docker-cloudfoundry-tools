@@ -1,6 +1,11 @@
 FROM golang:1.5.1-alpine
 
-RUN apk update
-RUN apk add git \
+ENV SPRUCE_VERSION 0.12.0
+
+RUN apk add --update git \
   && go get github.com/geofffranks/spruce \
-  && apk del git
+  && cd ${GOPATH}/src/github.com/geofffranks/spruce \
+  && git checkout v${SPRUCE_VERSION} \
+  && go install \
+  && apk del git \
+  && rm -rf /var/cache/apk/*
