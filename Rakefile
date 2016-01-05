@@ -10,11 +10,15 @@ namespace :build do
     system "cd spruce && docker build -t spruce ."
   end
 
+  desc "Build curl-ssl image"
+  task :curl_ssl do
+    system "cd curl-ssl && docker build -t curl-ssl ."
+  end
 end
 
 require 'rspec/core/rake_task'
 
-task :spec => ["spec:bosh-init", "spec:spruce"]
+task :spec => ["spec:bosh-init", "spec:spruce", "spec:curl_ssl"]
 task :default => :spec
 
 namespace :spec do
@@ -29,4 +33,8 @@ namespace :spec do
     t.pattern = "spec/spruce/**/*_spec.rb"
   end
 
+  desc "Run all specs for curl-ssl"
+  RSpec::Core::RakeTask.new("curl_ssl") do |t|
+    t.pattern = "spec/curl-ssl/**/*_spec.rb"
+  end
 end
