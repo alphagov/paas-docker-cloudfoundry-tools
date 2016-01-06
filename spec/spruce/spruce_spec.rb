@@ -4,13 +4,8 @@ require 'serverspec'
 
 describe "spruce image" do
   before(:all) {
-    @image = Docker::Image.all().detect{|i| i.info['RepoTags'].include? 'spruce:latest' }
-    set :docker_image, @image.id
+    set :docker_image, find_image_id('spruce:latest')
   }
-
-  it "should be available" do
-    expect(@image).to_not be_nil
-  end
 
   it "installs the right version of Alpine Linux" do
     expect(os_version).to include("Alpine Linux 3.2")

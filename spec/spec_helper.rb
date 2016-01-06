@@ -18,3 +18,10 @@ SPRUCE_VERSION = "0.13.0"
 # curl-ssl
 
 CURL_SSL_PACKAGES = "curl openssl ca-certificates"
+
+def find_image_id(name)
+  image = Docker::Image.all().detect{|i| i.info['RepoTags'][0].end_with? name }
+  raise "Docker image '#{name}' not found. You may need to run 'rake build:<name>' first" unless image
+
+  image.id
+end

@@ -4,13 +4,8 @@ require 'serverspec'
 
 describe "bosh-init image" do
   before(:all) {
-    @image = Docker::Image.all().detect{|i| i.info['RepoTags'].include? 'bosh-init:latest' }
-    set :docker_image, @image.id
+    set :docker_image, find_image_id('bosh-init:latest')
   }
-
-  it "should be available" do
-    expect(@image).to_not be_nil
-  end
 
   it "installs the right version of Ubuntu" do
     expect(os_version).to include("Ubuntu 14")
