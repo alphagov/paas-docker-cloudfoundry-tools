@@ -33,6 +33,14 @@ describe "bosh-init image" do
     expect(bosh_init_version).to eq("version #{BOSH_INIT_VERSION}")
   end
 
+  it "contains the compiled CPI packages" do
+    cmd = command('cat /root/.bosh_init/installations/*/compiled_packages.json')
+    expect(cmd.exit_status).to eq(0)
+    compiled_packages = JSON.parse(cmd.stdout)
+    cpi_package = compiled_packages.find {|p| p["Key"]["PackageName"] == "bosh_aws_cpi" }
+    expect(cpi_package).to be
+  end
+
   def bosh_init_version
     command("bosh-init --version").stdout.strip
   end
