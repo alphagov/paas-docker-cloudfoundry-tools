@@ -1,0 +1,24 @@
+---
+name: dummy-deployment
+cloud_provider:
+  template:
+    name: aws_cpi
+    release: bosh-aws-cpi
+releases:
+- name: bosh-aws-cpi
+  sha1: BOSH_AWS_CPI_CHECKSUM
+  url: BOSH_AWS_CPI_URL
+networks:
+- name: dummy
+  type: vip
+resource_pools:
+- name: dummy
+  network: dummy
+  stemcell:
+    sha1: 1a29c43d4e8abf7476ed6bb83168df1bdb742022
+    url: https://bosh.io/d/stemcells/bosh-aws-xen-hvm-ubuntu-trusty-go_agent?v=3074
+jobs:
+- name: dummy
+  networks:
+  - name: dummy
+  resource_pool: dummy

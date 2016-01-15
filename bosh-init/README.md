@@ -52,3 +52,12 @@ $ docker run -v /home/ubuntu/docker-bosh-init-manifest:/docker-bosh-init-manifes
 bosh-init deploy /docker-bosh-init-manifest/bosh-manifest.yml
 
 ```
+
+## Caching compile of AWS CPI
+
+The container has been preseeded with a compile of the bosh AWS CPI. If your
+manifest is using the same version, this will speed things up considerably.
+
+The version of the CPi that's cached is controller by the `BOSH_AWS_CPI_URL`
+and `BOSH_AWS_CPI_CHECKSUM` variables in the `Dockerfile`, which should contain
+values that match the `url` and `sha1` parameters of the bosh release.

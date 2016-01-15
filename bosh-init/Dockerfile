@@ -12,3 +12,10 @@ RUN apt-get install -y wget
 
 RUN wget -q -O /usr/local/bin/bosh-init --no-check-certificate ${BOSH_INIT_URL}
 RUN chmod +x /usr/local/bin/bosh-init
+
+ENV BOSH_AWS_CPI_URL https://bosh.io/d/github.com/cloudfoundry-incubator/bosh-aws-cpi-release?v=36
+ENV BOSH_AWS_CPI_CHECKSUM db2a6c6cdd5ff9f77bf083e10118fa72e1f5e181
+
+COPY bosh_init_cache /tmp/bosh_init_cache/
+RUN /tmp/bosh_init_cache/seed_bosh_init_cache.sh && \
+    rm -rf /tmp/bosh_init_cache
