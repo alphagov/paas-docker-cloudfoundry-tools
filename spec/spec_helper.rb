@@ -25,3 +25,8 @@ def find_image_id(name)
 
   image.id
 end
+
+# mksecrets
+
+MKSECRETS_PACKAGES = "pwgen"
+MKPASSWD_BIN = "/usr/bin/mkpasswd"

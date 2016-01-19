@@ -2,9 +2,9 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-describe "curl-ssl image" do
+describe "mksecrets image" do
   before(:all) {
-    set :docker_image, find_image_id('curl-ssl:latest')
+    set :docker_image, find_image_id('mksecrets:latest')
   }
 
   it "installs the right version of Alpine" do
@@ -16,8 +16,13 @@ describe "curl-ssl image" do
   end
 
   it "installs required packages" do
-    CURL_SSL_PACKAGES.split(' ').each do |package|
+    MKSECRETS_PACKAGES.split(' ').each do |package|
       expect(command("apk -vv info | grep #{package}").exit_status).to eq(0)
     end
   end
+
+  it "can run mkpasswd" do
+    expect(command('echo mysecret | mkpasswd').exit_status).to eq(0)
+  end
+
 end

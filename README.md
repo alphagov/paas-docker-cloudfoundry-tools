@@ -9,3 +9,4 @@ List:
 * [bosh-init](https://github.com/alphagov/paas-docker-cloudfoundry-tools/tree/master/bosh-init)
 * [spruce](https://github.com/alphagov/paas-docker-cloudfoundry-tools/tree/master/spruce)
 * [curl-ssl](https://github.com/alphagov/paas-docker-cloudfoundry-tools/tree/master/curl-ssl)
+* [mksecrets](https://github.com/alphagov/paas-docker-cloudfoundry-tools/tree/master/mksecrets)
