@@ -14,6 +14,11 @@ namespace :build do
   task :curl_ssl do
     system "cd curl-ssl && docker build -t curl-ssl ."
   end
+
+  desc "Build mksecrets image"
+  task :mksecrets do
+    system "cd mksecrets && docker build -t mksecrets ."
+  end
 end
 
 require 'rspec/core/rake_task'
@@ -36,5 +41,10 @@ namespace :spec do
   desc "Run all specs for curl-ssl"
   RSpec::Core::RakeTask.new("curl_ssl") do |t|
     t.pattern = "spec/curl-ssl/**/*_spec.rb"
+  end
+
+  desc "Run all specs for mksecrets"
+  RSpec::Core::RakeTask.new("mksecrets") do |t|
+    t.pattern = "spec/mksecrets/**/*_spec.rb"
   end
 end
