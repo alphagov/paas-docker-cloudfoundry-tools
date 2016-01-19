@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-describe "bosh-init image" do
+describe "curl-ssl image" do
   before(:all) {
     set :docker_image, find_image_id('curl-ssl:latest')
   }
