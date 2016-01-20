@@ -30,3 +30,8 @@ end
 
 MKSECRETS_PACKAGES = "pwgen"
 MKPASSWD_BIN = "/usr/bin/mkpasswd"
+
+# awscli
+#
+AWSCLI_BIN = "/usr/bin/aws"
+AWSCLI_VERSION = "1.9.21"

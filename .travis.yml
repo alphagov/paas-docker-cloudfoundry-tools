@@ -9,6 +9,7 @@ before_install:
   - bundle exec rake build:spruce
   - bundle exec rake build:curl_ssl
   - bundle exec rake build:mksecrets
+  - bundle exec rake build:awscli
 
 script:
   - cd ${TRAVIS_BUILD_DIR} && bundle exec rake
