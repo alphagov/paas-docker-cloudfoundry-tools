@@ -30,3 +30,10 @@ end
 
 MKSECRETS_PACKAGES = "pwgen"
 MKPASSWD_BIN = "/usr/bin/mkpasswd"
+
+# awscli
+
+AWSCLI_PACKAGES = "curl openssl ca-certificates less"
+
+AWSCLI_BIN = "/usr/bin/aws"
+AWSCLI_VERSION = "1.9.21"

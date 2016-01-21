@@ -19,6 +19,12 @@ namespace :build do
   task :mksecrets do
     system "cd mksecrets && docker build -t mksecrets ."
   end
+
+  desc "Build awscli image"
+  task :awscli do
+    system "cd awscli && docker build -t awscli ."
+  end
+
 end
 
 require 'rspec/core/rake_task'
@@ -46,5 +52,10 @@ namespace :spec do
   desc "Run all specs for mksecrets"
   RSpec::Core::RakeTask.new("mksecrets") do |t|
     t.pattern = "spec/mksecrets/**/*_spec.rb"
+  end
+
+  desc "Run all specs for awscli"
+  RSpec::Core::RakeTask.new("awscli") do |t|
+    t.pattern = "spec/awscli/**/*_spec.rb"
   end
 end
