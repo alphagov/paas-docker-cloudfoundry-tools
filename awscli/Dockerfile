@@ -1,7 +1,7 @@
 FROM governmentpaas/curl-ssl
 
 ENV AWSCLI_VERSION "1.9.21"
-ENV PACKAGES "python py-pip"
+ENV PACKAGES "groff less python py-pip"
 
 RUN apk add --update $PACKAGES \
     && pip install awscli==$AWSCLI_VERSION \

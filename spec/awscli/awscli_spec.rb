@@ -24,10 +24,20 @@ describe "awscli image" do
   end
 
   it "has the 'aws' version #{AWSCLI_VERSION}" do
+    def awscli_version
+      command("aws --version").stderr.strip
+    end
     expect(awscli_version).to match(/aws-cli\/#{AWSCLI_VERSION} /)
   end
 
-  def awscli_version
-    command("aws --version").stderr.strip
+  it "the 'aws help' command works" do
+    expect(command("aws help").stdout).to match(/SYNOPSIS/)
   end
+
+  it "installs required packages" do
+    AWSCLI_PACKAGES.split(' ').each do |package|
+      expect(command("apk -vv info | grep #{package}").exit_status).to eq(0)
+    end
+  end
+
 end
