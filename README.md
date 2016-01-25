@@ -10,5 +10,5 @@ This container allows you to run Terraform inside a Docker container.
 ## How to run it
 
 ```
-docker run -ti terraform
+docker run -ti terraform terraform
 ```
