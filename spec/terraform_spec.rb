@@ -22,8 +22,8 @@ end
          expect(file("/usr/local/bin/terraform")).to be_mode 755
     end
 
-    it "has the Terraform version 0.6.9" do
-        expect(terraform_version).to include("Terraform v0.6.9")
+    it "has the Terraform version 0.6.10" do
+        expect(terraform_version).to include("Terraform v0.6.10")
     end
 
     def terraform_version
