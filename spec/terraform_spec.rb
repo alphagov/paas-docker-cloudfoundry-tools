@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Terraform image" do
 before(:all) do
-    @image = Docker::Image.all().detect{|i| i.info['RepoTags'].include? 'governmentpaas/docker-terraform:latest' }
+    @image = Docker::Image.all().detect{|i| i.info['RepoTags'].include? 'terraform:latest' }
     set :docker_image, @image.id
 end
     
