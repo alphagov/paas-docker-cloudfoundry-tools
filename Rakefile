@@ -1,19 +1,20 @@
 dockerfiles = Dir.glob(File.join("*", "Dockerfile"))
 containers = dockerfiles.map { |f| File.dirname(f) }
 
-namespace :build do
+namespace :build do |ns|
   containers.each { |container|
     desc "Build #{container} image"
     task container.to_sym do
       system "cd #{container} && docker build -t #{container} ."
     end
   }
+  desc "Build all containers"
+  task :all do
+    ns.tasks.each { |t| t.invoke }
+  end
 end
 
-task :spec => ["spec:bosh-init", "spec:spruce", "spec:curl_ssl"]
-task :default => :spec
-
-namespace :spec do
+namespace :spec do |ns|
   require 'rspec/core/rake_task'
 
   containers.each { |container|
@@ -25,5 +26,10 @@ namespace :spec do
       end
     end
   }
+  desc "Run all containers spec"
+  task :all do
+    ns.tasks.each { |t| t.invoke }
+  end
 end
 
+task :default => "spec:all"
