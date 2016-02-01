@@ -18,7 +18,7 @@ namespace :spec do |ns|
   require 'rspec/core/rake_task'
 
   containers.each { |container|
-    spec_pattern = File.join("spec", container, "**", "*_spec.rb")
+    spec_pattern = File.join(container, "**", "*_spec.rb")
     if Dir.glob(spec_pattern).any?
       desc "Run all specs for #{container}"
       RSpec::Core::RakeTask.new(container) do |t|
