@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
+CURL_SSL_PACKAGES = "curl openssl ca-certificates"
+
 describe "curl-ssl image" do
   before(:all) {
     set :docker_image, find_image_id('curl-ssl:latest')

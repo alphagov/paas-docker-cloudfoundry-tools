@@ -2,6 +2,9 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
+MKSECRETS_PACKAGES = "pwgen"
+MKPASSWD_BIN = "/usr/bin/mkpasswd"
+
 describe "mksecrets image" do
   before(:all) {
     set :docker_image, find_image_id('mksecrets:latest')
