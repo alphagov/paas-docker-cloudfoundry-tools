@@ -32,4 +32,4 @@ namespace :spec do |ns|
   end
 end
 
-task :default => "spec:all"
+task :default => [ "build:all", "spec:all" ]
