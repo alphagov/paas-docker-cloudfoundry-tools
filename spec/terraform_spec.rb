@@ -37,4 +37,12 @@ end
     def ssh_version
         command("ssh -V").stderr.strip
     end
+
+    it "should not have binary directory larger than 200M" do
+        expect(binaries_size).to be < 200
+    end
+
+    def binaries_size
+        Integer(command("du -m /usr/local/bin").stdout.split.first)
+    end
 end
