@@ -2,6 +2,11 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
+AWSCLI_PACKAGES = "curl openssl ca-certificates less"
+
+AWSCLI_BIN = "/usr/bin/aws"
+AWSCLI_VERSION = "1.9.21"
+
 describe "awscli image" do
   before(:all) {
     set :docker_image, find_image_id('awscli:latest')

@@ -5,11 +5,7 @@ services:
 
 before_install:
   - bundle install
-  - bundle exec rake build:bosh_init
-  - bundle exec rake build:spruce
-  - bundle exec rake build:curl_ssl
-  - bundle exec rake build:mksecrets
-  - bundle exec rake build:awscli
+  - bundle exec rake build:all
 
 script:
-  - cd ${TRAVIS_BUILD_DIR} && bundle exec rake
+  - cd ${TRAVIS_BUILD_DIR} && bundle exec rake spec:all

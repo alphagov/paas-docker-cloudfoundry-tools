@@ -2,6 +2,9 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
+SPRUCE_BIN = "/go/bin/spruce"
+SPRUCE_VERSION = "0.13.0"
+
 describe "spruce image" do
   before(:all) {
     set :docker_image, find_image_id('spruce:latest')
