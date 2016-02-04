@@ -4,7 +4,7 @@ require 'serverspec'
 
 CERTSTRAP_BIN = "/usr/local/bin/certstrap"
 CERTSTRAP_VERSION = "0.1.0"
-CERTSTRAP_PACKAGES = "openssl"
+CERTSTRAP_PACKAGES = "openssl curl"
 
 describe "certstrap image" do
   before(:all) {
