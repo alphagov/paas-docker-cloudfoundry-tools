@@ -7,7 +7,7 @@ Based on [alpine](https://hub.docker.com/_/alpine/) image.
 ## Build locally
 
 ```
-$ cd bosh-init
+$ cd curl-ssl
 $ docker build -t curl-ssl .
 ```
 
