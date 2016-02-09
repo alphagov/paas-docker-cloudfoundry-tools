@@ -21,4 +21,11 @@ describe "cf-cli image" do
       command("cf --version").stdout
     ).to match(/cf version #{CF_CLI_VERSION}/)
   end
+
+  it "has curl available" do
+    # Needed by the cf acceptance-test helpers
+    expect(
+      command("curl --version").exit_status
+    ).to eq(0)
+  end
 end
