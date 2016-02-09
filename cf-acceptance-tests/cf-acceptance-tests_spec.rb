@@ -5,9 +5,9 @@ require 'serverspec'
 GO_VERSION="1.5.3"
 CF_CLI_VERSION="6.15.0"
 
-describe "cf-cli image" do
+describe "cf-acceptance-tests image" do
   before(:all) {
-    set :docker_image, find_image_id('cf-cli:latest')
+    set :docker_image, find_image_id('cf-acceptance-tests:latest')
   }
 
   it "has the expected version of Go" do
@@ -20,5 +20,12 @@ describe "cf-cli image" do
     expect(
       command("cf --version").stdout
     ).to match(/cf version #{CF_CLI_VERSION}/)
+  end
+
+  it "has curl available" do
+    # Needed by the cf acceptance-test helpers
+    expect(
+      command("curl --version").exit_status
+    ).to eq(0)
   end
 end
