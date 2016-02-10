@@ -16,6 +16,13 @@ describe "cf-acceptance-tests image" do
     ).to match(/go version go#{GO_VERSION}/)
   end
 
+  it "has godep available" do
+    expect(
+      command("godep version").exit_status
+    ).to eq(0)
+
+  end
+
   it "has the expected version of the CF CLI" do
     expect(
       command("cf --version").stdout
