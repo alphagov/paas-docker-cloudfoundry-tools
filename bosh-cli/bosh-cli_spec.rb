@@ -15,6 +15,12 @@ describe "bosh-cli image" do
     ).to eq("BOSH #{BOSH_CLI_VERSION}")
   end
 
+  it "has `file` available" do
+    expect(
+      command("file --version").exit_status
+    ).to eq(0)
+  end
+
   it "has ssh available" do
     expect(
       command("ssh -V").exit_status
