@@ -2,6 +2,17 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
+REQUIRED_BINARIES = %w{
+  terraform
+  terraform-provider-aws
+  terraform-provider-null
+  terraform-provider-template
+  terraform-provider-tls
+  terraform-provisioner-file
+  terraform-provisioner-local-exec
+  terraform-provisioner-remote-exec
+}
+
 describe "Terraform image" do
   before(:all) {
     set :docker_image, find_image_id('terraform:latest')
@@ -18,6 +29,20 @@ describe "Terraform image" do
   it "checks if terraform binary is executable" do
     expect(file("/usr/local/bin/terraform")).to be_mode 755
   end
+
+  it "installs all the whitelisted binaries" do
+    command("echo $BINARY_WHITELIST").stdout.split.each { |f|
+      expect(file("/usr/local/bin/#{f}")).to be_mode 755
+    }
+  end
+
+  REQUIRED_BINARIES.each { |binary|
+    it "required binary '#{binary}' is in path and executable" do
+      command_path = command("which #{binary}").stdout.strip
+      expect(command_path).not_to be_empty
+      expect(file(command_path)).to be_mode 755
+    end
+  }
 
   it "has the Terraform version 0.6.10" do
     expect(terraform_version).to include("Terraform v0.6.10")
