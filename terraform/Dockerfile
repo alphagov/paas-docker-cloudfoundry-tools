@@ -8,6 +8,7 @@ ENV BINARY_WHITELIST \
   terraform-provider-null \
   terraform-provider-template \
   terraform-provider-tls \
+  terraform-provider-postgresql \
   terraform-provisioner-file \
   terraform-provisioner-local-exec \
   terraform-provisioner-remote-exec
