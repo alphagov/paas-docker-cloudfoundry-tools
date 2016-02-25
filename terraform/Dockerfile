@@ -1,6 +1,6 @@
 FROM alpine
 ENV PATH $PATH:/usr/local/bin
-ENV TERRAFORM_VER 0.6.10
+ENV TERRAFORM_VER 0.6.12
 ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
 ENV BINARY_WHITELIST \
   terraform \
@@ -13,7 +13,7 @@ ENV BINARY_WHITELIST \
   terraform-provisioner-local-exec \
   terraform-provisioner-remote-exec
 
-RUN apk update && apk add openssl openssh ca-certificates
+RUN apk add --update openssl openssh-client ca-certificates && rm -rf /var/cache/apk/*
 RUN set -ex \
        && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/${TERRAFORM_ZIP} -O /tmp/${TERRAFORM_ZIP} \
        && unzip /tmp/${TERRAFORM_ZIP} -d /usr/local/bin ${BINARY_WHITELIST} \

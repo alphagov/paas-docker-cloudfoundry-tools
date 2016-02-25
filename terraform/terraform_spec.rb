@@ -27,10 +27,6 @@ describe "Terraform image" do
     expect(file("/usr/share/ca-certificates/mozilla/GlobalSign_Root_CA.crt")).to be_file
   end
 
-  it "checks if terraform binary is executable" do
-    expect(file("/usr/local/bin/terraform")).to be_mode 755
-  end
-
   it "installs all the whitelisted binaries" do
     command("echo $BINARY_WHITELIST").stdout.split.each { |f|
       expect(file("/usr/local/bin/#{f}")).to be_mode 755
@@ -45,27 +41,21 @@ describe "Terraform image" do
     end
   }
 
-  it "has the Terraform version 0.6.10" do
-    expect(terraform_version).to include("Terraform v0.6.10")
-  end
-
-  def terraform_version
-    command("terraform version").stdout.strip
+  it "has the expected Terraform version" do
+    expect(
+      command("terraform version").stdout
+    ).to include("Terraform v0.6.12")
   end
 
   it "installs SSH" do
-    expect(ssh_version).to include("OpenSSH")
-  end
-
-  def ssh_version
-    command("ssh -V").stderr.strip
+    expect(
+      command("ssh -V").stderr.strip
+    ).to include("OpenSSH")
   end
 
   it "should not have binary directory larger than 200M" do
-    expect(binaries_size).to be < 200
-  end
-
-  def binaries_size
-    Integer(command("du -m /usr/local/bin").stdout.split.first)
+    expect(
+      Integer(command("du -m /usr/local/bin").stdout.split.first)
+    ).to be < 200
   end
 end
