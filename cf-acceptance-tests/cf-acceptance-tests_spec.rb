@@ -35,4 +35,11 @@ describe "cf-acceptance-tests image" do
       command("curl --version").exit_status
     ).to eq(0)
   end
+
+  it "has unzip available" do
+    # Needed by the cf acceptance-test helpers
+    expect(
+      command("unzip -v").exit_status
+    ).to eq(0)
+  end
 end
