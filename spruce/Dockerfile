@@ -1,11 +1,11 @@
-FROM golang:1.5.1-alpine
+FROM alpine:3.3
 
-ENV SPRUCE_VERSION 0.13.0
+ENV SPRUCE_VERSION 1.1.2
 
-RUN apk add --update git \
-  && go get -d github.com/geofffranks/spruce \
-  && cd ${GOPATH}/src/github.com/geofffranks/spruce \
-  && git checkout v${SPRUCE_VERSION} \
-  && go install \
-  && apk del git \
+ENV PACKAGES "curl openssl ca-certificates"
+
+RUN apk add --update $PACKAGES \
+  && curl -f -L https://github.com/geofffranks/spruce/releases/download/v$SPRUCE_VERSION/spruce-linux-amd64 > /usr/local/bin/spruce \
+  && chmod +x /usr/local/bin/spruce \
+  && apk del $PACKAGES \
   && rm -rf /var/cache/apk/*
