@@ -5,7 +5,7 @@ namespace :build do |ns|
   containers.each { |container|
     desc "Build #{container} image"
     task container.to_sym do
-      system "cd #{container} && docker build -t #{container} ."
+      system "cd #{container} && docker build -t #{container} ." or abort
     end
   }
   desc "Build all containers"

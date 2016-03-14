@@ -3,9 +3,8 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - bundle install
+before_script:
   - bundle exec rake build:all
 
 script:
-  - cd ${TRAVIS_BUILD_DIR} && bundle exec rake spec:all
+  - bundle exec rake spec:all
