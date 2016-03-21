@@ -1,4 +1,5 @@
-FROM alpine
+FROM alpine:3.3
+
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_VER 0.6.13
 ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
