@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM governmentpaas/awscli
 
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_VER 0.6.13
