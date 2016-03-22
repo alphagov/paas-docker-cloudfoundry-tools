@@ -19,8 +19,8 @@ describe "Terraform image" do
     set :docker_image, find_image_id('terraform:latest')
   }
 
-  it "installs the Alpine linux" do
-    expect(file("/etc/alpine-release")).to be_file
+  it "installs Alpine" do
+    expect(command("cat /etc/issue | head -1").stdout).to include("Alpine Linux")
   end
 
   it "installs Root Certificates" do
@@ -44,7 +44,7 @@ describe "Terraform image" do
   it "has the expected Terraform version" do
     expect(
       command("terraform version").stdout
-    ).to include("Terraform v0.6.12")
+    ).to include("Terraform v0.6.13")
   end
 
   it "installs SSH" do
