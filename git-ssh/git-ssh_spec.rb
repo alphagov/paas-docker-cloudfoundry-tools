@@ -29,4 +29,8 @@ describe "image" do
     expect(command('ssh -V').exit_status).to eq(0)
   end
 
+  it "/root/.ssh exists" do
+    expect(file('/root/.ssh')).to be_directory
+  end
+
 end

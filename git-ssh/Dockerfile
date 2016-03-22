@@ -3,3 +3,5 @@ FROM alpine:3.3
 ENV PACKAGES "git openssh-client"
 
 RUN apk add --update $PACKAGES && rm -rf /var/cache/apk/*
+
+RUN mkdir -p /root/.ssh
