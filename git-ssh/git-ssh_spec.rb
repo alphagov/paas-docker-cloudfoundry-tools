@@ -33,4 +33,8 @@ describe "image" do
     expect(file('/root/.ssh')).to be_directory
   end
 
+  it "/root/.gitconfig contains user and email" do
+    expect(file('/root/.gitconfig')).to contain 'name ='
+    expect(file('/root/.gitconfig')).to contain 'email ='
+  end
 end
