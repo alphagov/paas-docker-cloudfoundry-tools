@@ -29,4 +29,12 @@ describe "image" do
     expect(command('ssh -V').exit_status).to eq(0)
   end
 
+  it "/root/.ssh exists" do
+    expect(file('/root/.ssh')).to be_directory
+  end
+
+  it "/root/.gitconfig contains user and email" do
+    expect(file('/root/.gitconfig')).to contain 'name ='
+    expect(file('/root/.gitconfig')).to contain 'email ='
+  end
 end
