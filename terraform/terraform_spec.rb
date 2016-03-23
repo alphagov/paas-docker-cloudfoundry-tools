@@ -27,12 +27,6 @@ describe "Terraform image" do
     expect(file("/usr/share/ca-certificates/mozilla/GlobalSign_Root_CA.crt")).to be_file
   end
 
-  it "installs all the whitelisted binaries" do
-    command("echo $BINARY_WHITELIST").stdout.split.each { |f|
-      expect(file("/usr/local/bin/#{f}")).to be_mode 755
-    }
-  end
-
   REQUIRED_BINARIES.each { |binary|
     it "required binary '#{binary}' is in path and executable" do
       command_path = command("which #{binary}").stdout.strip
