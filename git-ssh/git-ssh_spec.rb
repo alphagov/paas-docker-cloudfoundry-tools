@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-PACKAGES = "git openssh-client ca-certificates"
+PACKAGES = "git openssh-client ca-certificates gnupg"
 GIT_VERSION = "2.6.4"
 OPENSSH_VERSION = "7.2p2"
 
