@@ -1,8 +1,7 @@
-FROM alpine:3.3
+FROM golang:1.6-alpine
 
 ENV PATH $PATH:/usr/local/bin
-ENV TERRAFORM_VER 0.6.13
-ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
+ENV TERRAFORM_TAG 9cb08cb229a821753bdba8a6fc8c010767dea6c1
 ENV BINARY_WHITELIST \
   terraform \
   terraform-provider-aws \
@@ -14,8 +13,16 @@ ENV BINARY_WHITELIST \
   terraform-provisioner-local-exec \
   terraform-provisioner-remote-exec
 
-RUN apk add --update openssl openssh-client ca-certificates && rm -rf /var/cache/apk/*
+ENV PACKAGES "openssl openssh-client ca-certificates make bash git"
+
 RUN set -ex \
-       && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/${TERRAFORM_ZIP} -O /tmp/${TERRAFORM_ZIP} \
-       && unzip /tmp/${TERRAFORM_ZIP} -d /usr/local/bin ${BINARY_WHITELIST} \
-       && rm /tmp/${TERRAFORM_ZIP}
+    && apk add --update $PACKAGES \
+    && mkdir -p /go/src/github.com/hashicorp/ \
+    && cd /go/src/github.com/hashicorp/ \
+    && git clone https://github.com/hashicorp/terraform.git \
+    && cd terraform \
+    && git checkout $TERRAFORM_TAG \
+    && make dev \
+    && for file in $BINARY_WHITELIST ; do mv bin/$file /usr/local/bin ; done \
+    && rm -rf /go \
+    && rm -rf /var/cache/apk/*
