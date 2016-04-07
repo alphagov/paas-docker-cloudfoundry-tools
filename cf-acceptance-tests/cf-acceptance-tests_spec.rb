@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-GO_VERSION="1.5.3"
+GO_VERSION="1.6"
 CF_CLI_VERSION="6.15.0"
 
 describe "cf-acceptance-tests image" do
