@@ -1,6 +1,6 @@
 FROM alpine:3.3
 
-ENV PACKAGES "git openssh-client gnupg"
+ENV PACKAGES "git openssh-client gnupg bash"
 
 RUN apk add --update $PACKAGES && rm -rf /var/cache/apk/*
 
