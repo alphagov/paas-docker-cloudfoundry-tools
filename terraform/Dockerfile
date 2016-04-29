@@ -2,6 +2,7 @@ FROM alpine:3.3
 
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_VER 0.6.13
+ENV TERRAFORM_SUM 8eeddca53958d5c871de93a624eb0f5971f97cbaf107e0b2d1cc289f2ac21b79
 ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
 ENV BINARY_WHITELIST \
   terraform \
@@ -17,5 +18,6 @@ ENV BINARY_WHITELIST \
 RUN apk add --update openssl openssh-client ca-certificates && rm -rf /var/cache/apk/*
 RUN set -ex \
        && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/${TERRAFORM_ZIP} -O /tmp/${TERRAFORM_ZIP} \
+       && echo "${TERRAFORM_SUM}  /tmp/${TERRAFORM_ZIP}" | sha256sum -c - \
        && unzip /tmp/${TERRAFORM_ZIP} -d /usr/local/bin ${BINARY_WHITELIST} \
        && rm /tmp/${TERRAFORM_ZIP}
