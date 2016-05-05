@@ -3,7 +3,7 @@ Container for running CloudFoundry acceptance tests.
 It includes all the dependencies of the [CF test
 helpers](https://github.com/cloudfoundry-incubator/cf-test-helpers):
 
-* Go 1.5 compiler
+* Go compiler
 * `cf` CLI
 * `curl`
 * [`godep`](github.com/tools/godep)
