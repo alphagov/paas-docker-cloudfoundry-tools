@@ -4,7 +4,6 @@ require 'serverspec'
 
 BOSH_INIT_PACKAGES = "build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3"
-BOSH_INIT_BIN = "/usr/local/bin/bosh-init"
 BOSH_INIT_VERSION = "0.0.80-a62aad7-2015-10-28T01:52:30Z"
 
 describe "bosh-init image" do
@@ -26,16 +25,10 @@ describe "bosh-init image" do
     end
   end
 
-  it "checks if bosh-init binary exists and is a file" do
-    expect(file(BOSH_INIT_BIN)).to be_file
-  end
-
-  it "checks if bosh-init binary is executable" do
-    expect(file(BOSH_INIT_BIN)).to be_mode 755
-  end
-
-  it "has the bosh-init version #{BOSH_INIT_VERSION}" do
-    expect(bosh_init_version).to eq("version #{BOSH_INIT_VERSION}")
+  it "installs the expected version of bosh-init" do
+    expect(
+      command("bosh-init --version").stdout.strip
+    ).to eq("version #{BOSH_INIT_VERSION}")
   end
 
   it "contains the compiled CPI packages" do
@@ -51,9 +44,5 @@ describe "bosh-init image" do
     expect(cpi_package).to be
 
     expect(file("#{installation_path}/packages/bosh_aws_cpi/bin/aws_cpi")).to be_executable
-  end
-
-  def bosh_init_version
-    command("bosh-init --version").stdout.strip
   end
 end
