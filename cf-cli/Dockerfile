@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM ruby:2.2-slim
 
 ENV PACKAGES unzip curl ca-certificates git
 

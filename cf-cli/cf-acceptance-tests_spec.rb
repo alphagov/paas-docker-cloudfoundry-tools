@@ -32,4 +32,10 @@ describe "cf-cli image" do
       command("git --version").exit_status
     ).to eq(0)
   end
+
+  it "has ruby 2.2 available" do
+    cmd = command("ruby -v")
+    expect(cmd.exit_status).to eq(0)
+    expect(cmd.stdout).to match(/^ruby 2.2/)
+  end
 end
