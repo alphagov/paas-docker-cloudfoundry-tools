@@ -2,8 +2,9 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-SPRUCE_BIN = "/go/bin/spruce"
-SPRUCE_VERSION = "0.13.0"
+SPRUCE_BIN = "/usr/local/bin/spruce"
+SPRUCE_VERSION = "1.4.5"
+ALPINE_VERSION = "3.4"
 
 describe "spruce image" do
   before(:all) {
@@ -11,7 +12,7 @@ describe "spruce image" do
   }
 
   it "installs the right version of Alpine Linux" do
-    expect(os_version).to include("Alpine Linux 3.2")
+    expect(os_version).to include("Alpine Linux #{ALPINE_VERSION}")
   end
 
   def os_version
