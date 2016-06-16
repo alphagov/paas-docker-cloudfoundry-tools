@@ -1,12 +1,10 @@
-FROM golang:1.5.1-alpine
+FROM alpine:3.4
 
-ENV SPRUCE_VERSION 0.13.0
+ENV SPRUCE_VERSION 1.4.5
 
-RUN apk add --update git \
-  && go get -d github.com/geofffranks/spruce \
-  && cd ${GOPATH}/src/github.com/geofffranks/spruce \
-  && git checkout v${SPRUCE_VERSION} \
-  && export GOPATH=$(pwd)/Godeps/_workspace:$GOPATH \
-  && go install \
-  && apk del git \
+RUN apk add --update wget ca-certificates \
+  && wget https://github.com/geofffranks/spruce/releases/download/v${SPRUCE_VERSION}/spruce-linux-amd64 \
+  && chmod +x spruce-linux-amd64 \
+  && mv spruce-linux-amd64 /usr/local/bin/spruce \
+  && apk del wget ca-certificates \
   && rm -rf /var/cache/apk/*
