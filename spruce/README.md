@@ -1,6 +1,6 @@
 Installs [spruce](https://github.com/geofffranks/spruce).
 
-It uses a go alpine linux image as base to be able to compile go and keep a small image size.
+It uses alpine linux image as base and deploys statically compiled spruce release which runs directly.
 
 ## Requirements
 Spruce processes manifest files. To make them available to spruce inside the container, they must be mounted via one or several volumes.
@@ -10,6 +10,12 @@ Spruce processes manifest files. To make them available to spruce inside the con
 ```
 $ cd spruce
 $ docker build -t spruce .
+```
+
+or
+
+```
+$ rake build:spruce
 ```
 
 ## Run
