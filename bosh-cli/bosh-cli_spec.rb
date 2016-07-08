@@ -31,7 +31,8 @@ describe "bosh-cli image" do
     # See https://github.com/nahi/httpclient/blob/v2.7.1/lib/httpclient/ssl_config.rb#L441-L452
     # (httpclient is a dependency of bosh_cli)
     # With an older version of openssl, bosh_cli spits out warnings.
-    cmd = command("openssl version")
+    cmd = command("ruby -ropenssl -e 'puts OpenSSL::OPENSSL_VERSION'")
+
     expect(cmd.exit_status).to eq(0)
 
     ssl_version_str = cmd.stdout.strip
