@@ -51,6 +51,3 @@ DEPENDENCIES
   rake (~> 10.4.2)
   serverspec (~> 2.19)
   should_not (~> 1.1)
-
-BUNDLED WITH
-   1.10.6
