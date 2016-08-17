@@ -6,7 +6,7 @@ GEM
       excon (>= 0.38.0)
       json
     excon (0.45.4)
-    json (1.8.1)
+    json (2.0.2)
     multi_json (1.11.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -47,7 +47,7 @@ PLATFORMS
 
 DEPENDENCIES
   docker-api (~> 1.21)
-  json (= 1.8.1)
+  json (~> 2.0.0)
   rake (~> 10.4.2)
   serverspec (~> 2.19)
   should_not (~> 1.1)
