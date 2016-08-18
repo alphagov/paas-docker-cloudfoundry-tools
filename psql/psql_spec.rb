@@ -3,8 +3,6 @@ require 'docker'
 require 'serverspec'
 
 PSQL_PACKAGE = 'postgresql-client'
-PSQL_VERSION = '9.4.6'
-PSQL_PACKAGE_VERSION = PSQL_VERSION + '-r0'
 
 describe "psql image" do
   before(:all) {
@@ -21,15 +19,11 @@ describe "psql image" do
 
   it "installs required package" do
     expect(command("apk info #{PSQL_PACKAGE}").stdout.strip).to \
-      include("#{PSQL_PACKAGE}-#{PSQL_PACKAGE_VERSION}")
+      include("#{PSQL_PACKAGE}")
   end
 
   it "can run psql" do
     expect(command('psql --version').exit_status).to eq(0)
-  end
-
-  it "has the right version" do
-    expect(command("psql --version").stdout.strip).to include(PSQL_VERSION)
   end
 
 end
