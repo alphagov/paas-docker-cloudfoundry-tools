@@ -33,6 +33,12 @@ describe "cf-cli image" do
     ).to eq(0)
   end
 
+  it "has jq available" do
+    cmd = command("jq --version")
+    expect(cmd.exit_status).to eq(0)
+    expect(cmd.stdout).to match(/^jq-1.5/)
+  end
+
   it "has ruby 2.2 available" do
     cmd = command("ruby -v")
     expect(cmd.exit_status).to eq(0)
