@@ -44,4 +44,9 @@ describe "cf-cli image" do
     expect(cmd.exit_status).to eq(0)
     expect(cmd.stdout).to match(/^ruby 2.2/)
   end
+
+  it "has ruby json gem available" do
+    cmd = command("ruby -e 'require \"json\"'")
+    expect(cmd.exit_status).to eq(0)
+  end
 end
