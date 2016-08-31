@@ -1,0 +1,36 @@
+---
+commands:
+  check: |
+    /opt/resource/wrapped/s3/check > response.json
+    # If it is the first run, just dispatch a - string to for 'in' to be triggered
+    jq 'if . == [] then [{ "version_id":"-"}] else . end' < response.json
+
+  in: |
+    source /opt/resource/assert_valid_value.sh
+
+    if [ "${SMUGGLER_VERSION_version_id}" == "-" ]; then
+      # First run, so we'll just set the default value, failing if it is invalid
+
+      assert_valid_value ${SMUGGLER_valid_values} ${SMUGGLER_default_value}
+
+      echo "${SMUGGLER_default_value}" > ${SMUGGLER_DESTINATION_DIR}/value
+    else
+      # Subsequent run, get the current value from s3, failing if it is invalid
+
+      /opt/resource/wrapped/s3/in ${SMUGGLER_DESTINATION_DIR}
+
+      candidate_value="$(cat ${SMUGGLER_DESTINATION_DIR}/${SMUGGLER_versioned_file})"
+      assert_valid_value ${SMUGGLER_valid_values} ${candidate_value}
+
+      mv ${SMUGGLER_DESTINATION_DIR}/${SMUGGLER_versioned_file} ${SMUGGLER_DESTINATION_DIR}/value
+    fi
+
+  out: |
+    source /opt/resource/assert_valid_value.sh
+
+    # Write the value to s3, failing if it is invalid
+
+    assert_valid_value ${SMUGGLER_valid_values} ${SMUGGLER_value}
+
+    echo "${SMUGGLER_value}" > "${SMUGGLER_OUTPUT_DIR}/${SMUGGLER_versioned_file}"
+    /opt/resource/wrapped/s3/out "${SMUGGLER_OUTPUT_DIR}/${SMUGGLER_versioned_file}"
