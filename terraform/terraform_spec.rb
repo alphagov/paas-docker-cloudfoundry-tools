@@ -2,18 +2,6 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-REQUIRED_BINARIES = %w{
-  terraform
-  terraform-provider-aws
-  terraform-provider-null
-  terraform-provider-template
-  terraform-provider-tls
-  terraform-provider-postgresql
-  terraform-provisioner-file
-  terraform-provisioner-local-exec
-  terraform-provisioner-remote-exec
-}
-
 describe "Terraform image" do
   before(:all) {
     set :docker_image, find_image_id('terraform:latest')
@@ -26,14 +14,6 @@ describe "Terraform image" do
   it "installs Root Certificates" do
     expect(file("/usr/share/ca-certificates/mozilla/GlobalSign_Root_CA.crt")).to be_file
   end
-
-  REQUIRED_BINARIES.each { |binary|
-    it "required binary '#{binary}' is in path and executable" do
-      command_path = command("which #{binary}").stdout.strip
-      expect(command_path).not_to be_empty
-      expect(file(command_path)).to be_mode 755
-    end
-  }
 
   it "has the expected Terraform version" do
     expect(
