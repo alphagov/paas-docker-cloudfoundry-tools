@@ -6,3 +6,4 @@ RUN apt-get update \
       && rm -rf /var/lib/apt/lists/*
 
 RUN go get github.com/tools/godep
+RUN go get github.com/onsi/ginkgo/ginkgo
