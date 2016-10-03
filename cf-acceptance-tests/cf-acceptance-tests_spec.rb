@@ -23,6 +23,13 @@ describe "cf-acceptance-tests image" do
 
   end
 
+  it "has Ginkgo available" do
+    expect(
+      command("ginkgo version").exit_status
+    ).to eq(0)
+
+  end
+
   it "has the expected version of the CF CLI" do
     expect(
       command("cf --version").stdout
