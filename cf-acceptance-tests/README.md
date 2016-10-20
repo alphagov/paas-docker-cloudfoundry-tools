@@ -8,7 +8,7 @@ helpers](https://github.com/cloudfoundry-incubator/cf-test-helpers):
 * `curl`
 * [`godep`](github.com/tools/godep)
 
-Based on the [golang](https://hub.docker.com/_/golang/) image.
+Based on the [golang](https://hub.docker.com/_/golang/) alpine image.
 
 ## Build locally
 
