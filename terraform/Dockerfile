@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM alpine:3.4
 
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_VER 0.7.10
