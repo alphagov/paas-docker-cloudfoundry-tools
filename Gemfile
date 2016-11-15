@@ -3,7 +3,7 @@
 
 source 'https://rubygems.org'
 
-gem 'docker-api', '~> 1.31'
+gem 'docker-api', '~> 1.32'
 gem 'serverspec', '~> 2.19'
 
 # You should_not start your specs with the string "should"
