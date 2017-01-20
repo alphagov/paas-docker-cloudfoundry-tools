@@ -1,0 +1,9 @@
+#!/bin/bash
+case "$1" in
+	-*k*)
+		exec /bin/old/gzip "${1/k/}" < "$2" > "${2%%.gz}"
+		;;
+	*)
+		exec /bin/old/gzip "$@"
+		;;
+esac
