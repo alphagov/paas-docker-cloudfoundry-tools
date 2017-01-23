@@ -19,6 +19,9 @@ RUN \
   mkdir $GOPATH && \
   rm -rf /tmp/*
 
+RUN go get github.com/tools/godep
+RUN go get github.com/onsi/ginkgo/ginkgo
+
 # Install the cf CLI
 ARG version
 RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&version=${version}&source=github-rel"
