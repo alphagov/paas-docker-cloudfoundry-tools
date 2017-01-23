@@ -23,8 +23,7 @@ RUN go get github.com/tools/godep
 RUN go get github.com/onsi/ginkgo/ginkgo
 
 # Install the cf CLI
-ARG version
-RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&version=${version}&source=github-rel"
+RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&version=6.21.1&source=github-rel"
 RUN dpkg -i cf.deb
 
 # Install the container networking CLI plugin
