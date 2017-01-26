@@ -27,6 +27,12 @@ describe "Terraform image" do
     ).to include("OpenSSH")
   end
 
+  it "installs dogapi gem v1.24.0" do
+    expect(
+      command("gem list").stdout.strip
+    ).to include("dogapi (1.24.0)")  
+  end
+
   it "should not have binary directory larger than 200M" do
     expect(
       Integer(command("du -m /usr/local/bin").stdout.split.first)
