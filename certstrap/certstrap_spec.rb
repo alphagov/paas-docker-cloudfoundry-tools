@@ -12,7 +12,7 @@ describe "certstrap image" do
   }
 
   it "installs the right version of Alpine Linux" do
-    expect(os_version).to include("Alpine Linux 3.3")
+    expect(os_version).to include("Alpine Linux 3.4")
   end
 
   def os_version
