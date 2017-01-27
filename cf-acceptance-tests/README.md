@@ -8,7 +8,8 @@ helpers](https://github.com/cloudfoundry-incubator/cf-test-helpers):
 * `curl`
 * [`godep`](github.com/tools/godep)
 
-Based on the [golang](https://hub.docker.com/_/golang/) image.
+Based on the [upstream image](https://hub.docker.com/r/relintdockerhubpushbot/cats-concourse-task/), which is
+hosted on [GitHub](https://github.com/cloudfoundry/cats-concourse-task).
 
 ## Build locally
 
