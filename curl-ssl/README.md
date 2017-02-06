@@ -2,8 +2,6 @@ Includes curl with SSL and openssl support, including the `openssl` command.
 
 It also includes the ca-certificates.
 
-Based on [alpine](https://hub.docker.com/_/alpine/) image.
-
 ## Build locally
 
 ```

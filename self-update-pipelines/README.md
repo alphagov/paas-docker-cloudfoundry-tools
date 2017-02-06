@@ -6,8 +6,6 @@ This includes all the software for this task to run.
 * `ruby` and `curl`: Included on `ruby:slim`
 * `make`
 
-Based on the [wheezy](https://hub.docker.com/_/ruby/) image.
-
 ## Build locally
 
 ```

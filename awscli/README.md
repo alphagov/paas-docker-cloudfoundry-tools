@@ -4,8 +4,6 @@ command line.
 Also curl with SSL and openssl support is included, to allow scripting HTTP
 calls if necessary (e.g. query metadata)
 
-Based on [alpine](https://hub.docker.com/_/alpine/) image.
-
 ## Build locally
 
 ```

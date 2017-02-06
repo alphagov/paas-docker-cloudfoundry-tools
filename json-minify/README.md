@@ -1,8 +1,5 @@
 Container for Ruby implemenation of json-minify.
 
-
-Based on the [ruby:alpine](https://hub.docker.com/r/library/ruby/tags/) image.
-
 ## Build locally
 
 ```

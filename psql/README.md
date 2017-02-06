@@ -1,7 +1,5 @@
 Provides *psql* Postgres client.
 
-Based on [alpine](https://hub.docker.com/_/alpine/) image.
-
 ## Build locally
 
 ```
