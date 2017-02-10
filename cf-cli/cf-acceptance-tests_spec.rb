@@ -15,6 +15,11 @@ describe "cf-cli image" do
     ).to match(/cf version #{CF_CLI_VERSION}/)
   end
 
+  it "has blue-green-deploy plugin available" do
+    cmd = command("cf blue-green-deploy --help")
+    expect(cmd.exit_status).to eq(0)
+  end
+
   it "has curl available" do
     expect(
       command("curl --version").exit_status
