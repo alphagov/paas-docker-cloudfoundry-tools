@@ -23,9 +23,8 @@ RUN go get github.com/tools/godep
 RUN go get github.com/onsi/ginkgo/ginkgo
 
 # Install the cf CLI
-RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&version=6.25.0&source=github-rel" && \
-    dpkg -i cf.deb && \
-    rm -f cf.deb
+RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&version=6.21.1&source=github-rel"
+RUN dpkg -i cf.deb
 
 # Install the container networking CLI plugin
 RUN wget -q -O /tmp/network-policy-plugin "https://github.com/cloudfoundry-incubator/netman-release/releases/download/v0.11.0/network-policy-plugin-linux64" && \
