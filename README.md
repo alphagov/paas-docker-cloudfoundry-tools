@@ -10,6 +10,7 @@ repository of the same name in Docker Hub.
 You can add a new container you only need to add these files:
 
  * the `Dockerfile` and support files to build the image.
+ * a symlink to the [hooks directory](hooks/).
  * a `README.md` file describing the container. Its content will populate the
    docker repository description.
  * one or more `*_spec.rb` files to test the container.
