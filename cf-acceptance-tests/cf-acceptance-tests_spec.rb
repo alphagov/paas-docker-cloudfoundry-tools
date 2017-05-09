@@ -3,7 +3,7 @@ require 'docker'
 require 'serverspec'
 
 GO_VERSION="1.7.4"
-CF_CLI_VERSION="6.25.0"
+CF_CLI_VERSION="6.26.0"
 
 describe "cf-acceptance-tests image" do
   before(:all) {
