@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-ENV BOSH_INIT_VERSION 0.0.95
+ENV BOSH_INIT_VERSION 0.0.100
 ENV BOSH_INIT_URL https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-${BOSH_INIT_VERSION}-linux-amd64
 ENV BOSH_INIT_PACKAGES "build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3"
