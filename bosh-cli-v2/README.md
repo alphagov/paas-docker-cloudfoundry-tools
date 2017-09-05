@@ -1,4 +1,4 @@
-Container for running Bosh SSH.
+Container for running Bosh SSH using [v2 cli](https://bosh.io/docs/cli-v2.html)
 
 
 * `BOSH` CLI
