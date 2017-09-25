@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="1.3232.0"
+BOSH_CLI_VERSION="1.3262.26.0"
 
 describe "bosh-cli image" do
   before(:all) {
