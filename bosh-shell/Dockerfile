@@ -1,4 +1,4 @@
-FROM ruby:2.4-alpine
+FROM ruby:2.2-alpine
 
 RUN gem install bosh_cli -v 1.3262.26.0 --no-rdoc --no-ri
 
