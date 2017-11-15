@@ -9,7 +9,7 @@ fi
 
 echo "$BOSH_ID_RSA" | base64 -d > /tmp/bosh_id_rsa && chmod 400 /tmp/bosh_id_rsa
 
-ssh -fNT -L 25555:localhost:25555 \
+ssh -fNT -4 -L 25555:localhost:25555 \
   -o ExitOnForwardFailure=yes \
   -o StrictHostKeyChecking=no \
   -o UserKnownHostsFile=/dev/null \
