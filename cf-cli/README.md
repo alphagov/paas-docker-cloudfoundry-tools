@@ -16,7 +16,7 @@ It also includes some commonly-used `cf` plugins:
 
 ```
 $ cd cf-cli
-$ docker build -t cf-cly .
+$ docker build -t cf-cli .
 ```
 
 ## Run
