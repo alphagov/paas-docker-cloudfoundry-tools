@@ -20,6 +20,11 @@ describe "cf-cli image" do
     expect(cmd.exit_status).to eq(0)
   end
 
+  it "has autopilot plugin available" do
+    cmd = command("cf zero-downtime-push --help")
+    expect(cmd.exit_status).to eq(0)
+  end
+
   it "has curl available" do
     expect(
       command("curl --version").exit_status
