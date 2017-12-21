@@ -45,4 +45,10 @@ describe "awscli image" do
     end
   end
 
+  it "has jq available" do
+    cmd = command("jq --version")
+    expect(cmd.exit_status).to eq(0)
+    expect(cmd.stdout).to match(/^jq-1.5/)
+  end
+
 end
