@@ -11,3 +11,7 @@ RUN set -ex \
     && echo "${TERRAFORM_SUM}  /tmp/${TERRAFORM_ZIP}" | sha256sum -c - \
     && unzip /tmp/${TERRAFORM_ZIP} -d /usr/local/bin \
     && rm /tmp/${TERRAFORM_ZIP}
+
+ENV TF_DATA_DIR "/.terraform"
+COPY plugin_cache.tf /tmp/
+RUN cd /tmp && terraform init

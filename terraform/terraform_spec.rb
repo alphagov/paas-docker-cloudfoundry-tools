@@ -26,4 +26,10 @@ describe "Terraform image" do
       command("ssh -V").stderr.strip
     ).to include("OpenSSH")
   end
+
+  it "has the plugins already downloaded" do
+    expect(
+      command("cd /tmp && terraform init").stdout.strip
+    ).to_not include("Downloading")
+  end
 end
