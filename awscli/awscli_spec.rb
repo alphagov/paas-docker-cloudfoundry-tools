@@ -5,7 +5,7 @@ require 'serverspec'
 AWSCLI_PACKAGES = "curl openssl ca-certificates less"
 
 AWSCLI_BIN = "/usr/bin/aws"
-AWSCLI_VERSION = "1.10.38"
+AWSCLI_VERSION = "1.14.10"
 
 describe "awscli image" do
   before(:all) {
@@ -43,6 +43,12 @@ describe "awscli image" do
     AWSCLI_PACKAGES.split(' ').each do |package|
       expect(command("apk -vv info | grep #{package}").exit_status).to eq(0)
     end
+  end
+
+  it "has jq available" do
+    cmd = command("jq --version")
+    expect(cmd.exit_status).to eq(0)
+    expect(cmd.stdout).to match(/^jq-1.5/)
   end
 
 end

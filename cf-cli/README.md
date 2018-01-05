@@ -1,17 +1,22 @@
 Container for running CloudFoundry client.
 
-It includes some other packages commonly used when deploying CF apps:
+It includes some packages commonly used when deploying CF apps:
 
 * `cf` CLI
 * `curl`
 * `unzip`
 * `git`
 
+It also includes some commonly-used `cf` plugins:
+
+* [blue-green-deploy](https://github.com/bluemixgaragelondon/cf-blue-green-deploy)
+* [autopilot](https://github.com/contraband/autopilot)
+
 ## Build locally
 
 ```
 $ cd cf-cli
-$ docker build -t cf-cly .
+$ docker build -t cf-cli .
 ```
 
 ## Run
