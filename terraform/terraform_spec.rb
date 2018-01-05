@@ -26,10 +26,4 @@ describe "Terraform image" do
       command("ssh -V").stderr.strip
     ).to include("OpenSSH")
   end
-
-  it "should not have binary directory larger than 200M" do
-    expect(
-      Integer(command("du -m /usr/local/bin").stdout.split.first)
-    ).to be < 200
-  end
 end
