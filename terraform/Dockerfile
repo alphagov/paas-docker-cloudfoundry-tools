@@ -15,3 +15,5 @@ RUN set -ex \
 ENV TF_DATA_DIR "/.terraform"
 COPY plugin_cache.tf /tmp/
 RUN cd /tmp && terraform init
+
+ENV TF_INPUT 0

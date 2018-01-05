@@ -32,4 +32,10 @@ describe "Terraform image" do
       command("cd /tmp && terraform init").stdout.strip
     ).to_not include("Downloading")
   end
+
+  it "disables interactive Terraform use" do
+    expect(
+      command("printenv TF_INPUT").stdout.strip
+    ).to eq("0")
+  end
 end
