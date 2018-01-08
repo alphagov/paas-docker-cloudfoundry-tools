@@ -5,7 +5,7 @@ require 'serverspec'
 describe "Terraform image" do
   before(:all) {
     set :docker_image, find_image_id('terraform:latest')
-    @providers_count = 0
+    @terraform_version_output = command("terraform version").stdout
   }
 
   it "installs Alpine" do
@@ -17,9 +17,7 @@ describe "Terraform image" do
   end
 
   it "has the expected Terraform version" do
-    expect(
-      command("terraform version").stdout
-    ).to include("Terraform v0.10.2")
+    expect(@terraform_version_output).to include("Terraform v0.11.2")
   end
 
   it "installs SSH" do
@@ -28,54 +26,46 @@ describe "Terraform image" do
     ).to include("OpenSSH")
   end
 
-  it "should not have binary directory larger than 200M" do
+  it "has the plugins already downloaded" do
     expect(
-      Integer(command("du -m /usr/local/bin").stdout.split.first)
-    ).to be < 200
+      command("cd /tmp && terraform init").stdout.strip
+    ).to_not include("Downloading")
+  end
+
+  it "disables interactive Terraform use" do
+    expect(
+        command("printenv TF_INPUT").stdout.strip
+    ).to eq("0")
   end
 
   context "providers checks" do
-    let(:terraform_shared_dir) { File.join('', 'root','.terraform.d','providers','linux_amd64') }
-    # minus 2 to exclude . and ..
-    let(:expected_terraform_providers_count) { Dir.entries(terraform_shared_dir).length-2 }
-
-    it "has the terraform provider" do
-      expect(file(File.join(terraform_shared_dir,'terraform-provider-terraform_v1.0.2_x4'))).to be_file
-      @providers_count += 1
-    end
 
     it "has the cloudflare provider" do
-      expect(file(File.join(terraform_shared_dir,'terraform-provider-cloudflare_v0.1.0_x4'))).to be_file
-      @providers_count += 1
+      expect(@terraform_version_output).to include("provider.cloudflare v0.1.0")
     end
 
     it "has the local provider" do
-      expect(file(File.join(terraform_shared_dir,'terraform-provider-local_v1.0.0_x4'))).to be_file
-      @providers_count += 1
+      expect(@terraform_version_output).to include("provider.local v1.0.0")
     end
 
     it "has the openstack provider" do
-      expect(file(File.join(terraform_shared_dir,'terraform-provider-openstack_v1.1.0_x4'))).to be_file
-      @providers_count += 1
+      expect(@terraform_version_output).to include("provider.openstack v1.1.0")
     end
 
     it "has the powerdns provider" do
-      expect(file(File.join(terraform_shared_dir,'terraform-provider-powerdns_v0.1.0_x4'))).to be_file
-      @providers_count += 1
+      expect(@terraform_version_output).to include("provider.powerdns v0.1.0")
     end
 
     it "has the credhub provider" do
-      expect(file(File.join(terraform_shared_dir,'terraform-provider-credhub_0.10_linux_amd64'))).to be_file
-      @providers_count += 1
+      expect(@terraform_version_output).to include("provider.credhub (unversioned)")
     end
 
     it "has the cloudfoundry provider" do
-      expect(file(File.join(terraform_shared_dir,'terraform-provider-cloudfoundry_0.10_linux_amd64'))).to be_file
-      @providers_count += 1
+      expect(@terraform_version_output).to include("provider.cloudfoundry (unversioned)")
     end
 
     it "has enough providers" do
-      expect(@providers_count).to eq(expected_terraform_providers_count)
+      expect(@terraform_version_output.scan('provider.').length).to eq(6)
     end
 
   end
