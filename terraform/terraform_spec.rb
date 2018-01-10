@@ -57,11 +57,11 @@ describe "Terraform image" do
     end
 
     it "has the credhub provider" do
-      expect(@terraform_version_output).to include("provider.credhub (unversioned)")
+      expect(@terraform_version_output).to include("provider.credhub v0.10.0")
     end
 
     it "has the cloudfoundry provider" do
-      expect(@terraform_version_output).to include("provider.cloudfoundry (unversioned)")
+      expect(@terraform_version_output).to include("provider.cloudfoundry v0.9.1")
     end
 
     it "has enough providers" do
