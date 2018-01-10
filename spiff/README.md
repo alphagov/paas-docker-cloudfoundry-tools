@@ -1,3 +1,5 @@
+Orange: [![Build Status](https://travis-ci.org/orange-cloudfoundry/paas-docker-cloudfoundry-tools.svg)](https://travis-ci.org/orange-cloudfoundry/paas-docker-cloudfoundry-tools)
+
 Installs [spiff](https://github.com/cloudfoundry-incubator/spiff).
 
 It uses alpine linux image as base and deploys statically compiled spiff release which runs directly.

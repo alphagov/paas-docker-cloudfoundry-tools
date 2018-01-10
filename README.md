@@ -1,4 +1,12 @@
-[![Build Status](https://travis-ci.org/alphagov/paas-docker-cloudfoundry-tools.svg)](https://travis-ci.org/alphagov/paas-docker-cloudfoundry-tools)
+
+Orange: [![Build Status](https://travis-ci.org/orange-cloudfoundry/paas-docker-cloudfoundry-tools.svg)](https://travis-ci.org/orange-cloudfoundry/paas-docker-cloudfoundry-tools)
+AlphaGov: [![Build Status](https://travis-ci.org/alphagov/paas-docker-cloudfoundry-tools.svg)](https://travis-ci.org/alphagov/paas-docker-cloudfoundry-tools)
+
+Orange specifics:
+ * spiff (only in this repo)
+ * terraform (overrides Alphagov)
+
+--------------------
 
 Contains Dockerfiles to build the Cloud foundry tools.
 

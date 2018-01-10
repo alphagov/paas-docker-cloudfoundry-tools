@@ -5,6 +5,7 @@ require 'serverspec'
 describe "Terraform image" do
   before(:all) {
     set :docker_image, find_image_id('terraform:latest')
+    @terraform_version_output = command("terraform version").stdout
   }
 
   it "installs Alpine" do
@@ -16,9 +17,7 @@ describe "Terraform image" do
   end
 
   it "has the expected Terraform version" do
-    expect(
-      command("terraform version").stdout
-    ).to include("Terraform v0.8.5")
+    expect(@terraform_version_output).to include("Terraform v0.11.2")
   end
 
   it "installs SSH" do
@@ -27,9 +26,48 @@ describe "Terraform image" do
     ).to include("OpenSSH")
   end
 
-  it "should not have binary directory larger than 200M" do
+  it "has the plugins already downloaded" do
     expect(
-      Integer(command("du -m /usr/local/bin").stdout.split.first)
-    ).to be < 200
+      command("cd /tmp && terraform init").stdout.strip
+    ).to_not include("Downloading")
   end
+
+  it "disables interactive Terraform use" do
+    expect(
+        command("printenv TF_INPUT").stdout.strip
+    ).to eq("0")
+  end
+
+  context "providers checks" do
+
+    it "has the cloudflare provider" do
+      expect(@terraform_version_output).to include("provider.cloudflare v0.1.0")
+    end
+
+    it "has the local provider" do
+      expect(@terraform_version_output).to include("provider.local v1.0.0")
+    end
+
+    it "has the openstack provider" do
+      expect(@terraform_version_output).to include("provider.openstack v1.1.0")
+    end
+
+    it "has the powerdns provider" do
+      expect(@terraform_version_output).to include("provider.powerdns v0.1.0")
+    end
+
+    it "has the credhub provider" do
+      expect(@terraform_version_output).to include("provider.credhub (unversioned)")
+    end
+
+    it "has the cloudfoundry provider" do
+      expect(@terraform_version_output).to include("provider.cloudfoundry (unversioned)")
+    end
+
+    it "has enough providers" do
+      expect(@terraform_version_output.scan('provider.').length).to eq(6)
+    end
+
+  end
+
 end
