@@ -45,7 +45,7 @@ describe "Terraform image" do
     end
 
     it "has the local provider" do
-      expect(@terraform_version_output).to include("provider.local v1.0.0")
+      expect(@terraform_version_output).to include("provider.local v1.1.0")
     end
 
     it "has the openstack provider" do
