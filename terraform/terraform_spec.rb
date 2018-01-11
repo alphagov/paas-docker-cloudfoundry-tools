@@ -52,6 +52,10 @@ describe "Terraform image" do
       expect(@terraform_version_output).to include("provider.openstack v1.1.0")
     end
 
+    it "has the cloudstack provider" do
+      expect(@terraform_version_output).to include("provider.cloudstack v0.1.4")
+    end
+
     it "has the powerdns provider" do
       expect(@terraform_version_output).to include("provider.powerdns v0.1.0")
     end
@@ -65,7 +69,7 @@ describe "Terraform image" do
     end
 
     it "has enough providers" do
-      expect(@terraform_version_output.scan('provider.').length).to eq(6)
+      expect(@terraform_version_output.scan('provider.').length).to eq(13)
     end
 
   end
