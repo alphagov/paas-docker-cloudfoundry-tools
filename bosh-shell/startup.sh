@@ -22,8 +22,4 @@ bosh target localhost
 bosh download manifest "${BOSH_DEPLOYMENT}" "${BOSH_DEPLOYMENT}.yml"
 bosh deployment "${BOSH_DEPLOYMENT}.yml"
 
-echo
-echo "Use bosh-ssh to log in to a VM"
-echo
-
-exec bash
+exec bash --rcfile /bosh_wrapper.rc

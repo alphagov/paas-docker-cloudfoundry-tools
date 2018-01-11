@@ -1,17 +1,4 @@
 #!/bin/bash
 
-set -eu
-
-if [ $# -eq 0 ]
-then
-    echo "Usage: $(basename "$0") VM/INDEX"
-    exit 1
-fi
-
-target=$1
-
-exec bosh ssh \
-   "$target" \
-   --gateway_host "$BOSH_IP" \
-   --gateway_user vcap \
-   --gateway_identity_file /tmp/bosh_id_rsa
+echo 'deprecated: use `bosh ssh` as normal'
+exit 2
