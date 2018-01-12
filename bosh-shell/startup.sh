@@ -13,7 +13,7 @@ ssh -fNT -4 -L 25555:localhost:25555 \
   -o ExitOnForwardFailure=yes \
   -o StrictHostKeyChecking=no \
   -o UserKnownHostsFile=/dev/null \
-  -o ServerAliveInterval=60 \
+  -o ServerAliveInterval=30 \
   "vcap@$BOSH_IP" -i /tmp/bosh_id_rsa
 
 bosh -t localhost login admin -- "$BOSH_ADMIN_PASSWORD"
