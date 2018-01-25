@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM alpine:3.7
 
 ENV PACKAGES "postgresql-client"
 
