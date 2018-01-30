@@ -3,8 +3,8 @@ require 'docker'
 require 'serverspec'
 
 SPRUCE_BIN = "/usr/local/bin/spruce"
-SPRUCE_VERSION = "1.12.1"
-ALPINE_VERSION = "3.4"
+SPRUCE_VERSION = "1.14.0"
+ALPINE_VERSION = "3.7"
 
 describe "spruce image" do
   before(:all) {
