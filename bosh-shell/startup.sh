@@ -19,7 +19,11 @@ ssh -fNT -4 -L 25555:localhost:25555 \
 bosh -t localhost login admin -- "$BOSH_ADMIN_PASSWORD"
 bosh target localhost
 
-bosh download manifest "${BOSH_DEPLOYMENT}" "${BOSH_DEPLOYMENT}.yml"
-bosh deployment "${BOSH_DEPLOYMENT}.yml"
+if bosh download manifest "${BOSH_DEPLOYMENT}" "${BOSH_DEPLOYMENT}.yml"; then
+  bosh deployment "${BOSH_DEPLOYMENT}.yml"
+else
+  echo "No deployment targetted..."
+  echo "You'll need to manually download a manifest and target a deployment."
+fi
 
 exec bash --rcfile /bosh_wrapper.rc
