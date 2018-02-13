@@ -23,6 +23,10 @@ provider "grafana" {
 provider "http" {
   version = "~> 1.0.0"
 }
+provider "kubernetes" {
+  version = "~> 1.0.1"
+}
+
 # Orange provider
 provider "credhub" {version = "~> 0.10.0"}
 provider "cloudfoundry" {version = "~> 0.9.1"}

@@ -68,8 +68,12 @@ describe "Terraform image" do
       expect(@terraform_version_output).to include("provider.cloudfoundry v0.9.1")
     end
 
+    it "has the cloudfoundry provider" do
+      expect(@terraform_version_output).to include("provider.kubernetes v1.0.1")
+    end
+
     it "has enough providers" do
-      expect(@terraform_version_output.scan('provider.').length).to eq(13)
+      expect(@terraform_version_output.scan('provider.').length).to eq(14)
     end
 
   end
