@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="6.26.0"
+CF_CLI_VERSION="6.34.1"
 
 describe "cf-cli image" do
   before(:all) {
