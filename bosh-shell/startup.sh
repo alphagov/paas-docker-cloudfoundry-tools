@@ -2,32 +2,26 @@
 
 set -eu
 
-if [ -z "${BOSH_ID_RSA:-}" ] || [ -z "${BOSH_IP:-}" ]; then
-  echo "WARNING: You need to set BOSH_ID_RSA and BOSH_IP. You will not be logged into Bosh"
+if [ -z "${BOSH_ID_RSA:-}" ] || [ -z "${BOSH_IP:-}" ] || [ -z "${BOSH_ENVIRONMENT:-}" ] || [ -z "${BOSH_CA_CERT:-}" ]; then
+  echo "WARNING: You need to set BOSH_ID_RSA, BOSH_IP, BOSH_ENVIRONMENT and BOSH_CA_CERT."
+  echo "You will not be logged into Bosh."
   exec bash
 fi
 
 echo "$BOSH_ID_RSA" | base64 -d > /tmp/bosh_id_rsa && chmod 400 /tmp/bosh_id_rsa
 
-ssh -fNT -4 -L 25555:localhost:25555 \
+ssh -fNC -4 -D 25555 \
   -o ExitOnForwardFailure=yes \
   -o StrictHostKeyChecking=no \
   -o UserKnownHostsFile=/dev/null \
   -o ServerAliveInterval=30 \
   "vcap@$BOSH_IP" -i /tmp/bosh_id_rsa
 
-bosh -t localhost login admin -- "$BOSH_ADMIN_PASSWORD"
-bosh target localhost
+export BOSH_ALL_PROXY="socks5://localhost:25555"
+export BOSH_GW_HOST=$BOSH_IP
+export BOSH_GW_USER=vcap
+export BOSH_GW_PRIVATE_KEY=/tmp/bosh_id_rsa
 
-if bosh download manifest "${BOSH_DEPLOYMENT}" "${BOSH_DEPLOYMENT}.yml"; then
-  if [ -s "${BOSH_DEPLOYMENT}.yml" ]; then
-    bosh deployment "${BOSH_DEPLOYMENT}.yml"
-  else
-    echo "Unable to target deployment ${BOSH_DEPLOYMENT}, manifest is an empty file."
-  fi
-else
-  echo "No deployment targetted..."
-  echo "You'll need to manually download a manifest and target a deployment."
-fi
+bosh login --client=admin --client-secret="$BOSH_ADMIN_PASSWORD"
 
-exec bash --rcfile /bosh_wrapper.rc
+exec bash
