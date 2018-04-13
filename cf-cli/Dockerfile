@@ -8,6 +8,7 @@ ENV CF_BGD_TEMPFILE "/tmp/blue-green-deploy.linux64"
 ENV CF_AUTOPILOT_VERSION "0.0.4"
 ENV CF_AUTOPILOT_CHECKSUM "a755f9da3981fb6dc6aa675a55f8fc7de9d73c87b8cad4883d98c543a45a9922"
 ENV CF_AUTOPILOT_TEMPFILE "/tmp/autopilot-linux"
+ENV SPRUCE_VERSION "1.17.0"
 
 RUN apk add --update $PACKAGES && rm -rf /var/cache/apk/*
 RUN ln -s /lib/ /lib64 # FIXME: Remove for Alpine >= 3.6
@@ -28,3 +29,6 @@ RUN curl -L -o "${CF_AUTOPILOT_TEMPFILE}" \
   && chmod +x "${CF_AUTOPILOT_TEMPFILE}" \
   && cf install-plugin -f "${CF_AUTOPILOT_TEMPFILE}" \
   && rm "${CF_AUTOPILOT_TEMPFILE}"
+
+RUN curl -Lo /usr/local/bin/spruce https://github.com/geofffranks/spruce/releases/download/v${SPRUCE_VERSION}/spruce-linux-amd64 \
+  && chmod +x /usr/local/bin/spruce
