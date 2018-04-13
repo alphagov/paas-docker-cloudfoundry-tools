@@ -1,6 +1,6 @@
 FROM alpine:3.3
 
-ENV PACKAGES "unzip curl openssl ca-certificates git ruby ruby-json libc6-compat"
+ENV PACKAGES "unzip curl openssl ca-certificates git ruby ruby-json libc6-compat bash"
 ENV CF_CLI_VERSION "6.34.1"
 ENV CF_BGD_VERSION "1.3.0"
 ENV CF_BGD_CHECKSUM "c74995ae0ba3ec9eded9c2a555e5984ba536d314cf9dc30013c872eb6b9d76b6"

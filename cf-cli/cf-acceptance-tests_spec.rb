@@ -79,4 +79,10 @@ describe "cf-cli image" do
     spruce_version = command("spruce --version").stdout.strip
     expect(spruce_version).to match(/spruce - Version #{SPRUCE_VERSION}( \(master\))?/)
   end
+
+  it "has `bash` available" do
+    expect(
+      command("bash --version").exit_status
+    ).to eq(0)
+  end
 end
