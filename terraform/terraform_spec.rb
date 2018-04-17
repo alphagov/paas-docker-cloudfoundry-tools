@@ -17,7 +17,7 @@ describe "Terraform image" do
   end
 
   it "has the expected Terraform version" do
-    expect(@terraform_version_output).to include("Terraform v0.11.2")
+    expect(@terraform_version_output).to include("Terraform v0.11.7")
   end
 
   it "installs SSH" do
@@ -41,7 +41,7 @@ describe "Terraform image" do
   context "providers checks" do
 
     it "has the cloudflare provider" do
-      expect(@terraform_version_output).to include("provider.cloudflare v0.1.0")
+      expect(@terraform_version_output).to include("provider.cloudflare v1.0.0")
     end
 
     it "has the local provider" do
@@ -49,7 +49,7 @@ describe "Terraform image" do
     end
 
     it "has the openstack provider" do
-      expect(@terraform_version_output).to include("provider.openstack v1.1.0")
+      expect(@terraform_version_output).to include("provider.openstack v1.3.0")
     end
 
     it "has the cloudstack provider" do
@@ -69,11 +69,15 @@ describe "Terraform image" do
     end
 
     it "has the cloudfoundry provider" do
-      expect(@terraform_version_output).to include("provider.kubernetes v1.0.1")
+      expect(@terraform_version_output).to include("provider.kubernetes v1.1.0")
     end
 
+    it "has the uaa provider" do
+      expect(@terraform_version_output).to include("provider.uaa v0.8")
+    end
     it "has enough providers" do
-      expect(@terraform_version_output.scan('provider.').length).to eq(14)
+      EXPECTED_PROVIDER_COUNT = 15
+      expect(@terraform_version_output.scan('provider.').length).to eq(EXPECTED_PROVIDER_COUNT)
     end
 
   end
