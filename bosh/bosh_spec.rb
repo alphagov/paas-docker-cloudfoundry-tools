@@ -2,17 +2,17 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="1.3262.26.0"
+BOSH_CLI_VERSION="3.0.1-712bfd7-2018-03-13T23:26:43Z"
 
-describe "bosh-cli image" do
+describe "bosh image" do
   before(:all) {
-    set :docker_image, find_image_id('bosh-cli:latest')
+    set :docker_image, find_image_id('bosh:latest')
   }
 
   it "has the expected version of the Bosh CLI" do
     expect(
       command("bosh --version").stdout.strip
-    ).to eq("BOSH #{BOSH_CLI_VERSION}")
+    ).to eq("version #{BOSH_CLI_VERSION}")
   end
 
   it "has `file` available" do

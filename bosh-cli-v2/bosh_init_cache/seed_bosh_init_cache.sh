@@ -20,7 +20,7 @@ echo "###############################################"
 echo "${NO_COLOUR}"
 
 set +e
-bosh-init deploy minimal.yml
+bosh create-env minimal.yml
 set -e
 
 echo "...done"

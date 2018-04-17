@@ -1,4 +1,0 @@
-#!/bin/bash
-
-echo 'deprecated: use `bosh ssh` as normal'
-exit 2

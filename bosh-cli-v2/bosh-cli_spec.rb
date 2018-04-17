@@ -2,12 +2,21 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="2.0.40-9fc1ea4-2017-09-18T23:00:15Z"
+BOSH_CLI_VERSION="3.0.1-712bfd7-2018-03-13T23:26:43Z"
+
+BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt1-dev libxml2-dev \
+    libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3"
 
 describe "bosh-cli-v2 image" do
   before(:all) {
     set :docker_image, find_image_id('bosh-cli-v2:latest')
   }
+
+  it "installs required packages" do
+    BOSH_ENV_DEPS.split(' ').each do |package|
+      expect(package(package)).to be_installed
+    end
+  end
 
   it "has the expected version of the Bosh CLI" do
     expect(
@@ -52,5 +61,20 @@ describe "bosh-cli-v2 image" do
     else
       expect(ssl_version_str).to be >= 'OpenSSL 1.0.2d'
     end
+  end
+
+  it "contains the compiled CPI packages" do
+    installation_path = '/root/.bosh/installations/44f01911-a47a-4a24-6ca3-a3109b33f058'
+    packages_file = file("#{installation_path}/compiled_packages.json")
+    expect(packages_file).to exist
+    compiled_packages = JSON.parse(packages_file.content)
+    compiled_packages.each do |package|
+      expect(file("#{installation_path}/blobs/#{package["Value"]["BlobID"]}")).to exist
+    end
+
+    cpi_package = compiled_packages.find {|p| p["Key"]["PackageName"] == "bosh_aws_cpi" }
+    expect(cpi_package).to be
+
+    expect(file("#{installation_path}/packages/bosh_aws_cpi/bin/aws_cpi")).to be_executable
   end
 end

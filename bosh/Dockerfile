@@ -1,7 +1,7 @@
 FROM ruby:2.2-alpine
 
-ENV BOSH_CLI_VERSION 2.0.48
-ENV BOSH_CLI_SUM c807f1938494f4280d65ebbdc863eda3f883d72e
+ENV BOSH_CLI_VERSION 3.0.1
+ENV BOSH_CLI_SUM ccc893bab8b219e9e4a628ed044ebca6c6de9ca0
 ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
 
 RUN apk add --update wget bash openssl openssh-client file git netcat-openbsd \
@@ -14,4 +14,5 @@ RUN wget -nv https://s3.amazonaws.com/bosh-cli-artifacts/${BOSH_CLI_FILENAME} \
 
 COPY startup.sh /startup.sh
 
-ENTRYPOINT /startup.sh
+ENTRYPOINT ["/startup.sh"]
+CMD []
