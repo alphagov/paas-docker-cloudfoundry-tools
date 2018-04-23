@@ -16,6 +16,8 @@ ENV PROVIDER_CREDHUB_SUM 5a7c2281771326eebf1721ebe4186e2e4190b9a629fd7c93ee19ac1
 ENV PROVIDER_UAA_VERSION 0.8.0
 ENV PROVIDER_UAA_SUM 2f8f2e6aa91c6f1b0c6d2064a0fd2cd7ca2b9d164211c87065b3ad8c9c344496
 
+ENV PROVIDER_HELM_VERSION 0.5.0
+ENV PROVIDER_HELM_SUM eb8b8f8791df8b71cf5661d0395ef00b6c0dcd2855836a6229220dc9e1c36124
 
 RUN mkdir -p ${TERRAFORM_SHARED_DIR}
 
@@ -56,7 +58,6 @@ RUN set -ex \
     && mv /tmp/${FULL_FILENAME} ${TERRAFORM_SHARED_DIR}/${FILENAME}_v${PROVIDER_CREDHUB_VERSION} \
     && chmod +x ${TERRAFORM_SHARED_DIR}/* \
     && echo "Computed sha256sum: $(sha256sum ${TERRAFORM_SHARED_DIR}/${FILENAME}_v${PROVIDER_CREDHUB_VERSION})"
-#    && echo "${SUM}  /tmp/${FILENAME}" | sha256sum -c - \
 
 # Terraform UAA provider name is not version dependant
 RUN set -ex \
@@ -72,6 +73,20 @@ RUN set -ex \
     && chmod +x ${TERRAFORM_SHARED_DIR}/*
 
 
+# Helm charts Terraform UAA provider
+RUN set -ex \
+    && export FILENAME="terraform-provider-helm" \
+    && export FILENAME_SUFFIX="_linux_amd64.tar.gz" \
+    && export FULL_FILENAME="${FILENAME}_v${PROVIDER_HELM_VERSION}${FILENAME_SUFFIX}" \
+    && export URL="https://github.com/mcuadros/terraform-provider-helm/releases/download/v${PROVIDER_HELM_VERSION}/${FULL_FILENAME}" \
+    && export SUM=${PROVIDER_HELM_SUM} \
+    && wget ${URL} -O /tmp/${FULL_FILENAME} \
+    && echo "Computed sha256sum: $(sha256sum /tmp/${FULL_FILENAME})" \
+    && echo "${SUM}  /tmp/${FULL_FILENAME}" | sha256sum -c - \
+    && mv /tmp/${FULL_FILENAME} ${TERRAFORM_SHARED_DIR}/${FILENAME}_v${PROVIDER_HELM_VERSION} \
+    && chmod +x ${TERRAFORM_SHARED_DIR}/*
+
+#wget https://github.com/mcuadros/terraform-provider-helm/releases/download/v0.5.0/terraform-provider-helm_v0.5.0_linux_amd64.tar.gz
 ENV TF_DATA_DIR "/.terraform"
 COPY plugin_cache.tf /tmp/
 RUN cd /tmp && terraform init

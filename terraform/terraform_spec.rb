@@ -76,7 +76,7 @@ describe "Terraform image" do
       expect(@terraform_version_output).to include("provider.uaa v0.8")
     end
     it "has enough providers" do
-      EXPECTED_PROVIDER_COUNT = 15
+      EXPECTED_PROVIDER_COUNT = 16
       expect(@terraform_version_output.scan('provider.').length).to eq(EXPECTED_PROVIDER_COUNT)
     end
 
