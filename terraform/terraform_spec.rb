@@ -49,11 +49,11 @@ describe "Terraform image" do
     end
 
     it "has the openstack provider" do
-      expect(@terraform_version_output).to include("provider.openstack v1.3.0")
+      expect(@terraform_version_output).to include("provider.openstack v1.4.0")
     end
 
     it "has the cloudstack provider" do
-      expect(@terraform_version_output).to include("provider.cloudstack v0.1.4")
+      expect(@terraform_version_output).to include("provider.cloudstack v0.1.5")
     end
 
     it "has the powerdns provider" do
@@ -61,7 +61,7 @@ describe "Terraform image" do
     end
 
     it "has the credhub provider" do
-      expect(@terraform_version_output).to include("provider.credhub v0.10.0")
+      expect(@terraform_version_output).to include("provider.credhub v0.11.0")
     end
 
     it "has the cloudfoundry provider" do

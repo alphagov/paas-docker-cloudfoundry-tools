@@ -10,14 +10,14 @@ ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
 ENV PROVIDER_CLOUDFOUNDRY_VERSION 0.9.1
 ENV PROVIDER_CLOUDFOUNDRY_SUM baf908c3c8af4fcc06a772de45e61e2ebc5f3023939b58ddb4118b6a6a4ac173
 
-ENV PROVIDER_CREDHUB_VERSION 0.10.0
-ENV PROVIDER_CREDHUB_SUM 5a7c2281771326eebf1721ebe4186e2e4190b9a629fd7c93ee19ac1067562914
+ENV PROVIDER_CREDHUB_VERSION 0.11.0
+ENV PROVIDER_CREDHUB_SUM 1b43ea2c404bb716eefa36e18a9fd8baa35f8e5ea991d98b2dd3447cba08435a
 
 ENV PROVIDER_UAA_VERSION 0.8.0
 ENV PROVIDER_UAA_SUM 2f8f2e6aa91c6f1b0c6d2064a0fd2cd7ca2b9d164211c87065b3ad8c9c344496
 
-ENV PROVIDER_HELM_VERSION 0.5.0
-ENV PROVIDER_HELM_SUM eb8b8f8791df8b71cf5661d0395ef00b6c0dcd2855836a6229220dc9e1c36124
+ENV PROVIDER_HELM_VERSION 0.5.1
+ENV PROVIDER_HELM_SUM bb187def614814f4a60bb12c0217fd01909901f2e01272f5d78982f12d2dc641
 
 RUN mkdir -p ${TERRAFORM_SHARED_DIR}
 
@@ -48,7 +48,7 @@ RUN set -ex \
 # Terraform Credhub provider name is not version dependant
 RUN set -ex \
     && export FILENAME="terraform-provider-credhub" \
-    && export FILENAME_SUFFIX="_0.10_linux_amd64" \
+    && export FILENAME_SUFFIX="_linux_amd64" \
     && export FULL_FILENAME="$FILENAME$FILENAME_SUFFIX" \
     && export URL="https://github.com/orange-cloudfoundry/terraform-provider-credhub/releases/download/v${PROVIDER_CREDHUB_VERSION}/${FULL_FILENAME}" \
     && export SUM=${PROVIDER_CREDHUB_SUM} \
@@ -86,7 +86,6 @@ RUN set -ex \
     && mv /tmp/${FULL_FILENAME} ${TERRAFORM_SHARED_DIR}/${FILENAME}_v${PROVIDER_HELM_VERSION} \
     && chmod +x ${TERRAFORM_SHARED_DIR}/*
 
-#wget https://github.com/mcuadros/terraform-provider-helm/releases/download/v0.5.0/terraform-provider-helm_v0.5.0_linux_amd64.tar.gz
 ENV TF_DATA_DIR "/.terraform"
 COPY plugin_cache.tf /tmp/
 RUN cd /tmp && terraform init
