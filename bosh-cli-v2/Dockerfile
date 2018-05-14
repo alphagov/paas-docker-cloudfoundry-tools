@@ -4,7 +4,7 @@ ENV BOSH_CLI_VERSION 3.0.1
 ENV BOSH_CLI_SUM ccc893bab8b219e9e4a628ed044ebca6c6de9ca0
 ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
 
-ENV DEBIAN_PACKAGES "ca-certificates wget git openssh-client file"
+ENV DEBIAN_PACKAGES "ca-certificates wget git openssh-client file dnsutils"
 
 # https://bosh.io/docs/cli-env-deps.html
 ENV BOSH_ENV_DEPS "build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt-dev \
