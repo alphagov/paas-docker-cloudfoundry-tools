@@ -63,6 +63,12 @@ describe "bosh-cli-v2 image" do
     end
   end
 
+  it "has ruby 2.5 available" do
+    cmd = command("ruby -v")
+    expect(cmd.exit_status).to eq(0)
+    expect(cmd.stdout).to match(/^ruby 2.5/)
+  end
+
   it "contains the compiled CPI packages" do
     installation_path = '/root/.bosh/installations/44f01911-a47a-4a24-6ca3-a3109b33f058'
     packages_file = file("#{installation_path}/compiled_packages.json")
