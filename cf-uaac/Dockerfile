@@ -1,4 +1,4 @@
-FROM ruby:2.2-alpine
+FROM ruby:2.5-alpine
 
 RUN apk add --update musl-dev gcc make g++ && rm -rf /var/cache/apk/*
 
