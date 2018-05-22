@@ -21,7 +21,7 @@ ENV PROVIDER_HELM_SUM bb187def614814f4a60bb12c0217fd01909901f2e01272f5d78982f12d
 
 RUN mkdir -p ${TERRAFORM_SHARED_DIR}
 
-RUN apk add --update openssl openssh-client ca-certificates wget && rm -rf /var/cache/apk/*
+RUN apk add --update openssl openssh-client ca-certificates wget libc6-compat && rm -rf /var/cache/apk/*
 
 
 RUN set -ex \
@@ -73,7 +73,7 @@ RUN set -ex \
     && chmod +x ${TERRAFORM_SHARED_DIR}/*
 
 
-# Helm charts Terraform UAA provider
+# Helm charts Terraform provider
 RUN set -ex \
     && export FILENAME="terraform-provider-helm" \
     && export FILENAME_SUFFIX="_linux_amd64.tar.gz" \
@@ -83,7 +83,8 @@ RUN set -ex \
     && wget ${URL} -O /tmp/${FULL_FILENAME} \
     && echo "Computed sha256sum: $(sha256sum /tmp/${FULL_FILENAME})" \
     && echo "${SUM}  /tmp/${FULL_FILENAME}" | sha256sum -c - \
-    && mv /tmp/${FULL_FILENAME} ${TERRAFORM_SHARED_DIR}/${FILENAME}_v${PROVIDER_HELM_VERSION} \
+    && tar -xvf /tmp/${FULL_FILENAME} -C /tmp \
+    && mv /tmp/terraform-provider-helm_linux_amd64/terraform-provider-helm ${TERRAFORM_SHARED_DIR}/${FILENAME}_v${PROVIDER_HELM_VERSION} \
     && chmod +x ${TERRAFORM_SHARED_DIR}/*
 
 ENV TF_DATA_DIR "/.terraform"
