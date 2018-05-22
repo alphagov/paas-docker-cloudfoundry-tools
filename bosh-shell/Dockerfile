@@ -1,4 +1,4 @@
-FROM ruby:2.2-alpine
+FROM ruby:2.5-alpine
 
 ENV BOSH_CLI_VERSION 2.0.48
 ENV BOSH_CLI_SUM c807f1938494f4280d65ebbdc863eda3f883d72e
