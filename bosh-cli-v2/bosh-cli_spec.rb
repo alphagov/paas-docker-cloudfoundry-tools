@@ -4,8 +4,8 @@ require 'serverspec'
 
 BOSH_CLI_VERSION="3.0.1-712bfd7-2018-03-13T23:26:43Z"
 
-BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt1-dev libxml2-dev \
-    libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3"
+BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
+    libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
 
 describe "bosh-cli-v2 image" do
   before(:all) {
