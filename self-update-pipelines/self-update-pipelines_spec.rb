@@ -19,13 +19,13 @@ describe "self-update-pipelines image" do
   it "has curl available" do
     expect(
       command("curl --version").stdout
-    ).to match(/curl 7\.38/)
+    ).to match(/curl 7/)
   end
 
   it "has bash available" do
     expect(
       command("bash --version").stdout
-    ).to match(/GNU bash, version 4\.3/)
+    ).to match(/GNU bash, version 4/)
   end
 
   it "has make available" do
