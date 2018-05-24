@@ -39,6 +39,15 @@ describe "Terraform image" do
   end
 
   context "providers checks" do
+    let(:expected_plugin_error_message) { "This binary is a plugin. These are not meant to be executed directly.\nPlease execute the program that consumes these plugins, which will\nload any plugins automatically" }
+
+    it "validates provider binaries execution" do
+      provider_binaries=command("cd /.terraform/plugins/linux_amd64; ls terraform-provider-*").stdout.strip
+      provider_binaries.each_line do |provider|
+        provider_execution= command("cd /.terraform/plugins/linux_amd64;./#{provider}").stderr.strip
+        expect(provider_execution).to eq(expected_plugin_error_message)
+      end
+    end
 
     it "has the cloudflare provider" do
       expect(@terraform_version_output).to include("provider.cloudflare v1.0.0")
@@ -75,6 +84,11 @@ describe "Terraform image" do
     it "has the uaa provider" do
       expect(@terraform_version_output).to include("provider.uaa v0.8")
     end
+
+    it "has the helm provider" do
+      expect(@terraform_version_output).to include("provider.helm v0.5.1")
+    end
+
     it "has enough providers" do
       EXPECTED_PROVIDER_COUNT = 16
       expect(@terraform_version_output.scan('provider.').length).to eq(EXPECTED_PROVIDER_COUNT)
