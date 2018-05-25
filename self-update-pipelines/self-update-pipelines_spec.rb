@@ -10,22 +10,22 @@ describe "self-update-pipelines image" do
     set :docker_image, find_image_id('self-update-pipelines:latest')
   }
 
-  it "has ruby available" do
+  it "has ruby 2.5 available" do
     expect(
       command("ruby -v").stdout
-    ).to match(/ruby 2\.2/)
+    ).to match(/ruby 2\.5/)
   end
 
   it "has curl available" do
     expect(
       command("curl --version").stdout
-    ).to match(/curl 7\.38/)
+    ).to match(/curl 7/)
   end
 
   it "has bash available" do
     expect(
       command("bash --version").stdout
-    ).to match(/GNU bash, version 4\.3/)
+    ).to match(/GNU bash, version 4/)
   end
 
   it "has make available" do
