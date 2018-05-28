@@ -85,8 +85,10 @@ RUN set -ex \
     && echo "${SUM}  /tmp/${FULL_FILENAME}" | sha256sum -c - \
     && tar -xvf /tmp/${FULL_FILENAME} -C /tmp \
     && mv /tmp/terraform-provider-helm_linux_amd64/terraform-provider-helm ${TERRAFORM_SHARED_DIR}/${FILENAME}_v${PROVIDER_HELM_VERSION} \
+    && mkdir -p ~/.helm-home \
     && chmod +x ${TERRAFORM_SHARED_DIR}/*
 
+ENV HELM_HOME "~/.helm-home"
 ENV TF_DATA_DIR "/.terraform"
 COPY plugin_cache.tf /tmp/
 RUN cd /tmp && terraform init
