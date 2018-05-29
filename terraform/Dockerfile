@@ -106,7 +106,7 @@ RUN set -ex \
     && echo "${SUM}  /tmp/${FULL_FILENAME}" | sha256sum -c - \
     && tar -xvf /tmp/${FULL_FILENAME} -C /tmp \
     && chmod +x /tmp/linux-amd64/helm \
-    && ./tmp/linux-amd64/helm init 
+    && ./tmp/linux-amd64/helm init --client-only
 
 
 ENV TF_DATA_DIR "/.terraform"
