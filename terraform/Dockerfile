@@ -97,7 +97,7 @@ RUN set -ex \
 
 RUN set -ex \
     && export FILENAME="helm" \
-    && export FILENAME_SUFFIX="_linux-amd64.tar.gz" \
+    && export FILENAME_SUFFIX="-linux-amd64.tar.gz" \
     && export FULL_FILENAME="${FILENAME}-v${HELM_VERSION}${FILENAME_SUFFIX}" \
     && export URL="https://storage.googleapis.com/kubernetes-helm/${FULL_FILENAME}" \
     && export SUM=${HELM_SUM} \
