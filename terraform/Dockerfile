@@ -21,7 +21,11 @@ ENV PROVIDER_HELM_SUM bb187def614814f4a60bb12c0217fd01909901f2e01272f5d78982f12d
 
 RUN mkdir -p ${TERRAFORM_SHARED_DIR}
 
+ENV HELM_HOME "/.helm-home"
+RUN mkdir -p ${HELM_HOME}
+
 RUN apk add --update openssl openssh-client ca-certificates wget libc6-compat && rm -rf /var/cache/apk/*
+
 
 
 RUN set -ex \
@@ -85,10 +89,23 @@ RUN set -ex \
     && echo "${SUM}  /tmp/${FULL_FILENAME}" | sha256sum -c - \
     && tar -xvf /tmp/${FULL_FILENAME} -C /tmp \
     && mv /tmp/terraform-provider-helm_linux_amd64/terraform-provider-helm ${TERRAFORM_SHARED_DIR}/${FILENAME}_v${PROVIDER_HELM_VERSION} \
-    && mkdir -p ~/.helm-home \
     && chmod +x ${TERRAFORM_SHARED_DIR}/*
 
-ENV HELM_HOME "~/.helm-home"
+
+RUN set -ex \
+    && export FILENAME="helm" \
+    && export FILENAME_SUFFIX="_linux-amd64.tar.gz" \
+    && export FULL_FILENAME="${FILENAME}-v${PROVIDER_HELM_VERSION}${FILENAME_SUFFIX}" \
+    && export URL="https://storage.googleapis.com/kubernetes-helm/${FULL_FILENAME}" \
+    && export SUM=${PROVIDER_HELM_SUM} \
+    && wget ${URL} -O /tmp/${FULL_FILENAME} \
+    && echo "Computed sha256sum: $(sha256sum /tmp/${FULL_FILENAME})" \
+    && echo "${SUM}  /tmp/${FULL_FILENAME}" | sha256sum -c - \
+    && tar -xvf /tmp/${FULL_FILENAME} -C /tmp \
+    && chmod +x /tmp/linux_amd64/helm \
+    && ./tmp/linux_amd64/helm init 
+
+
 ENV TF_DATA_DIR "/.terraform"
 COPY plugin_cache.tf /tmp/
 RUN cd /tmp && terraform init
