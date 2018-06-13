@@ -89,8 +89,12 @@ describe "Terraform image" do
       expect(@terraform_version_output).to include("provider.helm v0.5.1")
     end
 
+    it "has the flexibleengine provider" do
+      expect(@terraform_version_output).to include("provider.flexibleengine v1.0.1")
+    end
+
     it "has enough providers" do
-      EXPECTED_PROVIDER_COUNT = 16
+      EXPECTED_PROVIDER_COUNT = 17
       expect(@terraform_version_output.scan('provider.').length).to eq(EXPECTED_PROVIDER_COUNT)
     end
 

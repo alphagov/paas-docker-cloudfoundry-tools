@@ -34,6 +34,9 @@ provider "http" {
 provider "kubernetes" {
   version = "~> 1.1.0"
 }
+provider "flexibleengine" {
+  version = "~> 1.0.1"
+}
 
 # Orange provider
 provider "credhub" {
