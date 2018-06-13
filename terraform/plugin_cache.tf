@@ -50,6 +50,3 @@ provider "cloudfoundry" {
 provider "uaa" {
   version = "~> 0.8.0"
 }
-provider "helm" {
-  version = "~> 0.5.1"
-}
