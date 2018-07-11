@@ -58,7 +58,7 @@ describe "Terraform image" do
     end
 
     it "has the openstack provider" do
-      expect(@terraform_version_output).to include("provider.openstack v1.4.0")
+      expect(@terraform_version_output).to include("provider.openstack v1.6.0")
     end
 
     it "has the cloudstack provider" do
@@ -82,7 +82,7 @@ describe "Terraform image" do
     end
 
     it "has the uaa provider" do
-      expect(@terraform_version_output).to include("provider.uaa v0.8")
+      expect(@terraform_version_output).to include("provider.uaa v0.9")
     end
 
     it "has the flexibleengine provider" do
@@ -90,10 +90,8 @@ describe "Terraform image" do
     end
 
     it "has enough providers" do
-      EXPECTED_PROVIDER_COUNT = 16
+      EXPECTED_PROVIDER_COUNT = 17
       expect(@terraform_version_output.scan('provider.').length).to eq(EXPECTED_PROVIDER_COUNT)
     end
-
   end
-
 end

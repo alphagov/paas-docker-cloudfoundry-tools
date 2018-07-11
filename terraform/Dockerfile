@@ -13,8 +13,8 @@ ENV PROVIDER_CLOUDFOUNDRY_SUM baf908c3c8af4fcc06a772de45e61e2ebc5f3023939b58ddb4
 ENV PROVIDER_CREDHUB_VERSION 0.11.0
 ENV PROVIDER_CREDHUB_SUM 1b43ea2c404bb716eefa36e18a9fd8baa35f8e5ea991d98b2dd3447cba08435a
 
-ENV PROVIDER_UAA_VERSION 0.8.0
-ENV PROVIDER_UAA_SUM 2f8f2e6aa91c6f1b0c6d2064a0fd2cd7ca2b9d164211c87065b3ad8c9c344496
+ENV PROVIDER_UAA_VERSION 0.9.0
+ENV PROVIDER_UAA_SUM bfbab04dde59e70354c98f4516924c447d70c3bb3a5689dd4d6466e744162220
 
 RUN mkdir -p ${TERRAFORM_SHARED_DIR}
 
@@ -65,7 +65,7 @@ RUN set -ex \
     && export FILENAME="terraform-provider-uaa" \
     && export FILENAME_SUFFIX="_linux_amd64" \
     && export FULL_FILENAME="$FILENAME$FILENAME_SUFFIX" \
-    && export URL="https://github.com/mevansam/terraform-provider-uaa/releases/download/${PROVIDER_UAA_VERSION}/${FULL_FILENAME}" \
+    && export URL="https://github.com/orange-cloudfoundry/terraform-provider-uaa/releases/download/${PROVIDER_UAA_VERSION}/${FULL_FILENAME}" \
     && export SUM=${PROVIDER_UAA_SUM} \
     && wget ${URL} -O /tmp/${FULL_FILENAME} \
     && echo "Computed sha256sum: $(sha256sum /tmp/${FULL_FILENAME})" \
