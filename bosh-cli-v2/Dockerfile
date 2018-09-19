@@ -1,7 +1,7 @@
 FROM ruby:2.5-slim
 
-ENV BOSH_CLI_VERSION 3.0.1-gds1
-ENV BOSH_CLI_SUM fb71095c50aaf60865a4687cf22f2c826f44ed2f
+ENV BOSH_CLI_VERSION 3.0.1
+ENV BOSH_CLI_SUM ccc893bab8b219e9e4a628ed044ebca6c6de9ca0
 ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
 
 ENV DEBIAN_PACKAGES "ca-certificates wget git openssh-client file"
@@ -19,7 +19,7 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends ${BOSH_ENV_DEPS} \
   && rm -rf /var/lib/apt/lists/*
 
-RUN wget -nv https://github.com/alphagov/paas-bosh-cli/releases/download/v${BOSH_CLI_VERSION}/${BOSH_CLI_FILENAME} \
+RUN wget -nv https://s3.amazonaws.com/bosh-cli-artifacts/${BOSH_CLI_FILENAME} \
   && echo "${BOSH_CLI_SUM}  ${BOSH_CLI_FILENAME}" | sha1sum -c - \
   && chmod +x ${BOSH_CLI_FILENAME} \
   && mv ${BOSH_CLI_FILENAME} /usr/local/bin/bosh
