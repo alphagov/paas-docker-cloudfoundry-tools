@@ -23,7 +23,7 @@ RUN go get github.com/tools/godep
 RUN go get github.com/onsi/ginkgo/ginkgo
 
 # Install the cf CLI
-RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&version=6.36.0&source=github-rel" && \
+RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&version=6.39.1&source=github-rel" && \
     dpkg -i cf.deb && \
     rm -f cf.deb
 
