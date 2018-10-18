@@ -57,16 +57,6 @@ describe "cf-acceptance-tests image" do
     ).to match(/^CF_PLUGIN_HOME=\/root/)
   end
 
-  it "has the network-policy plugin" do
-    # Needed by the cf acceptance-test suite network polices
-    plugins_output = command("cf plugins").stdout
-
-    expect(plugins_output).to match(/^network-policy +[^ ]+ +allow-access /)
-    expect(plugins_output).to match(/^network-policy +[^ ]+ +deny-access /)
-    expect(plugins_output).to match(/^network-policy +[^ ]+ +list-access /)
-    expect(plugins_output).to match(/^network-policy +[^ ]+ +remove-access /)
-  end
-
   it "has the log-cache plugin" do
     # Needed by the cf acceptance-test with log-cache mode
     plugins_output = command("cf plugins").stdout

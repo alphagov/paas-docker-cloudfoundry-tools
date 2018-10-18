@@ -30,8 +30,5 @@ RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&versio
 # Setup plugins
 ENV CF_PLUGIN_HOME /root/
 
-# Install the container networking CLI plugin
-RUN cf install-plugin -f "https://github.com/cloudfoundry-incubator/netman-release/releases/download/v0.11.0/network-policy-plugin-linux64"
-
 # Install the log-cache-cli plugin
 RUN cf install-plugin -f https://github.com/cloudfoundry/log-cache-cli/releases/download/v1.1.0/log-cache-cf-plugin-linux
