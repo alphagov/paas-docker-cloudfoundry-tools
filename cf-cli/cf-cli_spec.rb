@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="6.34.1"
+CF_CLI_VERSION="6.39.1"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.17.0"
 

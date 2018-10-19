@@ -3,7 +3,7 @@ require 'docker'
 require 'serverspec'
 
 GO_VERSION="1.9"
-CF_CLI_VERSION="6.36.0"
+CF_CLI_VERSION="6.39.1"
 LOG_CACHE_CLI_VERSION="1.1.0"
 
 describe "cf-acceptance-tests image" do
@@ -55,16 +55,6 @@ describe "cf-acceptance-tests image" do
     expect(
       command("env").stdout
     ).to match(/^CF_PLUGIN_HOME=\/root/)
-  end
-
-  it "has the network-policy plugin" do
-    # Needed by the cf acceptance-test suite network polices
-    plugins_output = command("cf plugins").stdout
-
-    expect(plugins_output).to match(/^network-policy +[^ ]+ +allow-access /)
-    expect(plugins_output).to match(/^network-policy +[^ ]+ +deny-access /)
-    expect(plugins_output).to match(/^network-policy +[^ ]+ +list-access /)
-    expect(plugins_output).to match(/^network-policy +[^ ]+ +remove-access /)
   end
 
   it "has the log-cache plugin" do
