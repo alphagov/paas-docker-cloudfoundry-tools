@@ -3,7 +3,8 @@ require 'docker'
 require 'serverspec'
 
 GO_VERSION="1.9"
-CF_CLI_VERSION="6.36.0"
+CF_CLI_VERSION="6.39.1"
+LOG_CACHE_CLI_VERSION="1.1.0"
 
 describe "cf-acceptance-tests image" do
   before(:all) {
@@ -48,5 +49,18 @@ describe "cf-acceptance-tests image" do
     expect(
       command("unzip -v").exit_status
     ).to eq(0)
+  end
+
+  it "has the CF_PLUGIN_HOME variable set" do
+    expect(
+      command("env").stdout
+    ).to match(/^CF_PLUGIN_HOME=\/root/)
+  end
+
+  it "has the log-cache plugin" do
+    # Needed by the cf acceptance-test with log-cache mode
+    plugins_output = command("cf plugins").stdout
+    expect(plugins_output).to match(/^log-cache +#{LOG_CACHE_CLI_VERSION} +log-meta/)
+    expect(plugins_output).to match(/^log-cache +#{LOG_CACHE_CLI_VERSION} +tail /)
   end
 end

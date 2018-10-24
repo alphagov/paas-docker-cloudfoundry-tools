@@ -2,10 +2,10 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="3.0.1-712bfd7-2018-03-13T23:26:43Z"
+BOSH_CLI_VERSION="5.2.1-24101936-2018-08-27T21:55:34Z"
 
-BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt1-dev libxml2-dev \
-    libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3"
+BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
+    libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
 
 describe "bosh-cli-v2 image" do
   before(:all) {
@@ -61,6 +61,12 @@ describe "bosh-cli-v2 image" do
     else
       expect(ssl_version_str).to be >= 'OpenSSL 1.0.2d'
     end
+  end
+
+  it "has ruby 2.5 available" do
+    cmd = command("ruby -v")
+    expect(cmd.exit_status).to eq(0)
+    expect(cmd.stdout).to match(/^ruby 2.5/)
   end
 
   it "contains the compiled CPI packages" do

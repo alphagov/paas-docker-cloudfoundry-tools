@@ -10,3 +10,5 @@ gem 'serverspec', '~> 2.19'
 gem 'should_not', '~> 1.1'
 
 gem 'rake', '~> 10.4.2'
+
+gem 'json', '~> 2.1.0'

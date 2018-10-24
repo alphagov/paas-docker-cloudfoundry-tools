@@ -1,14 +1,14 @@
-FROM ubuntu:16.04
+FROM ruby:2.5-slim
 
-ENV BOSH_CLI_VERSION 3.0.1
-ENV BOSH_CLI_SUM ccc893bab8b219e9e4a628ed044ebca6c6de9ca0
+ENV BOSH_CLI_VERSION 5.2.1
+ENV BOSH_CLI_SUM 89916f4b499f46037e7217ffceda0f1a352006b8
 ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
 
 ENV DEBIAN_PACKAGES "ca-certificates wget git openssh-client file"
 
 # https://bosh.io/docs/cli-env-deps.html
-ENV BOSH_ENV_DEPS "build-essential zlibc zlib1g-dev ruby ruby-dev openssl libxslt-dev \
-  libxml2-dev libssl-dev libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev sqlite3"
+ENV BOSH_ENV_DEPS "build-essential zlibc zlib1g-dev openssl libxslt1-dev \
+  libxml2-dev libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
 
 ENV BOSH_AWS_CPI_URL https://bosh.io/d/github.com/cloudfoundry-incubator/bosh-aws-cpi-release?v=69
 ENV BOSH_AWS_CPI_CHECKSUM 8abe70219244896ea6f7208fc01f2eac56179170
