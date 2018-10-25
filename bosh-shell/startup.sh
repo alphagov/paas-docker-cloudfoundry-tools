@@ -22,6 +22,6 @@ export BOSH_GW_HOST=$BOSH_IP
 export BOSH_GW_USER=vcap
 export BOSH_GW_PRIVATE_KEY=/tmp/bosh_id_rsa
 
-bosh login --client=admin --client-secret="$BOSH_ADMIN_PASSWORD"
+bosh login
 
 exec bash
