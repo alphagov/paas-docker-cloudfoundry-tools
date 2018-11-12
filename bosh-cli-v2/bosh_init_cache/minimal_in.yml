@@ -15,8 +15,8 @@ resource_pools:
 - name: dummy
   network: dummy
   stemcell:
-    sha1: 1a29c43d4e8abf7476ed6bb83168df1bdb742022
-    url: https://bosh.io/d/stemcells/bosh-aws-xen-hvm-ubuntu-trusty-go_agent?v=3074
+    sha1: c8b65794ca4c45773b6fe23b3d447dde520f07b0
+    url: https://bosh.io/d/stemcells/bosh-aws-xen-hvm-ubuntu-xenial-go_agent?v=170.3
 jobs:
 - name: dummy
   networks:
