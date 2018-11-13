@@ -31,4 +31,4 @@ RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&versio
 ENV CF_PLUGIN_HOME /root/
 
 # Install the log-cache-cli plugin
-RUN cf install-plugin -f https://github.com/cloudfoundry/log-cache-cli/releases/download/v1.1.0/log-cache-cf-plugin-linux
+RUN cf install-plugin -f https://github.com/cloudfoundry/log-cache-cli/releases/download/v2.0.0/log-cache-cf-plugin-linux
