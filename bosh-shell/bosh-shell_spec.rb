@@ -53,4 +53,10 @@ describe "bosh-shell image" do
       expect(ssl_version_str).to be >= 'OpenSSL 1.0.2d'
     end
   end
+
+  it "has `vim` available" do
+    expect(
+      command("vim --version").exit_status
+    ).to eq(0)
+  end
 end
