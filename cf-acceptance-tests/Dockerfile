@@ -9,6 +9,7 @@ RUN \
     openssh-client \
     unzip \
     git \
+    python-pip \
   && rm -rf /var/lib/apt/lists/*
 
 ENV GOPATH /go
@@ -32,3 +33,6 @@ ENV CF_PLUGIN_HOME /root/
 
 # Install the log-cache-cli plugin
 RUN cf install-plugin -f https://github.com/cloudfoundry/log-cache-cli/releases/download/v2.0.0/log-cache-cf-plugin-linux
+
+# Install the AWS-CLI
+RUN pip install awscli=="1.14.10"

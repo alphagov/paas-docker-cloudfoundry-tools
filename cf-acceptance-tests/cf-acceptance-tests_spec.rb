@@ -63,4 +63,11 @@ describe "cf-acceptance-tests image" do
     expect(plugins_output).to match(/^log-cache +#{LOG_CACHE_CLI_VERSION} +log-meta/)
     expect(plugins_output).to match(/^log-cache +#{LOG_CACHE_CLI_VERSION} +tail /)
   end
+
+  it "has AWS CLI available" do
+    expect(
+      command("aws --version").exit_status
+    ).to eq(0)
+  end
+
 end
