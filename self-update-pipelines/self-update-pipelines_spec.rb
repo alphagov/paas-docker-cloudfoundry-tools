@@ -48,8 +48,4 @@ describe "self-update-pipelines image" do
     end
     expect(awscli_version).to match(/aws-cli\/#{AWSCLI_VERSION} /)
   end
-
-  it "the 'aws help' command works" do
-    expect(command("aws help").stdout.gsub(/\s+/, "\s")).to match(/The AWS Command Line Interface/)
-  end
 end
