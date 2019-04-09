@@ -1,7 +1,12 @@
+FROM golang:1.12 as build-cf-cli
+
+ENV GO111MODULE  on
+ENV CF_CLI_COMMIT 9db143646fb6cca031d8bb9099274d6688633606
+RUN go get github.com/cloudfoundry/cli@$CF_CLI_COMMIT
+
 FROM ruby:2.5-alpine
 
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash"
-ENV CF_CLI_VERSION "6.41.0"
 ENV CF_BGD_VERSION "1.3.0"
 ENV CF_BGD_CHECKSUM "c74995ae0ba3ec9eded9c2a555e5984ba536d314cf9dc30013c872eb6b9d76b6"
 ENV CF_BGD_TEMPFILE "/tmp/blue-green-deploy.linux64"
@@ -13,7 +18,7 @@ ENV SPRUCE_VERSION "1.17.0"
 RUN apk add --update $PACKAGES && rm -rf /var/cache/apk/*
 RUN ln -s /lib/ /lib64 # FIXME: Remove for Alpine >= 3.6
 
-RUN curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&version=${CF_CLI_VERSION}" | tar -zx -C /usr/local/bin
+COPY --from=build-cf-cli /go/bin/cli /usr/local/bin/cf
 RUN curl -L 'https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64' -o /usr/local/bin/jq && chmod +x /usr/local/bin/jq
 
 RUN curl -L -o "${CF_BGD_TEMPFILE}" \
