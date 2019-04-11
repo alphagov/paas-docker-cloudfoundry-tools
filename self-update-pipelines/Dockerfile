@@ -1,6 +1,6 @@
-FROM ruby:2.5-slim
+FROM ruby:2.5.1-slim
 
-ENV AWSCLI_VERSION "1.9.21"
+ENV AWSCLI_VERSION "1.16.140"
 ENV PACKAGES make python-setuptools python-pip groff less curl
 
 RUN apt-get update \
