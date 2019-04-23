@@ -1,5 +1,5 @@
-FROM alpine:3.3
+FROM alpine:3.9
 
 ENV PACKAGES "gettext curl openssl ca-certificates"
 
-RUN apk add --update $PACKAGES && rm -rf /var/cache/apk/*
+RUN apk add --no-cache $PACKAGES

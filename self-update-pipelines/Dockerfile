@@ -1,4 +1,4 @@
-FROM ruby:2.5.1-slim
+FROM ruby:2.6-slim
 
 ENV AWSCLI_VERSION "1.16.140"
 ENV PACKAGES make python-setuptools python-pip groff less curl
