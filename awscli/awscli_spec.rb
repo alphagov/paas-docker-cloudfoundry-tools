@@ -12,10 +12,6 @@ describe "awscli image" do
     set :docker_image, find_image_id('awscli:latest')
   }
 
-  it "installs the right version of Alpine Linux" do
-    expect(os_version).to include("Alpine Linux 3.3")
-  end
-
   def os_version
     command("cat /etc/issue | head -1").stdout
   end
@@ -48,7 +44,6 @@ describe "awscli image" do
   it "has jq available" do
     cmd = command("jq --version")
     expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^jq-1.5/)
   end
 
 end
