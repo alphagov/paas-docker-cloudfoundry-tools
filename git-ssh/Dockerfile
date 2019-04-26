@@ -1,6 +1,6 @@
 FROM alpine:3.9
 
-ENV PACKAGES "git openssh-client gnupg bash"
+ENV PACKAGES "git openssl curl openssh-client gnupg bash"
 
 RUN apk add --no-cache $PACKAGES
 
