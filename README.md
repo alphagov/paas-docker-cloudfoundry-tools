@@ -21,9 +21,9 @@ You can add a new container you only need to add these files:
 
 Tasks to build and tests the containers will be generated automatically:
 
- * `rake build:bost-init` builds the container under `./bosh-init`
+ * `rake build:bosh-init` builds the container under `./bosh-init`
  * `rake build:all` builds all containers
- * `rake spec:bost-init` tests the container under `./bosh-init`
+ * `rake spec:bosh-init` tests the container under `./bosh-init`
  * `rake spec:all` tests all the containers
 
 Travis will execute the tasks `build:all` and `spec:all`
