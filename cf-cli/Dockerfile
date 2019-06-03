@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.6-alpine3.9
 
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq"
 ENV CF_CLI_VERSION "6.41.0"
