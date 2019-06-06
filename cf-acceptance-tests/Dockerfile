@@ -14,7 +14,10 @@ RUN \
 
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
+
 ENV CF_CLI_VERSION "6.45.0"
+ENV CF_LOG_CACHE_VERSION "2.1.0"
+
 RUN \
   wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz -P /tmp && \
   tar xzvf /tmp/go1.9.linux-amd64.tar.gz -C /usr/local && \
@@ -33,7 +36,7 @@ RUN wget -q -O cf.deb "https://cli.run.pivotal.io/stable?release=debian64&versio
 ENV CF_PLUGIN_HOME /root/
 
 # Install the log-cache-cli plugin
-RUN cf install-plugin -f https://github.com/cloudfoundry/log-cache-cli/releases/download/v2.0.0/log-cache-cf-plugin-linux
+RUN cf install-plugin -f "https://github.com/cloudfoundry/log-cache-cli/releases/download/v${CF_LOG_CACHE_VERSION}/log-cache-cf-plugin-linux"
 
 # Install the AWS-CLI
 RUN pip install awscli=="1.14.10"

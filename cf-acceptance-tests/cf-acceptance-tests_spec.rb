@@ -4,7 +4,7 @@ require 'serverspec'
 
 GO_VERSION="1.9"
 CF_CLI_VERSION="6.45.0"
-LOG_CACHE_CLI_VERSION="2.0.0"
+LOG_CACHE_CLI_VERSION="2.1.0"
 
 describe "cf-acceptance-tests image" do
   before(:all) {
@@ -62,6 +62,9 @@ describe "cf-acceptance-tests image" do
     plugins_output = command("cf plugins").stdout
     expect(plugins_output).to match(/^log-cache +#{LOG_CACHE_CLI_VERSION} +log-meta/)
     expect(plugins_output).to match(/^log-cache +#{LOG_CACHE_CLI_VERSION} +tail /)
+
+    cf_tail_help = command("cf tail -h").stdout
+    expect(cf_tail_help).to match(/envelope-class/)
   end
 
   it "has AWS CLI available" do
