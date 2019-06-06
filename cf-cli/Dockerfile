@@ -11,7 +11,6 @@ ENV CF_AUTOPILOT_TEMPFILE "/tmp/autopilot-linux"
 ENV SPRUCE_VERSION "1.17.0"
 
 RUN apk add --no-cache $PACKAGES
-RUN ln -s /lib/ /lib64 # FIXME: Remove for Alpine >= 3.6
 
 RUN curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&version=${CF_CLI_VERSION}" | tar -zx -C /usr/local/bin
 
