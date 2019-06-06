@@ -84,4 +84,10 @@ describe "cf-cli image" do
       command("bash --version").exit_status
     ).to eq(0)
   end
+
+  it "has `envsubst` available" do
+    expect(
+      command("envsubst --help").exit_status
+    ).to eq(0)
+  end
 end
