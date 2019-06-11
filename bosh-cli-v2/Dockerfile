@@ -10,8 +10,8 @@ ENV DEBIAN_PACKAGES "ca-certificates wget git openssh-client file"
 ENV BOSH_ENV_DEPS "build-essential zlibc zlib1g-dev openssl libxslt1-dev \
   libxml2-dev libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
 
-ENV BOSH_AWS_CPI_URL https://bosh.io/d/github.com/cloudfoundry-incubator/bosh-aws-cpi-release?v=72
-ENV BOSH_AWS_CPI_CHECKSUM b7999e95115bb691a630c07f0439ef5b577884c2
+ENV BOSH_AWS_CPI_URL https://bosh.io/d/github.com/cloudfoundry/bosh-aws-cpi-release?v=75
+ENV BOSH_AWS_CPI_CHECKSUM a6f32491067eae70f62cb03fc559654708e4f2f3
 
 RUN apt-get update \
   && apt-get -y upgrade \
