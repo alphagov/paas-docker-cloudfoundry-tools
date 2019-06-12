@@ -15,12 +15,13 @@ RUN \
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 
+ENV GO_VERSION "1.12.5"
 ENV CF_CLI_VERSION "6.45.0"
 ENV CF_LOG_CACHE_VERSION "2.1.0"
 
 RUN \
-  wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz -P /tmp && \
-  tar xzvf /tmp/go1.9.linux-amd64.tar.gz -C /usr/local && \
+  wget https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz -P /tmp && \
+  tar xzvf /tmp/go${GO_VERSION}.linux-amd64.tar.gz -C /usr/local && \
   mkdir $GOPATH && \
   rm -rf /tmp/*
 
