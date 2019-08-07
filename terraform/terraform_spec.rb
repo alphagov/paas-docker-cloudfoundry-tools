@@ -54,7 +54,7 @@ describe "Terraform image" do
     end
 
     it "has the local provider" do
-      expect(@terraform_version_output).to include("provider.local v1.1.0")
+      expect(@terraform_version_output).to include("provider.local v1.3.0")
     end
 
     it "has the openstack provider" do
@@ -62,15 +62,15 @@ describe "Terraform image" do
     end
 
     it "has the cloudstack provider" do
-      expect(@terraform_version_output).to include("provider.cloudstack v0.1.5")
+      expect(@terraform_version_output).to include("provider.cloudstack v0.3.0")
     end
 
     it "has the powerdns provider" do
-      expect(@terraform_version_output).to include("provider.powerdns v0.1.0")
+      expect(@terraform_version_output).to include("provider.powerdns v1.0.0")
     end
 
     it "has the credhub provider" do
-      expect(@terraform_version_output).to include("provider.credhub v0.12.1")
+      expect(@terraform_version_output).to include("provider.credhub v0.13.0")
     end
 
     it "has the cloudfoundry provider" do
@@ -86,7 +86,7 @@ describe "Terraform image" do
     end
 
     it "has the flexibleengine provider" do
-      expect(@terraform_version_output).to include("provider.flexibleengine v1.2.0")
+      expect(@terraform_version_output).to include("provider.flexibleengine v1.6.0")
     end
 
     it "has enough providers" do
