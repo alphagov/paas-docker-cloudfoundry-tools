@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.9
 
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_SHARED_DIR /.terraform/plugins/linux_amd64
@@ -21,7 +21,7 @@ RUN mkdir -p ${TERRAFORM_SHARED_DIR}
 ENV HELM_HOME "/.helm-home"
 RUN mkdir -p ${HELM_HOME}
 
-RUN apk add --update openssl openssh-client ca-certificates wget libc6-compat && rm -rf /var/cache/apk/*
+RUN apk add --no-cache openssl openssh-client ca-certificates wget libc6-compat && rm -rf /var/cache/apk/*
 
 
 

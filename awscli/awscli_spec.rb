@@ -5,16 +5,12 @@ require 'serverspec'
 AWSCLI_PACKAGES = "curl openssl ca-certificates less"
 
 AWSCLI_BIN = "/usr/bin/aws"
-AWSCLI_VERSION = "1.14.10"
+AWSCLI_VERSION = "1.16.154"
 
 describe "awscli image" do
   before(:all) {
     set :docker_image, find_image_id('awscli:latest')
   }
-
-  it "installs the right version of Alpine Linux" do
-    expect(os_version).to include("Alpine Linux 3.3")
-  end
 
   def os_version
     command("cat /etc/issue | head -1").stdout
@@ -48,7 +44,6 @@ describe "awscli image" do
   it "has jq available" do
     cmd = command("jq --version")
     expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^jq-1.5/)
   end
 
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="6.39.1"
+CF_CLI_VERSION="6.45.0"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.17.0"
 
@@ -48,13 +48,12 @@ describe "cf-cli image" do
   it "has jq available" do
     cmd = command("jq --version")
     expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^jq-1.5/)
   end
 
-  it "has ruby 2.5 available" do
+  it "has ruby 2.6 available" do
     cmd = command("ruby -v")
     expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^ruby 2.5/)
+    expect(cmd.stdout).to match(/^ruby 2.6/)
   end
 
   it "has ruby json gem available" do
@@ -83,6 +82,12 @@ describe "cf-cli image" do
   it "has `bash` available" do
     expect(
       command("bash --version").exit_status
+    ).to eq(0)
+  end
+
+  it "has `envsubst` available" do
+    expect(
+      command("envsubst --help").exit_status
     ).to eq(0)
   end
 end

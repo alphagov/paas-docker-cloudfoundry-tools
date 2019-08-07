@@ -3,17 +3,17 @@ require 'docker'
 require 'serverspec'
 
 AWSCLI_BIN = "/usr/local/bin/aws"
-AWSCLI_VERSION = "1.9.21"
+AWSCLI_VERSION = "1.16.140"
 
 describe "self-update-pipelines image" do
   before(:all) {
     set :docker_image, find_image_id('self-update-pipelines:latest')
   }
 
-  it "has ruby 2.5 available" do
+  it "has ruby 2.6 available" do
     expect(
       command("ruby -v").stdout
-    ).to match(/ruby 2\.5/)
+    ).to match(/ruby 2\.6/)
   end
 
   it "has curl available" do
@@ -47,9 +47,5 @@ describe "self-update-pipelines image" do
       command("aws --version").stderr.strip
     end
     expect(awscli_version).to match(/aws-cli\/#{AWSCLI_VERSION} /)
-  end
-
-  it "the 'aws help' command works" do
-    expect(command("aws help").stdout.gsub(/\s+/, "\s")).to match(/The AWS Command Line Interface/)
   end
 end

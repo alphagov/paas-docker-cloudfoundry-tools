@@ -1,7 +1,7 @@
-FROM ruby:2.5-alpine
+FROM ruby:2.6-alpine3.9
 
-ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash"
-ENV CF_CLI_VERSION "6.39.1"
+ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq gettext"
+ENV CF_CLI_VERSION "6.45.0"
 ENV CF_BGD_VERSION "1.3.0"
 ENV CF_BGD_CHECKSUM "c74995ae0ba3ec9eded9c2a555e5984ba536d314cf9dc30013c872eb6b9d76b6"
 ENV CF_BGD_TEMPFILE "/tmp/blue-green-deploy.linux64"
@@ -10,11 +10,9 @@ ENV CF_AUTOPILOT_CHECKSUM "a755f9da3981fb6dc6aa675a55f8fc7de9d73c87b8cad4883d98c
 ENV CF_AUTOPILOT_TEMPFILE "/tmp/autopilot-linux"
 ENV SPRUCE_VERSION "1.17.0"
 
-RUN apk add --update $PACKAGES && rm -rf /var/cache/apk/*
-RUN ln -s /lib/ /lib64 # FIXME: Remove for Alpine >= 3.6
+RUN apk add --no-cache $PACKAGES
 
 RUN curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&version=${CF_CLI_VERSION}" | tar -zx -C /usr/local/bin
-RUN curl -L 'https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64' -o /usr/local/bin/jq && chmod +x /usr/local/bin/jq
 
 RUN curl -L -o "${CF_BGD_TEMPFILE}" \
   "https://github.com/bluemixgaragelondon/cf-blue-green-deploy/releases/download/v${CF_BGD_VERSION}/blue-green-deploy.linux64" \

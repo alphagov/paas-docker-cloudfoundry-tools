@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CURL_SSL_PACKAGES = "curl openssl ca-certificates"
+CURL_SSL_PACKAGES = "gettext curl openssl ca-certificates"
 
 describe "curl-ssl image" do
   before(:all) {
@@ -10,7 +10,7 @@ describe "curl-ssl image" do
   }
 
   it "installs the right version of Alpine" do
-    expect(os_version).to include("Alpine Linux 3.3")
+    expect(os_version).to include("Alpine Linux 3.9")
   end
 
   def os_version

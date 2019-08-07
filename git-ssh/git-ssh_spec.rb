@@ -25,6 +25,18 @@ describe "image" do
     expect(command('git --version').exit_status).to eq(0)
   end
 
+  it "can run curl" do
+    expect(command('curl --version').exit_status).to eq(0)
+  end
+
+  it "can run openssl" do
+    expect(command('openssl version').exit_status).to eq(0)
+  end
+
+  it "has ca-certificates installed" do
+    expect(command('apk list ca-certificates').stdout).to contain('installed')
+  end
+
   it "can run ssh" do
     expect(command('ssh -V').exit_status).to eq(0)
   end
