@@ -25,7 +25,7 @@ describe "self-update-pipelines image" do
   it "has bash available" do
     expect(
       command("bash --version").stdout
-    ).to match(/GNU bash, version 4/)
+    ).to match(/GNU bash, version 5/)
   end
 
   it "has make available" do
