@@ -27,3 +27,13 @@ RUN wget -nv https://s3.amazonaws.com/bosh-cli-artifacts/${BOSH_CLI_FILENAME} \
 COPY bosh_init_cache /tmp/bosh_init_cache/
 RUN /tmp/bosh_init_cache/seed_bosh_init_cache.sh && \
     rm -rf /tmp/bosh_init_cache
+
+ENV CREDHUB_CLI_VERSION 2.4.0
+ENV CREDHUB_CLI_SUM 73edaf1ee47323c4f0aa455bcc17303a73c0cf2a6d9156542f1f6b7b1b1aa3db
+ENV CREDHUB_CLI_FILENAME credhub-linux-${CREDHUB_CLI_VERSION}.tgz
+
+RUN wget -nv https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/${CREDHUB_CLI_VERSION}/${CREDHUB_CLI_FILENAME} \
+  && echo "${CREDHUB_CLI_SUM}  ${CREDHUB_CLI_FILENAME}" | sha256sum -c - \
+  && tar zxvf ${CREDHUB_CLI_FILENAME} \
+  && chmod +x credhub \
+  && mv credhub /usr/local/bin/credhub
