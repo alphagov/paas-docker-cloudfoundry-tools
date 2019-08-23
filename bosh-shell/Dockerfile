@@ -23,4 +23,4 @@ RUN wget -nv https://github.com/cloudfoundry-incubator/credhub-cli/releases/down
 
 COPY startup.sh /startup.sh
 
-ENTRYPOINT /startup.sh
+ENTRYPOINT ["/startup.sh"]
