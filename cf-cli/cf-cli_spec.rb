@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="6.45.0"
+CF_CLI_VERSION="7.0.0-beta.25"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.17.0"
 
@@ -15,16 +15,6 @@ describe "cf-cli image" do
     expect(
       command("cf --version").stdout
     ).to match(/cf version #{CF_CLI_VERSION}/)
-  end
-
-  it "has blue-green-deploy plugin available" do
-    cmd = command("cf blue-green-deploy --help")
-    expect(cmd.exit_status).to eq(0)
-  end
-
-  it "has autopilot plugin available" do
-    cmd = command("cf zero-downtime-push --help")
-    expect(cmd.exit_status).to eq(0)
   end
 
   it "has curl available" do
