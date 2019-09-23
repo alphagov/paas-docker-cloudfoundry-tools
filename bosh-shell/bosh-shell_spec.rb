@@ -3,7 +3,7 @@ require 'docker'
 require 'serverspec'
 
 BOSH_CLI_VERSION="5.5.1-7850ac98-2019-05-21T22:28:36Z"
-CREDHUB_VERSION='2.4'
+CREDHUB_VERSION='2.5.3'
 
 describe "bosh-shell image" do
   before(:all) {
