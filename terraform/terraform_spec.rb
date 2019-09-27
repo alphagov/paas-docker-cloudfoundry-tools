@@ -18,7 +18,7 @@ describe "Terraform image" do
   it "has the expected Terraform version" do
     expect(
       command("terraform version").stdout
-    ).to include("Terraform v0.11.1")
+    ).to match("Terraform v0.11.1$")
   end
 
   it "installs SSH" do
