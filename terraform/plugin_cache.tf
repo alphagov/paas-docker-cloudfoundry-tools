@@ -1,5 +1,5 @@
 provider "aws" {
-  version = "1.46.0"
+  version = "2.30.0"
 }
 provider "datadog" {
   version = "1.0.3"
