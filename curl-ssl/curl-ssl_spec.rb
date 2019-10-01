@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CURL_SSL_PACKAGES = "gettext curl openssl ca-certificates"
+CURL_SSL_PACKAGES = "jq gettext curl openssl ca-certificates"
 
 describe "curl-ssl image" do
   before(:all) {
