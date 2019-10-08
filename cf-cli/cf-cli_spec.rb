@@ -33,6 +33,12 @@ describe "cf-cli image" do
     ).to eq(0)
   end
 
+  it "has make available" do
+    expect(
+      command("make --version").exit_status
+    ).to eq(0)
+  end
+
   it "has unzip available" do
     expect(
       command("unzip -v").exit_status
