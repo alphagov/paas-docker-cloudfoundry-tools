@@ -17,7 +17,7 @@ describe "Terraform image" do
   end
 
   it "has the expected Terraform version" do
-    expect(@terraform_version_output).to include("Terraform v0.11.7")
+    expect(@terraform_version_output).to match("Terraform v0.11.14$")
   end
 
   it "installs SSH" do
@@ -34,7 +34,7 @@ describe "Terraform image" do
 
   it "disables interactive Terraform use" do
     expect(
-        command("printenv TF_INPUT").stdout.strip
+      command("printenv TF_INPUT").stdout.strip
     ).to eq("0")
   end
 

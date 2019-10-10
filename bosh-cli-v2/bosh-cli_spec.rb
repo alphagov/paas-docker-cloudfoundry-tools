@@ -3,6 +3,7 @@ require 'docker'
 require 'serverspec'
 
 BOSH_CLI_VERSION="5.5.1-7850ac98-2019-05-21T22:28:36Z"
+CREDHUB_VERSION='2.5.3'
 
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
@@ -38,6 +39,12 @@ describe "bosh-cli-v2 image" do
 
   it "can run git" do
     expect(command('git --version').exit_status).to eq(0)
+  end
+
+  it "can run credhub" do
+    cmd = command('credhub --version')
+    expect(cmd.exit_status).to eq(0)
+    expect(cmd.stdout.match?(/#{CREDHUB_VERSION}/)).to eq(true)
   end
 
   it "has `bash` available" do

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="6.45.0"
+CF_CLI_VERSION="6.46.1"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.17.0"
 
@@ -30,6 +30,12 @@ describe "cf-cli image" do
   it "has curl available" do
     expect(
       command("curl --version").exit_status
+    ).to eq(0)
+  end
+
+  it "has make available" do
+    expect(
+      command("make --version").exit_status
     ).to eq(0)
   end
 

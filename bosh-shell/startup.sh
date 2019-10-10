@@ -15,6 +15,7 @@ ssh -fNC -4 -D 25555 \
   -o StrictHostKeyChecking=no \
   -o UserKnownHostsFile=/dev/null \
   -o ServerAliveInterval=30 \
+  -q \
   "vcap@$BOSH_IP" -i /tmp/bosh_id_rsa
 
 export BOSH_ALL_PROXY="socks5://localhost:25555"
@@ -22,4 +23,4 @@ export BOSH_GW_HOST=$BOSH_IP
 export BOSH_GW_USER=vcap
 export BOSH_GW_PRIVATE_KEY=/tmp/bosh_id_rsa
 
-exec bash
+exec bash "${@}"
