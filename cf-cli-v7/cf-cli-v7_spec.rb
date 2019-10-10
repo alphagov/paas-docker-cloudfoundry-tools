@@ -17,6 +17,12 @@ describe "cf-cli-v7 image" do
     ).to match(/cf version #{CF_CLI_VERSION}/)
   end
 
+  it "has the CF CLI available with the alias cf7" do
+    expect(
+      command("cf7 --version").stdout
+    ).to match(/cf7 version #{CF_CLI_VERSION}/)
+  end
+
   it "has conduit plugin available" do
     cmd = command("cf conduit --help")
     expect(cmd.exit_status).to eq(0)
