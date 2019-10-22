@@ -1,6 +1,6 @@
 FROM alpine:3.9
 
-ENV SPRUCE_VERSION 1.14.0
+ENV SPRUCE_VERSION 1.22.0
 
 RUN apk add --no-cache wget ca-certificates \
   && wget https://github.com/geofffranks/spruce/releases/download/v${SPRUCE_VERSION}/spruce-linux-amd64 \
