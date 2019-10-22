@@ -4,7 +4,7 @@ require 'serverspec'
 
 CF_CLI_VERSION="7.0.0-beta.25"
 SPRUCE_BIN = "/usr/local/bin/spruce"
-SPRUCE_VERSION = "1.17.0"
+SPRUCE_VERSION = "1.22.0"
 
 describe "cf-cli-v7 image" do
   before(:all) {
