@@ -1,7 +1,7 @@
 FROM ruby:2.6-alpine3.9
 
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq gettext make"
-ENV CF_CLI_VERSION "6.46.1"
+ENV CF_CLI_VERSION "6.47.2"
 ENV CF_BGD_VERSION "1.3.0"
 ENV CF_BGD_CHECKSUM "c74995ae0ba3ec9eded9c2a555e5984ba536d314cf9dc30013c872eb6b9d76b6"
 ENV CF_BGD_TEMPFILE "/tmp/blue-green-deploy.linux64"
