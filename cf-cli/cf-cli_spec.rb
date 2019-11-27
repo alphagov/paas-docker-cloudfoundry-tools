@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="6.46.1"
+CF_CLI_VERSION="6.47.2"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.22.0"
 
@@ -11,7 +11,7 @@ describe "cf-cli image" do
     set :docker_image, find_image_id('cf-cli:latest')
   }
 
-  it "has the expected version of the CF CLI" do
+  it "has the expected version of the CF CLI (#{CF_CLI_VERSION})" do
     expect(
       command("cf --version").stdout
     ).to match(/cf version #{CF_CLI_VERSION}/)
