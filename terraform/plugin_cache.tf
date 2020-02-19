@@ -2,7 +2,7 @@ provider "aws" {
   version = "2.30.0"
 }
 provider "azurerm" {
-  version = "1.32.1"
+  version = "1.44.0"
 }
 provider "cloudflare" {
 version = "~> 1.7.0"
@@ -11,31 +11,31 @@ provider "cloudstack" {
 version = "~> 0.3.0"
 }
 provider "flexibleengine" {
-version = "~> 1.6.0"
+version = "~> 1.11.1"
 }
 provider "gitlab" {
 version = "~> 1.0.0"
 }
 provider "grafana" {
-version = "~> 1.2.0"
+version = "~> 1.5.0"
 }
 provider "http" {
 version = "~> 1.1.1"
 }
 provider "kubernetes" {
-version = "~> 1.3.0"
+version = "~> 1.11.0"
 }
 provider "local" {
-version = "~> 1.3.0"
+version = "~> 1.4.0"
 }
 provider "null" {
 version = "1.0.0"
 }
 provider "openstack" {
-version = "~> 1.10.0"
+version = "~> 1.25.0"
 }
 provider "powerdns" {
-version = "~> 1.0.0"
+version = "~> 1.3.0"
 }
 provider "template" {
 version = "1.0.0"
