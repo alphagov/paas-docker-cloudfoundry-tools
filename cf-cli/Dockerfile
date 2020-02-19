@@ -1,14 +1,14 @@
 FROM ruby:2.6-alpine3.9
 
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq gettext make"
-ENV CF_CLI_VERSION "6.46.1"
+ENV CF_CLI_VERSION "6.47.2"
 ENV CF_BGD_VERSION "1.3.0"
 ENV CF_BGD_CHECKSUM "c74995ae0ba3ec9eded9c2a555e5984ba536d314cf9dc30013c872eb6b9d76b6"
 ENV CF_BGD_TEMPFILE "/tmp/blue-green-deploy.linux64"
 ENV CF_AUTOPILOT_VERSION "0.0.4"
 ENV CF_AUTOPILOT_CHECKSUM "a755f9da3981fb6dc6aa675a55f8fc7de9d73c87b8cad4883d98c543a45a9922"
 ENV CF_AUTOPILOT_TEMPFILE "/tmp/autopilot-linux"
-ENV SPRUCE_VERSION "1.17.0"
+ENV SPRUCE_VERSION "1.22.0"
 
 RUN apk add --no-cache $PACKAGES
 

@@ -2,40 +2,35 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="6.47.2"
+CF_CLI_VERSION="7.0.0-beta.25"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.22.0"
 
-describe "cf-cli image" do
+describe "cf-cli-v7 image" do
   before(:all) {
-    set :docker_image, find_image_id('cf-cli:latest')
+    set :docker_image, find_image_id('cf-cli-v7:latest')
   }
 
-  it "has the expected version of the CF CLI (#{CF_CLI_VERSION})" do
+  it "has the expected version of the CF CLI" do
     expect(
       command("cf --version").stdout
     ).to match(/cf version #{CF_CLI_VERSION}/)
   end
 
-  it "has blue-green-deploy plugin available" do
-    cmd = command("cf blue-green-deploy --help")
-    expect(cmd.exit_status).to eq(0)
+  it "has the CF CLI available with the alias cf7" do
+    expect(
+      command("cf7 --version").stdout
+    ).to match(/cf7 version #{CF_CLI_VERSION}/)
   end
 
-  it "has autopilot plugin available" do
-    cmd = command("cf zero-downtime-push --help")
+  it "has conduit plugin available" do
+    cmd = command("cf conduit --help")
     expect(cmd.exit_status).to eq(0)
   end
 
   it "has curl available" do
     expect(
       command("curl --version").exit_status
-    ).to eq(0)
-  end
-
-  it "has make available" do
-    expect(
-      command("make --version").exit_status
     ).to eq(0)
   end
 
