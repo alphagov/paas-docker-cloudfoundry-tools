@@ -1,4 +1,4 @@
-FROM golang:1.7-alpine
+FROM golang:1.14-alpine
 
 ENV GIT_COMMIT 8b3cd66cfe2433e2e998c46a618eb09f732c2c2c
 ENV CERTSTRAP_VERSION 0.1.0
