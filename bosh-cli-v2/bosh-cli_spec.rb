@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="5.5.1-7850ac98-2019-05-21T22:28:36Z"
-CREDHUB_VERSION='2.5.3'
+BOSH_CLI_VERSION="6.2.1-a28042ac-2020-02-10T18:40:57Z"
+CREDHUB_VERSION='2.7.0'
 
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
