@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine3.9
+FROM ruby:2.6-alpine3.11
 
 ENV BOSH_CLI_VERSION 5.5.1
 ENV BOSH_CLI_SUM 34e9898c244655ccbce2dc657b7d1df52e487cfd
