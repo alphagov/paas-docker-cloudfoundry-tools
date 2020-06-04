@@ -4,5 +4,4 @@ ENV AWSCLI_VERSION "1.17.2"
 ENV PACKAGES "groff less python3 py-pip jq"
 
 RUN apk add --no-cache $PACKAGES \
-    && pip install awscli==$AWSCLI_VERSION \
-    && apk --purge -v del py-pip
+    && pip3 install awscli==$AWSCLI_VERSION
