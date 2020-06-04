@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.12
 
 ENV PACKAGES "git openssl curl openssh-client gnupg bash"
 
