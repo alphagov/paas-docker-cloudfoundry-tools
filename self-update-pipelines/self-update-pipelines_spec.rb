@@ -10,10 +10,10 @@ describe "self-update-pipelines image" do
     set :docker_image, find_image_id('self-update-pipelines:latest')
   }
 
-  it "has ruby 2.6 available" do
+  it "has ruby 2.7 available" do
     expect(
       command("ruby -v").stdout
-    ).to match(/ruby 2\.6/)
+    ).to match(/ruby 2\.7/)
   end
 
   it "has curl available" do

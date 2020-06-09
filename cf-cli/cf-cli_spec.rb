@@ -56,10 +56,10 @@ describe "cf-cli image" do
     expect(cmd.exit_status).to eq(0)
   end
 
-  it "has ruby 2.6 available" do
+  it "has ruby 2.7 available" do
     cmd = command("ruby -v")
     expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^ruby 2.6/)
+    expect(cmd.stdout).to match(/^ruby 2.7/)
   end
 
   it "has ruby json gem available" do
