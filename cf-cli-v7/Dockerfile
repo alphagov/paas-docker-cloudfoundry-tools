@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine3.11
+FROM ruby:2.7-alpine3.11
 
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq gettext"
 
