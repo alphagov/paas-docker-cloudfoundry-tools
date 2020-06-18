@@ -15,10 +15,7 @@ describe "paas-prometheus-exporter" do
   end
 
   it "has the correct version installed" do
-    cmd = command(
-      %(grep -q 'version[^=]*= "#{version}"' \
-             /go/src/github.com/alphagov/paas-prometheus-exporter/main.go)
-    )
-    expect(cmd.exit_status).to eq(0)
+    cmd = command("cat /opt/paas-prometheus-exporter.version")
+    expect(cmd.stdout.chomp).to eq(version)
   end
 end
