@@ -1,6 +1,8 @@
+dist: focal
+
 language: ruby
 rvm:
-  - 2.5.3
+  - 2.7.1
 
 sudo: required
 
