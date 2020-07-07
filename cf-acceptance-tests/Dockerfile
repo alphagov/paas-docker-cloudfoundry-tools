@@ -8,14 +8,15 @@ RUN \
     curl \
     openssh-client \
     unzip \
-    git \
     python-pip \
+    jq \
+    git fossil mercurial bzr subversion \
   && rm -rf /var/lib/apt/lists/*
 
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 
-ENV GO_VERSION "1.12.5"
+ENV GO_VERSION "1.14"
 ENV CF_CLI_VERSION "6.45.0"
 ENV CF_LOG_CACHE_VERSION "2.1.0"
 
@@ -25,7 +26,6 @@ RUN \
   mkdir $GOPATH && \
   rm -rf /tmp/*
 
-RUN go get github.com/tools/godep
 RUN go get github.com/onsi/ginkgo/ginkgo
 
 # Install the cf CLI
