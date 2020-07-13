@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-GO_VERSION="1.12.5"
+GO_VERSION="1.14"
 CF_CLI_VERSION="6.45.0"
 LOG_CACHE_CLI_VERSION="2.1.0"
 
@@ -17,18 +17,19 @@ describe "cf-acceptance-tests image" do
     ).to match(/go version go#{GO_VERSION}/)
   end
 
-  it "has godep available" do
-    expect(
-      command("godep version").exit_status
-    ).to eq(0)
-
-  end
-
   it "has Ginkgo available" do
     expect(
       command("ginkgo version").exit_status
     ).to eq(0)
+  end
 
+  %w[git bzr fossil hg svn].each do |version_control_tool|
+    it "has #{version_control_tool} available" do
+      arg = version_control_tool == 'svn' ? '--version' : 'version'
+      expect(
+        command("#{version_control_tool} #{arg}").exit_status
+      ).to eq(0)
+    end
   end
 
   it "has the expected version of the CF CLI" do
@@ -48,6 +49,12 @@ describe "cf-acceptance-tests image" do
     # Needed by the cf acceptance-test helpers
     expect(
       command("unzip -v").exit_status
+    ).to eq(0)
+  end
+
+  it "has jq available" do
+    expect(
+      command("jq --version").exit_status
     ).to eq(0)
   end
 

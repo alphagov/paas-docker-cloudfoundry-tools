@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.6.3
+  - 2.7.1
 
 sudo: required
 

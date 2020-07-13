@@ -26,13 +26,24 @@ describe "awscli image" do
 
   it "has the 'aws' version #{AWSCLI_VERSION}" do
     def awscli_version
-      command("aws --version").stderr.strip
+      command("aws --version").stdout.strip
     end
-    expect(awscli_version).to match(/aws-cli\/#{AWSCLI_VERSION} /)
+    expect(awscli_version).to match(
+      Regexp.union(/aws-cli/, /#{AWSCLI_VERSION}/)
+    )
   end
 
   it "the 'aws help' command works" do
-    expect(command("aws help").stdout).to match(/SYNOPSIS/)
+    synopsis_interleaved_with_backspaces = [
+      0x0a, 0x53, 0x08, 0x53, 0x59, 0x08, 0x59, 0x4e,
+      0x08, 0x4e, 0x4f, 0x08, 0x4f, 0x50, 0x08, 0x50,
+      0x53, 0x08, 0x53, 0x49, 0x08, 0x49, 0x53, 0x08,
+      0x53, 0x0a
+    ].map(&:chr).join('')
+
+    expect(
+      command("aws help").stdout
+    ).to include(synopsis_interleaved_with_backspaces)
   end
 
   it "installs required packages" do

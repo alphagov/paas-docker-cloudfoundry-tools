@@ -3,7 +3,7 @@ require 'docker'
 require 'serverspec'
 
 CERTSTRAP_BIN = "/usr/local/bin/certstrap"
-CERTSTRAP_VERSION = "0.1.0"
+CERTSTRAP_VERSION = "1.2.0"
 CERTSTRAP_PACKAGES = "openssl curl"
 
 describe "certstrap image" do
@@ -12,7 +12,7 @@ describe "certstrap image" do
   }
 
   it "installs the right version of Alpine Linux" do
-    expect(os_version).to include("Alpine Linux 3.4")
+    expect(os_version).to include("Ubuntu 20.04 LTS")
   end
 
   def os_version
@@ -37,7 +37,7 @@ describe "certstrap image" do
 
   it "installs required packages" do
     CERTSTRAP_PACKAGES.split(' ').each do |package|
-      expect(command("apk -vv info | grep #{package}").exit_status).to eq(0)
+      expect(command("dpkg --get-selections | grep #{package}").exit_status).to eq(0)
     end
   end
 end

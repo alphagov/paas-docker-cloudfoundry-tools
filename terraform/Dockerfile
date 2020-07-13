@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.12
 
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_SHARED_DIR /.terraform/plugins/linux_amd64
