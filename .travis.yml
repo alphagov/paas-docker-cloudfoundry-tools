@@ -1,8 +1,8 @@
+dist: focal
+os: linux
 language: ruby
 rvm:
   - 2.7.1
-
-sudo: required
 
 services:
   - docker
