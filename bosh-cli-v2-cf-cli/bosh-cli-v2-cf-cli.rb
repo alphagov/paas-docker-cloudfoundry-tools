@@ -2,121 +2,65 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="5.5.1-7850ac98-2019-05-21T22:28:36Z"
+BOSH_CLI_VERSION="6.2.1-a28042ac-2020-02-10T18:40:57Z"
 CREDHUB_VERSION='2.5.3'
-CF_CLI_VERSION="6.46.1"
+CF_CLI_VERSION="7.0.1"
 SPRUCE_BIN = "/usr/local/bin/spruce"
-SPRUCE_VERSION = "1.17.0"
-
-
+SPRUCE_VERSION = "1.25.1"
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
+CF_ENV_DEPS = "unzip curl openssl ca-certificates git libc6 bash jq gettext make"
 
 describe "bosh-cli-v2-cf-cli image" do
   before(:all) {
     set :docker_image, find_image_id('bosh-cli-v2-cf-cli:latest')
   }
 
-  it "installs required packages" do
+  it "installs required bosh packages" do
     BOSH_ENV_DEPS.split(' ').each do |package|
+      expect(package(package)).to be_installed
+    end
+  end
+
+  it "installs required cf packages" do
+    CF_ENV_DEPS.split(' ').each do |package|
       expect(package(package)).to be_installed
     end
   end
 
   it "has the expected version of the Bosh CLI" do
     expect(
-      command("bosh -v").stdout.strip
+        command("bosh -v").stdout.strip
     ).to eq("version #{BOSH_CLI_VERSION}")
   end
 
-  it "has `file` available" do
+  it "has the expected version of the CF CLI (#{CF_CLI_VERSION})" do
     expect(
-      command("file --version").exit_status
-    ).to eq(0)
-  end
-
-  it "has ssh available" do
-    expect(
-      command("ssh -V").exit_status
-    ).to eq(0)
-  end
-
-  it "can run git" do
-    expect(command('git --version').exit_status).to eq(0)
-  end
-
-  it "can run credhub" do
-    cmd = command('credhub --version')
-    expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout.match?(/#{CREDHUB_VERSION}/)).to eq(true)
-  end
-
-  it "has `bash` available" do
-    expect(
-      command("bash --version").exit_status
-    ).to eq(0)
-  end
-
-  it "has a new enough version of openssl available" do
-    # wget (from busybox) requires openssl to be able to connect to https sites.
-
-    # See https://github.com/nahi/httpclient/blob/v2.7.1/lib/httpclient/ssl_config.rb#L441-L452
-    # (httpclient is a dependency of bosh_cli)
-    # With an older version of openssl, bosh_cli spits out warnings.
-    cmd = command("openssl version")
-    expect(cmd.exit_status).to eq(0)
-
-    ssl_version_str = cmd.stdout.strip
-    if ssl_version_str.start_with?('OpenSSL 1.0.1')
-      expect(ssl_version_str).to be >= 'OpenSSL 1.0.1p'
-    else
-      expect(ssl_version_str).to be >= 'OpenSSL 1.0.2d'
-    end
-  end
-
-  it "has ruby 2.6 available" do
-    cmd = command("ruby -v")
-    expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^ruby 2.6/)
-  end
-
-  it "has the expected version of the CF CLI" do
-    expect(
-        command("cf --version").stdout
+      command("cf --version").stdout
     ).to match(/cf version #{CF_CLI_VERSION}/)
-  end
-
-  it "has blue-green-deploy plugin available" do
-    cmd = command("cf blue-green-deploy --help")
-    expect(cmd.exit_status).to eq(0)
-  end
-
-  it "has autopilot plugin available" do
-    cmd = command("cf zero-downtime-push --help")
-    expect(cmd.exit_status).to eq(0)
   end
 
   it "has curl available" do
     expect(
-        command("curl --version").exit_status
+      command("curl --version").exit_status
     ).to eq(0)
   end
 
   it "has make available" do
     expect(
-        command("make --version").exit_status
+      command("make --version").exit_status
     ).to eq(0)
   end
 
   it "has unzip available" do
     expect(
-        command("unzip -v").exit_status
+      command("unzip -v").exit_status
     ).to eq(0)
   end
 
   it "has git available" do
     expect(
-        command("git --version").exit_status
+      command("git --version").exit_status
     ).to eq(0)
   end
 
@@ -125,10 +69,10 @@ describe "bosh-cli-v2-cf-cli image" do
     expect(cmd.exit_status).to eq(0)
   end
 
-  it "has ruby 2.6 available" do
+  it "has ruby 2.7 available" do
     cmd = command("ruby -v")
     expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^ruby 2.6/)
+    expect(cmd.stdout).to match(/^ruby 2.7/)
   end
 
   it "has ruby json gem available" do
@@ -156,13 +100,19 @@ describe "bosh-cli-v2-cf-cli image" do
 
   it "has `bash` available" do
     expect(
-        command("bash --version").exit_status
+      command("bash --version").exit_status
     ).to eq(0)
   end
 
   it "has `envsubst` available" do
     expect(
-        command("envsubst --help").exit_status
+      command("envsubst --help").exit_status
+    ).to eq(0)
+  end
+
+  it "has `jq` available" do
+    expect(
+      command("jq --help").exit_status
     ).to eq(0)
   end
 end
