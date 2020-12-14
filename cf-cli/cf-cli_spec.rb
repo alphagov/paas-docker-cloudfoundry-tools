@@ -2,9 +2,9 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="7.0.2"
+CF_CLI_VERSION="7.2.0"
 SPRUCE_BIN = "/usr/local/bin/spruce"
-SPRUCE_VERSION = "1.25.1"
+SPRUCE_VERSION = "1.27.0"
 
 describe "cf-cli image" do
   before(:all) {
