@@ -1,8 +1,8 @@
 FROM ruby:2.7-alpine3.11
 
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq gettext make"
-ENV CF_CLI_VERSION "7.0.2"
-ENV SPRUCE_VERSION "1.25.1"
+ENV CF_CLI_VERSION "7.2.0"
+ENV SPRUCE_VERSION "1.27.0"
 
 RUN apk add --no-cache $PACKAGES
 
