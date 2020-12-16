@@ -2,11 +2,11 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="6.2.1-a28042ac-2020-02-10T18:40:57Z"
-CREDHUB_VERSION='2.5.3'
-CF_CLI_VERSION="7.0.1"
+BOSH_CLI_VERSION="6.4.1-35ce8438-2020-10-20T16:04:13Z"
+CREDHUB_VERSION='2.8.0'
+CF_CLI_VERSION="7.2.0"
 SPRUCE_BIN = "/usr/local/bin/spruce"
-SPRUCE_VERSION = "1.25.1"
+SPRUCE_VERSION = "1.27.0"
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
 CF_ENV_DEPS = "unzip curl openssl ca-certificates git libc6 bash jq gettext make"
