@@ -11,8 +11,9 @@ describe "certstrap image" do
     set :docker_image, find_image_id('certstrap:latest')
   }
 
-  it "installs the right version of Alpine Linux" do
-    expect(os_version).to include("Ubuntu 20.04 LTS")
+  it "installs the right version of Ubuntu Linux" do
+    expect(os_version).to include("Ubuntu 20.04.1")
+    expect(os_version).to include("LTS")
   end
 
   def os_version
