@@ -23,7 +23,7 @@ provider "http" {
 version = "~> 1.1.1"
 }
 provider "kubernetes" {
-version = "~> 1.11.0"
+version = "~> 1.11.4"
 }
 provider "local" {
 version = "~> 1.4.0"

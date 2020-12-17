@@ -77,8 +77,8 @@ describe "Terraform image" do
       expect(@terraform_version_output).to include("provider.cloudfoundry v0.11.2")
     end
 
-    it "has the cloudfoundry provider" do
-      expect(@terraform_version_output).to include("provider.kubernetes v1.11.3")
+    it "has the kubernetes provider" do
+      expect(@terraform_version_output).to include("provider.kubernetes v1.11.4")
     end
 
     it "has the uaa provider" do
