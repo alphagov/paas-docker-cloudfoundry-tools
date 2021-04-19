@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/alphagov/paas-docker-cloudfoundry-tools.svg)](https://travis-ci.org/alphagov/paas-docker-cloudfoundry-tools)
-
 Contains Dockerfiles to build the Cloud foundry tools.
 
 Each directory with a Dockerfile relates to a container and will have
