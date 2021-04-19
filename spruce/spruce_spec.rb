@@ -4,7 +4,7 @@ require 'serverspec'
 
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.27.0"
-ALPINE_VERSION = "3.12"
+ALPINE_VERSION = "3.13"
 
 describe "spruce image" do
   before(:all) {
