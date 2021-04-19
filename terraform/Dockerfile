@@ -1,5 +1,7 @@
 FROM alpine:3.12
 
+LABEL org.opencontainers.image.source https://github.com/alphagov/paas-docker-cloudfoundry-tools
+
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_VER 0.14.4
 ENV TERRAFORM_SUM 042f1f4fb47696b3442eca12bce7cce6de0b477b299503ddad6b8bc3777a54b5

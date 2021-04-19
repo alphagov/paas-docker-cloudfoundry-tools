@@ -1,5 +1,7 @@
 FROM ubuntu:xenial
 
+LABEL org.opencontainers.image.source https://github.com/alphagov/paas-docker-cloudfoundry-tools
+
 RUN \
   apt-get update && \
   apt-get -y install \

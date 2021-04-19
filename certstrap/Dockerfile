@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+LABEL org.opencontainers.image.source https://github.com/alphagov/paas-docker-cloudfoundry-tools
+
 ENV GIT_COMMIT bd8b02aa8c1b81bc5cfc070722a1a894a348f00a
 ENV CERTSTRAP_VERSION 1.2.0
 

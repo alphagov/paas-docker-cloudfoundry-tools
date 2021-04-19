@@ -1,5 +1,7 @@
 FROM ruby:2.7-alpine3.11
 
+LABEL org.opencontainers.image.source https://github.com/alphagov/paas-docker-cloudfoundry-tools
+
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq gettext make"
 ENV CF_CLI_VERSION "7.2.0"
 ENV SPRUCE_VERSION "1.27.0"

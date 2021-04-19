@@ -1,5 +1,7 @@
 FROM alpine:3.12
 
+LABEL org.opencontainers.image.source https://github.com/alphagov/paas-docker-cloudfoundry-tools
+
 ENV SPRUCE_VERSION 1.27.0
 
 RUN apk add --no-cache wget ca-certificates \

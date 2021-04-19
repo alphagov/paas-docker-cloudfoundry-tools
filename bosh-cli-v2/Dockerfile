@@ -1,5 +1,7 @@
 FROM ruby:2.7-slim
 
+LABEL org.opencontainers.image.source https://github.com/alphagov/paas-docker-cloudfoundry-tools
+
 ENV BOSH_CLI_VERSION 6.4.1
 ENV BOSH_CLI_SUM 756d8e403f1d349ef3766d28980379c24da6212fa45dcf296c0519d4ec54d66a
 ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
