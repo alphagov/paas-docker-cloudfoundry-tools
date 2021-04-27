@@ -10,7 +10,7 @@ describe "curl-ssl image" do
   }
 
   it "installs the right version of Alpine" do
-    expect(os_version).to include("Alpine Linux 3.12")
+    expect(os_version).to include("Alpine Linux 3.13")
   end
 
   def os_version
