@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.13
 
 ENV SPIFF_VERSION 1.0.8
 

@@ -4,7 +4,7 @@ require 'serverspec'
 
 SPIFF_BIN = "/usr/local/bin/spiff"
 SPIFF_VERSION = "1.0.8"
-ALPINE_VERSION = "3.4"
+ALPINE_VERSION = "3.13"
 
 describe "spiff image" do
   before(:all) {
