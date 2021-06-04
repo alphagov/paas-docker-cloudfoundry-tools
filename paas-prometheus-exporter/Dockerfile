@@ -15,7 +15,7 @@ RUN CGO_ENABLED=0 GOOS=linux go install
 RUN grep 'version[^=]*=.*"[^"]*"' $REPO_PATH/main.go \
       | grep -o '"[^"]*"' | tr -d '"' > /tmp/version
 
-FROM alpine:3.12 AS run
+FROM alpine:3.13 AS run
 
 COPY --from=build /tmp/version /opt/paas-prometheus-exporter.version
 

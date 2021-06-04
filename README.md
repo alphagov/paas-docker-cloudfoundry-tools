@@ -1,6 +1,6 @@
 
 Orange: [![Build Status](https://travis-ci.org/orange-cloudfoundry/paas-docker-cloudfoundry-tools.svg)](https://travis-ci.org/orange-cloudfoundry/paas-docker-cloudfoundry-tools)
-AlphaGov: [![Build Status](https://travis-ci.org/alphagov/paas-docker-cloudfoundry-tools.svg)](https://travis-ci.org/alphagov/paas-docker-cloudfoundry-tools)
+AlphaGov: not using Travis anymore
 
 Orange specifics:
  * spiff (only in this repo)

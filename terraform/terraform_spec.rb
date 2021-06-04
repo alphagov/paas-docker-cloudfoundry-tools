@@ -16,6 +16,10 @@ describe "Terraform image" do
     expect(file("/usr/share/ca-certificates/mozilla/GlobalSign_Root_CA.crt")).to be_file
   end
 
+  it "installs plugin cache" do
+    expect(file("/tmp/plugin_cache.tf")).to be_file
+  end
+
   it "has the expected Terraform version" do
     expect(@terraform_version_output).to match("Terraform v0.11.14$")
   end
