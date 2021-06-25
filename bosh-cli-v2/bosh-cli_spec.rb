@@ -53,6 +53,12 @@ describe "bosh-cli-v2 image" do
     ).to eq(0)
   end
 
+  it "has `yq` available" do
+    expect(
+      command("yq --version").exit_status
+    ).to eq(0)
+  end
+
   it "has a new enough version of openssl available" do
     # wget (from busybox) requires openssl to be able to connect to https sites.
 

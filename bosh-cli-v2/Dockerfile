@@ -37,3 +37,12 @@ RUN wget -nv https://github.com/cloudfoundry-incubator/credhub-cli/releases/down
   && tar zxvf ${CREDHUB_CLI_FILENAME} \
   && chmod +x credhub \
   && mv credhub /usr/local/bin/credhub
+
+ENV YQ_VERSION 4.9.6
+ENV YQ_SUM a1cfa39a9538e27f11066aa5659b32f9beae1eea93369d395bf45bcfc8a181dc
+ENV YQ_FILENAME yq_linux_amd64
+
+RUN wget -nv https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/${YQ_FILENAME} \
+  && echo "${YQ_SUM}  ${YQ_FILENAME}" | sha256sum -c - \
+  && chmod +x ${YQ_FILENAME} \
+  && mv ${YQ_FILENAME} /usr/local/bin/yq
