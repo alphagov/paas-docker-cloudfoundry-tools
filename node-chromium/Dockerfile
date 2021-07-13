@@ -1,6 +1,8 @@
 FROM node:lts-alpine
 
-RUN apk add --no-cache \
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache \
     chromium \
     nss \
     freetype \
