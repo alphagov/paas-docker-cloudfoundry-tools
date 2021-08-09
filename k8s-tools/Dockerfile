@@ -11,8 +11,8 @@ RUN apt-get update \
 
 WORKDIR /usr/local/bin
 
-ENV YTT_VERSION "0.30.0"
-ENV YTT_SUM 456e58c70aef5cd4946d29ed106c2b2acbb4d0d5e99129e526ecb4a859a36145
+ENV YTT_VERSION "0.35.1"
+ENV YTT_SUM 0aa78f7b5f5a0a4c39bddfed915172880344270809c26b9844e9d0cbf6437030
 ENV YTT_FILENAME ytt-linux-amd64
 ADD https://github.com/k14s/ytt/releases/download/v${YTT_VERSION}/${YTT_FILENAME} .
 RUN echo "Computed sha256sum: $(sha256sum ${YTT_FILENAME})" \
@@ -20,39 +20,40 @@ RUN echo "Computed sha256sum: $(sha256sum ${YTT_FILENAME})" \
     && mv ${YTT_FILENAME} ytt
 
 
-ENV CREDHUB_CLI_VERSION 2.8.0
-ENV CREDHUB_CLI_SUM dcd4f05eaaea6f356d8ffcbf2692c465b272fcdf773266589f4bc4a891cbe4e4
+ENV CREDHUB_CLI_VERSION 2.9.0
+ENV CREDHUB_CLI_SUM f260e926099f9eb9474ab2239851e391bfd0fd1354a52891f3c834cea1630e8a
 ENV CREDHUB_CLI_FILENAME credhub-linux-${CREDHUB_CLI_VERSION}.tgz
 ADD https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/${CREDHUB_CLI_VERSION}/${CREDHUB_CLI_FILENAME} .
 RUN echo "Computed sha256sum: $(sha256sum ${CREDHUB_CLI_FILENAME})" \
     && echo "${CREDHUB_CLI_SUM}  ${CREDHUB_CLI_FILENAME}" | sha256sum -c - \
     && tar zxvf ${CREDHUB_CLI_FILENAME}
 
-ENV KUSTOMIZE_VERSION 3.8.4
-ENV KUSTOMIZE_SUM 194caffbdb59d8fc887488ba8fa3dce7b68ccf816737b57bde7338ca980f4912
+ENV KUSTOMIZE_VERSION 4.2.0
+ENV KUSTOMIZE_SUM 220dd03dcda8e45dc50e4e42b2d71882cbc4c05e0ed863513e67930ecad939eb
 ENV KUSTOMIZE_FILENAME kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz
 ADD https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz .
 RUN echo "Computed sha256sum: $(sha256sum ${KUSTOMIZE_FILENAME})" \
     && echo "${KUSTOMIZE_SUM}  ${KUSTOMIZE_FILENAME}" | sha256sum -c - \
     && tar zxvf ${KUSTOMIZE_FILENAME}
 
-ENV KAPP_VERSION 0.34.0
-ENV KAPP_SUM e170193c40ff5dff9f9274c25048de1f50e23c69e8406df274fbb416d5862d7f
+ENV KAPP_VERSION 0.37.0
+ENV KAPP_SUM f845233deb6c87feac7c82d9b3f5e03ced9a4672abb1a14d4e5b74fe53bc4538
 ENV KAPP_FILENAME kapp-linux-amd64
 ADD https://github.com/k14s/kapp/releases/download/v${KAPP_VERSION}/kapp-linux-amd64 .
 RUN echo "Computed sha256sum: $(sha256sum ${KAPP_FILENAME})" \
     && echo "${KAPP_SUM}  ${KAPP_FILENAME}" | sha256sum -c - \
     && mv kapp-linux-amd64 kapp
 
-ENV KUBECTL_VERSION 1.18.8
-ENV KUBECTL_SUM a076f5eff0710de94d1eb77bee458ea43b8f4d9572bbb3a3aec1edf0dde0a3e7
+ENV KUBECTL_VERSION 1.20.9
+ENV KUBECTL_SUM 9d76c4431e10e268dd7c6b53b27aaa62a6f26455013e1d7f6d85da86003539b9
 ENV KUBECTL_FILENAME kubectl
 ADD https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl .
+ADD https://storage.googleapis.com/kubernetes-release/release/v1.20.9/bin/linux/amd64/kubectl .
 RUN echo "Computed sha256sum: $(sha256sum ${KUBECTL_FILENAME})" \
     && echo "${KUBECTL_SUM}  ${KUBECTL_FILENAME}" | sha256sum -c -
 
-ENV HELM_VERSION 3.3.3
-ENV HELM_SUM 246d58b6b353e63ae8627415a7340089015e3eb542ff7b5ce124b0b1409369cc
+ENV HELM_VERSION 3.6.3
+ENV HELM_SUM 07c100849925623dc1913209cd1a30f0a9b80a5b4d6ff2153c609d11b043e262
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 ADD https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz .
 RUN echo "Computed sha256sum: $(sha256sum ${HELM_FILENAME})" \
@@ -61,14 +62,23 @@ RUN echo "Computed sha256sum: $(sha256sum ${HELM_FILENAME})" \
     && mv linux-amd64/helm helm \
     && rm -rf linux-amd64
 
-ENV KUTTL_VERSION 0.6.1
-ENV KUTTL_PLUGIN_SUM b128a080f9a05399c4f459d9f1fc289a4508d745535199de5bc0e751ce9c4d57
+ENV KUTTL_VERSION 0.11.0
+ENV KUTTL_PLUGIN_SUM ce481fed5af651893c431e8182d0a6a0350882c3ca4fa62e5ce0e3de876e9267
 ENV KUTTL_PLUGIN_FILENAME kubectl-kuttl_${KUTTL_VERSION}_linux_x86_64
 ADD https://github.com/kudobuilder/kuttl/releases/download/v${KUTTL_VERSION}/${KUTTL_PLUGIN_FILENAME} .
 RUN echo "Computed ${KUTTL_PLUGIN_FILENAME} sha256sum: $(sha256sum ${KUTTL_PLUGIN_FILENAME})" \
     && echo "${KUTTL_PLUGIN_SUM}  ${KUTTL_PLUGIN_FILENAME}" | sha256sum -c - \
     && mv ${KUTTL_PLUGIN_FILENAME} kubectl-kuttl \
     && ln -s kubectl-kuttl kuttl
+
+ENV YQ_VERSION 4.9.6
+ENV YQ_SUM a1cfa39a9538e27f11066aa5659b32f9beae1eea93369d395bf45bcfc8a181dc
+ENV YQ_FILENAME yq_linux_amd64
+
+ADD https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/${YQ_FILENAME} .
+RUN echo "${YQ_SUM}  ${YQ_FILENAME}" | sha256sum -c - \
+    && chmod +x ${YQ_FILENAME} \
+    && mv ${YQ_FILENAME} /usr/local/bin/yq
 
 
 WORKDIR /usr/local/bin

@@ -2,13 +2,13 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-YTT_VERSION="0.30.0"
-CREDHUB_VERSION='2.8.0'
-KUSTOMIZE_VERSION="3.8.4"
-KAPP_VERSION="0.34.0"
-KUBECTL_VERSION="1.18.8"
-HELM_VERSION="3.3.3"
-KUTTL_VERSION="0.6.1"
+YTT_VERSION="0.35.1"
+CREDHUB_VERSION='2.9.0'
+KUSTOMIZE_VERSION="4.2.0"
+KAPP_VERSION="0.37.0"
+KUBECTL_VERSION="1.20.9"
+HELM_VERSION="3.6.3"
+KUTTL_VERSION="0.11.0"
 
 DEPS = "unzip curl openssl ca-certificates git libc6 bash jq gettext"
 
@@ -110,4 +110,9 @@ describe "k8s image" do
     ).to eq(0)
   end
 
+  it "has `yq` available" do
+    expect(
+      command("yq --version").exit_status
+    ).to eq(0)
+  end
 end
