@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="6.4.1-35ce8438-2020-10-20T16:04:13Z"
-CREDHUB_VERSION='2.8.0'
+BOSH_CLI_VERSION="6.4.4-3c1a893c-2021-06-11T20:26:27Z"
+CREDHUB_VERSION='2.9.0'
 
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
@@ -50,6 +50,18 @@ describe "bosh-cli-v2 image" do
   it "has `bash` available" do
     expect(
       command("bash --version").exit_status
+    ).to eq(0)
+  end
+
+  it "has `jq` available" do
+    expect(
+      command("jq --version").exit_status
+    ).to eq(0)
+  end
+
+  it "has `yq` available" do
+    expect(
+      command("yq --version").exit_status
     ).to eq(0)
   end
 
