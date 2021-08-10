@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
+BOSH_CLI_VERSION="6.4.4-3c1a893c-2021-06-11T20:26:27Z"
 YTT_VERSION="0.35.1"
 CREDHUB_VERSION='2.9.0'
 KUSTOMIZE_VERSION="4.2.0"
@@ -114,5 +115,11 @@ describe "k8s image" do
     expect(
       command("yq --version").exit_status
     ).to eq(0)
+  end
+
+  it "has the expected version of the Bosh CLI" do
+    expect(
+      command("bosh -v").stdout.strip
+    ).to eq("version #{BOSH_CLI_VERSION}")
   end
 end

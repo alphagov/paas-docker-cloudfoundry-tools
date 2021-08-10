@@ -74,12 +74,18 @@ RUN echo "Computed ${KUTTL_PLUGIN_FILENAME} sha256sum: $(sha256sum ${KUTTL_PLUGI
 ENV YQ_VERSION 4.9.6
 ENV YQ_SUM a1cfa39a9538e27f11066aa5659b32f9beae1eea93369d395bf45bcfc8a181dc
 ENV YQ_FILENAME yq_linux_amd64
-
 ADD https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/${YQ_FILENAME} .
 RUN echo "${YQ_SUM}  ${YQ_FILENAME}" | sha256sum -c - \
     && chmod +x ${YQ_FILENAME} \
     && mv ${YQ_FILENAME} /usr/local/bin/yq
 
+ENV BOSH_CLI_VERSION 6.4.4
+ENV BOSH_CLI_SUM c944dd694e5470686995c2365ac60c9ef06f655cab51994f7fefed4c89e764fb
+ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
+ADD https://s3.amazonaws.com/bosh-cli-artifacts/${BOSH_CLI_FILENAME} .
+RUN echo "${BOSH_CLI_SUM}  ${BOSH_CLI_FILENAME}" | sha256sum -c - \
+      && chmod +x ${BOSH_CLI_FILENAME} \
+      && mv ${BOSH_CLI_FILENAME} /usr/local/bin/bosh
 
 WORKDIR /usr/local/bin
 RUN rm *.tgz && rm *.gz && chown root:root * && chmod a+x *
