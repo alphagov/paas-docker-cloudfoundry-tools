@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build and Publish Docker Images
 
 on:
   push:
@@ -7,23 +7,141 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+env:
+  DOCKERHUB_ORG: orangecloudfoundry
+  IMAGES: k8s-tools terraform bosh-cli-v2 bosh-cli-v2-cf-cli spruce spiff
+
 jobs:
-
-  build:
-
+  build_and_publish:
+    name: build, test and publish
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6 # Not needed with a .ruby-version file
+      with:      
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: build k8s
-      run: bundle exec rake build:k8s-tools
-    - run: bundle exec rake build:bosh-cli-v2-cf-cli
-      name: build bosh-cli-v2-cf-cli
-    - name: tests
-      run: bundle exec rake spec:all
+    -
+      name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: Login to GitHub Container Registry
+      uses: docker/login-action@v1 
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - 
+      name: build docker images
+      run: |
+        for image in $IMAGES;do
+          echo "Processing $image"
+          bundle exec rake build:$image
+        done
+      
+    -
+      name: test docker images
+      run: |
+        for image in $IMAGES;do
+          echo "Processing $image"
+          bundle exec rake spec:$image
+        done
 
-    
+    -
+      name: publish k8s-tools image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: k8s-tools          
+
+    -
+      name: publish bosh-cli-v2-cf-cli image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: bosh-cli-v2-cf-cli
+    -
+      name: publish bosh-cli-v2 image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: bosh-cli-v2
+    -
+      name: publish terraform image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: terraform
+ 
+    -
+      name: publish spiff image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: spiff
+    -
+      name: publish spruce image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: spruce
+
+  check_published_images:
+    name: check published images
+    runs-on: ubuntu-latest
+    needs: [ build_and_publish ]
+    steps:
+      - name: check docker public images
+        run: |
+          for image in $IMAGES;do
+            echo "Processing $image"
+            docker manifest inspect orangecloudfoundry/$image:$GITHUB_SHA
+          done
+
+
