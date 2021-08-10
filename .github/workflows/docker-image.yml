@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6 # Not needed with a .ruby-version file
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: build k8s
+      run: bundle exec rake build:k8s-tools
+    - run: bundle exec rake build:bosh-cli-v2-cf-cli
+      name: build bosh-cli-v2-cf-cli
+    - name: tests
+      run: bundle exec rake spec:all
+
+    
