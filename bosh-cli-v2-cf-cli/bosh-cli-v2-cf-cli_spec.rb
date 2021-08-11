@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="6.4.1-35ce8438-2020-10-20T16:04:13Z"
-CREDHUB_VERSION='2.8.0'
+BOSH_CLI_VERSION="6.4.4-3c1a893c-2021-06-11T20:26:27Z"
+CREDHUB_VERSION='2.9.0'
 CF_CLI_VERSION="7.2.0"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.27.0"
