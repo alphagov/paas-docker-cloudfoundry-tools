@@ -1,11 +1,10 @@
-FROM alpine:3.13
+FROM alpine:3.12
 
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_SHARED_DIR /.terraform/plugins/linux_amd64
 ENV TERRAFORM_VER 0.11.14
 ENV TERRAFORM_SUM 9b9a4492738c69077b079e595f5b2a9ef1bc4e8fb5596610f69a6f322a8af8dd
 ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
-
 
 ENV PROVIDER_CLOUDFOUNDRY_VERSION 0.11.2
 ENV PROVIDER_CLOUDFOUNDRY_SUM cad949683898195c44864e290fa0d0d9207eb75fdacaf94544e1c77ecb9f5246
@@ -18,11 +17,8 @@ ENV PROVIDER_UAA_SUM bfbab04dde59e70354c98f4516924c447d70c3bb3a5689dd4d6466e7441
 
 RUN mkdir -p ${TERRAFORM_SHARED_DIR}
 
-ENV HELM_HOME "/.helm-home"
-RUN mkdir -p ${HELM_HOME}
 
 RUN apk add --no-cache openssl openssh-client ca-certificates wget libc6-compat
-
 
 
 RUN set -ex \
@@ -65,7 +61,8 @@ RUN set -ex \
     && export FILENAME="terraform-provider-uaa" \
     && export FILENAME_SUFFIX="_linux_amd64" \
     && export FULL_FILENAME="$FILENAME$FILENAME_SUFFIX" \
-    && export URL="https://github.com/orange-cloudfoundry/terraform-provider-uaa/releases/download/${PROVIDER_UAA_VERSION}/${FULL_FILENAME}" \
+    && export ATTIC_FULL_FILENAME="${FILENAME}_${PROVIDER_UAA_VERSION}${FILENAME_SUFFIX}.0" \
+    && export URL="https://github.com/orange-cloudfoundry/terraform-provider-attic/releases/download/uaa_${PROVIDER_UAA_VERSION}/$ATTIC_FULL_FILENAME" \
     && export SUM=${PROVIDER_UAA_SUM} \
     && wget ${URL} -O /tmp/${FULL_FILENAME} \
     && echo "Computed sha256sum: $(sha256sum /tmp/${FULL_FILENAME})" \

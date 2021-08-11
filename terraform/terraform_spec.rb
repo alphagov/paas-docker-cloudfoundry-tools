@@ -81,10 +81,6 @@ describe "Terraform image" do
       expect(@terraform_version_output).to include("provider.cloudfoundry v0.11.2")
     end
 
-    it "has the kubernetes provider" do
-      expect(@terraform_version_output).to include("provider.kubernetes v1.11.4")
-    end
-
     it "has the uaa provider" do
       expect(@terraform_version_output).to include("provider.uaa v0.9")
     end
@@ -94,7 +90,7 @@ describe "Terraform image" do
     end
 
     it "has enough providers" do
-      EXPECTED_PROVIDER_COUNT = 17
+      EXPECTED_PROVIDER_COUNT = 14
       expect(@terraform_version_output.scan('provider.').length).to eq(EXPECTED_PROVIDER_COUNT)
     end
   end

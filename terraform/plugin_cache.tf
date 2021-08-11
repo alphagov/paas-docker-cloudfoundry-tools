@@ -1,9 +1,3 @@
-provider "aws" {
-  version = "2.30.0"
-}
-provider "azurerm" {
-  version = "1.44.0"
-}
 provider "cloudflare" {
 version = "~> 1.7.0"
 }
@@ -21,9 +15,6 @@ version = "~> 1.5.0"
 }
 provider "http" {
 version = "~> 1.1.1"
-}
-provider "kubernetes" {
-version = "~> 1.11.4"
 }
 provider "local" {
 version = "~> 1.4.0"
