@@ -1,6 +1,6 @@
 FROM ghcr.io/alphagov/paas/alpine:main
 
-ENV SPRUCE_VERSION 1.27.0
+ENV SPRUCE_VERSION 1.29.0
 
 RUN apk add --no-cache \
         wget=1.21.3-r0 \
