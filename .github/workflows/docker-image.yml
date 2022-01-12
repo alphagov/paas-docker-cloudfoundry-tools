@@ -59,8 +59,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
-        #ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: k8s-tools          
 
@@ -73,8 +73,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: bosh-cli-v2-cf-cli
     -
@@ -86,8 +86,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: bosh-cli-v2
     -
@@ -99,8 +99,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: terraform
  
@@ -113,8 +113,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: spiff
     -
@@ -126,8 +126,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: spruce
 
@@ -140,8 +140,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: awscli
     -
@@ -153,8 +153,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: cf-cli
     -
@@ -166,8 +166,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: curl-ssl
     -
@@ -179,8 +179,8 @@ jobs:
         tags: |
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
           ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-        #ghcr.io/${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: git-ssh
 
