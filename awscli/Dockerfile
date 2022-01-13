@@ -1,4 +1,4 @@
-FROM governmentpaas/curl-ssl
+FROM orangecloudfoundry/curl-ssl
 
 ENV AWSCLI_VERSION "1.18.140"
 ENV PACKAGES "groff less python3 py-pip jq"

@@ -1,4 +1,4 @@
-FROM governmentpaas/bosh-cli-v2:latest
+FROM orangecloudfoundry/bosh-cli-v2:latest
 
 # we use libc6 instead of libc6-compat as we do not use alpine base image
 ENV CF_PACKAGES "unzip curl openssl ca-certificates git libc6 bash jq gettext make"
