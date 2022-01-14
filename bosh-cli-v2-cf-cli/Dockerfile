@@ -1,9 +1,9 @@
-FROM governmentpaas/bosh-cli-v2:latest
+FROM orangecloudfoundry/bosh-cli-v2:latest
 
 # we use libc6 instead of libc6-compat as we do not use alpine base image
 ENV CF_PACKAGES "unzip curl openssl ca-certificates git libc6 bash jq gettext make"
-ENV CF_CLI_VERSION "7.2.0"
-ENV SPRUCE_VERSION "1.27.0"
+ENV CF_CLI_VERSION "7.4.0"
+ENV SPRUCE_VERSION "1.29.0"
 
 # we also use apt-get as we use an Ubuntu image, not an Alpine
 RUN apt-get update \

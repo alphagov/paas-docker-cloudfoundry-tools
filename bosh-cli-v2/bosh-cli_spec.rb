@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="6.4.4-3c1a893c-2021-06-11T20:26:27Z"
-CREDHUB_VERSION='2.9.0'
+BOSH_CLI_VERSION="6.4.11-e5579de9-2022-01-05T23:48:09Z"
+CREDHUB_VERSION='2.9.1'
 
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
@@ -88,18 +88,9 @@ describe "bosh-cli-v2 image" do
     expect(cmd.stdout).to match(/^ruby 2.7/)
   end
 
-  it "contains the compiled CPI packages" do
+  it "does not contain the compiled CPI packages" do
     installation_path = '/root/.bosh/installations/44f01911-a47a-4a24-6ca3-a3109b33f058'
     packages_file = file("#{installation_path}/compiled_packages.json")
-    expect(packages_file).to exist
-    compiled_packages = JSON.parse(packages_file.content)
-    compiled_packages.each do |package|
-      expect(file("#{installation_path}/blobs/#{package["Value"]["BlobID"]}")).to exist
-    end
-
-    cpi_package = compiled_packages.find {|p| p["Key"]["PackageName"] == "bosh_aws_cpi" }
-    expect(cpi_package).to be
-
-    expect(file("#{installation_path}/packages/bosh_aws_cpi/bin/aws_cpi")).to be_executable
+    expect(packages_file).not_to exist
   end
 end

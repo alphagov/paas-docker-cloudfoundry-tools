@@ -20,8 +20,8 @@ RUN echo "Computed sha256sum: $(sha256sum ${YTT_FILENAME})" \
     && mv ${YTT_FILENAME} ytt
 
 
-ENV CREDHUB_CLI_VERSION 2.9.0
-ENV CREDHUB_CLI_SUM f260e926099f9eb9474ab2239851e391bfd0fd1354a52891f3c834cea1630e8a
+ENV CREDHUB_CLI_VERSION 2.9.1
+ENV CREDHUB_CLI_SUM df8aa256d4563d741bda71e4e0baff077addce8438dba4f9157504b387b93d9f
 ENV CREDHUB_CLI_FILENAME credhub-linux-${CREDHUB_CLI_VERSION}.tgz
 ADD https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/${CREDHUB_CLI_VERSION}/${CREDHUB_CLI_FILENAME} .
 RUN echo "Computed sha256sum: $(sha256sum ${CREDHUB_CLI_FILENAME})" \
@@ -48,7 +48,6 @@ ENV KUBECTL_VERSION 1.20.9
 ENV KUBECTL_SUM 9d76c4431e10e268dd7c6b53b27aaa62a6f26455013e1d7f6d85da86003539b9
 ENV KUBECTL_FILENAME kubectl
 ADD https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl .
-ADD https://storage.googleapis.com/kubernetes-release/release/v1.20.9/bin/linux/amd64/kubectl .
 RUN echo "Computed sha256sum: $(sha256sum ${KUBECTL_FILENAME})" \
     && echo "${KUBECTL_SUM}  ${KUBECTL_FILENAME}" | sha256sum -c -
 
@@ -62,8 +61,8 @@ RUN echo "Computed sha256sum: $(sha256sum ${HELM_FILENAME})" \
     && mv linux-amd64/helm helm \
     && rm -rf linux-amd64
 
-ENV KUTTL_VERSION 0.11.0
-ENV KUTTL_PLUGIN_SUM ce481fed5af651893c431e8182d0a6a0350882c3ca4fa62e5ce0e3de876e9267
+ENV KUTTL_VERSION 0.11.1
+ENV KUTTL_PLUGIN_SUM 0fb13f8fbb6109803a06847a8ad3fae4fedc8cd159e2b0fd6c1a1d8737191e5f
 ENV KUTTL_PLUGIN_FILENAME kubectl-kuttl_${KUTTL_VERSION}_linux_x86_64
 ADD https://github.com/kudobuilder/kuttl/releases/download/v${KUTTL_VERSION}/${KUTTL_PLUGIN_FILENAME} .
 RUN echo "Computed ${KUTTL_PLUGIN_FILENAME} sha256sum: $(sha256sum ${KUTTL_PLUGIN_FILENAME})" \
@@ -79,8 +78,8 @@ RUN echo "${YQ_SUM}  ${YQ_FILENAME}" | sha256sum -c - \
     && chmod +x ${YQ_FILENAME} \
     && mv ${YQ_FILENAME} /usr/local/bin/yq
 
-ENV BOSH_CLI_VERSION 6.4.4
-ENV BOSH_CLI_SUM c944dd694e5470686995c2365ac60c9ef06f655cab51994f7fefed4c89e764fb
+ENV BOSH_CLI_VERSION 6.4.11
+ENV BOSH_CLI_SUM ea3960f25c561346ab073c3d2133b9e5d35a62f1cd39cdcb986bff45c0ab0536
 ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
 ADD https://s3.amazonaws.com/bosh-cli-artifacts/${BOSH_CLI_FILENAME} .
 RUN echo "${BOSH_CLI_SUM}  ${BOSH_CLI_FILENAME}" | sha256sum -c - \

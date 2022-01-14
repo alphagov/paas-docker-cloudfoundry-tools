@@ -9,7 +9,9 @@ on:
 
 env:
   DOCKERHUB_ORG: orangecloudfoundry
-  IMAGES: k8s-tools terraform bosh-cli-v2 bosh-cli-v2-cf-cli spruce spiff awscli cf-cli curl-ssl git-ssh
+  BASE_IMAGES: cf-cli curl-ssl git-ssh k8s-tools terraform bosh-cli-v2 spruce spiff
+  IMAGES_WITH_DEPENDENCIES: awscli bosh-cli-v2-cf-cli
+
 jobs:
   build_and_publish:
     name: build, test and publish
@@ -37,7 +39,7 @@ jobs:
     - 
       name: build docker images
       run: |
-        for image in $IMAGES;do
+        for image in $BASE_IMAGES;do
           echo "Processing $image"
           bundle exec rake build:$image
         done
@@ -45,11 +47,49 @@ jobs:
     -
       name: test docker images
       run: |
-        for image in $IMAGES;do
+        for image in $BASE_IMAGES;do
           echo "Processing $image"
           bundle exec rake spec:$image
         done
-
+    -
+      name: publish curl-ssl image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: curl-ssl
+    -
+      name: publish git-ssh image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: git-ssh
+    -
+      name: publish cf-cli image
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{env.IMAGE}}
+        push: true
+        tags: |
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
+          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
+          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
+      env:
+        IMAGE: cf-cli
     -
       name: publish k8s-tools image
       uses: docker/build-push-action@v2
@@ -62,21 +102,7 @@ jobs:
           ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
           ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
-        IMAGE: k8s-tools          
-
-    -
-      name: publish bosh-cli-v2-cf-cli image
-      uses: docker/build-push-action@v2
-      with:
-        context: ${{env.IMAGE}}
-        push: true
-        tags: |
-          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
-          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
-      env:
-        IMAGE: bosh-cli-v2-cf-cli
+        IMAGE: k8s-tools
     -
       name: publish bosh-cli-v2 image
       uses: docker/build-push-action@v2
@@ -130,7 +156,21 @@ jobs:
           ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: spruce
+    -
+      name: build docker images with dependencies
+      run: |
+        for image in $IMAGES_WITH_DEPENDENCIES;do
+          echo "Processing $image"
+          bundle exec rake build:$image
+        done
 
+    -
+      name: test docker images with dependencies
+      run: |
+        for image in $IMAGES_WITH_DEPENDENCIES;do
+          echo "Processing $image"
+          bundle exec rake spec:$image
+        done
     -
       name: publish awscli image
       uses: docker/build-push-action@v2
@@ -145,7 +185,7 @@ jobs:
       env:
         IMAGE: awscli
     -
-      name: publish cf-cli image
+      name: publish bosh-cli-v2-cf-cli image
       uses: docker/build-push-action@v2
       with:
         context: ${{env.IMAGE}}
@@ -156,33 +196,7 @@ jobs:
           ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
           ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
-        IMAGE: cf-cli
-    -
-      name: publish curl-ssl image
-      uses: docker/build-push-action@v2
-      with:
-        context: ${{env.IMAGE}}
-        push: true
-        tags: |
-          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
-          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
-      env:
-        IMAGE: curl-ssl
-    -
-      name: publish git-ssh image
-      uses: docker/build-push-action@v2
-      with:
-        context: ${{env.IMAGE}}
-        push: true
-        tags: |
-          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
-          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
-      env:
-        IMAGE: git-ssh
+        IMAGE: bosh-cli-v2-cf-cli
 
 
   check_published_images:
@@ -192,7 +206,7 @@ jobs:
     steps:
       - name: check docker public images
         run: |
-          for image in $IMAGES;do
+          for image in $BASE_IMAGES $IMAGES_WITH_DEPENDENCIES;do
             echo "Processing $image"
             docker manifest inspect orangecloudfoundry/$image:$GITHUB_SHA
           done

@@ -1,7 +1,7 @@
 FROM ruby:2.7-slim-buster
 
-ENV BOSH_CLI_VERSION 6.4.4
-ENV BOSH_CLI_SUM c944dd694e5470686995c2365ac60c9ef06f655cab51994f7fefed4c89e764fb
+ENV BOSH_CLI_VERSION 6.4.11
+ENV BOSH_CLI_SUM ea3960f25c561346ab073c3d2133b9e5d35a62f1cd39cdcb986bff45c0ab0536
 ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
 
 ENV DEBIAN_PACKAGES "ca-certificates wget git openssh-client file jq"
@@ -24,12 +24,9 @@ RUN wget -nv https://s3.amazonaws.com/bosh-cli-artifacts/${BOSH_CLI_FILENAME} \
   && chmod +x ${BOSH_CLI_FILENAME} \
   && mv ${BOSH_CLI_FILENAME} /usr/local/bin/bosh
 
-COPY bosh_init_cache /tmp/bosh_init_cache/
-RUN /tmp/bosh_init_cache/seed_bosh_init_cache.sh && \
-    rm -rf /tmp/bosh_init_cache
 
-ENV CREDHUB_CLI_VERSION 2.9.0
-ENV CREDHUB_CLI_SUM f260e926099f9eb9474ab2239851e391bfd0fd1354a52891f3c834cea1630e8a
+ENV CREDHUB_CLI_VERSION 2.9.1
+ENV CREDHUB_CLI_SUM df8aa256d4563d741bda71e4e0baff077addce8438dba4f9157504b387b93d9f
 ENV CREDHUB_CLI_FILENAME credhub-linux-${CREDHUB_CLI_VERSION}.tgz
 
 RUN wget -nv https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/${CREDHUB_CLI_VERSION}/${CREDHUB_CLI_FILENAME} \
