@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="6.4.11-e5579de9-2022-01-05T23:48:09Z"
+BOSH_CLI_VERSION="6.4.17-f0454a75-2022-02-25T00:42:57Z"
 CREDHUB_VERSION='2.9.1'
 
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
@@ -19,7 +19,7 @@ describe "bosh-cli-v2 image" do
     end
   end
 
-  it "has the expected version of the Bosh CLI" do
+  it "has the expected version of the Bosh CLI (#{BOSH_CLI_VERSION})" do
     expect(
       command("bosh -v").stdout.strip
     ).to eq("version #{BOSH_CLI_VERSION}")
