@@ -4,7 +4,7 @@ require 'serverspec'
 
 BOSH_CLI_VERSION="6.4.17-f0454a75-2022-02-25T00:42:57Z"
 CREDHUB_VERSION='2.9.1'
-CF_CLI_VERSION="7.4.0"
+CF_CLI_VERSION="8.3.0"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.29.0"
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
