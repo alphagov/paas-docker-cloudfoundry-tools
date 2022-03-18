@@ -1,7 +1,7 @@
 FROM ruby:2.7-slim-buster
 
-ENV BOSH_CLI_VERSION 6.4.11
-ENV BOSH_CLI_SUM ea3960f25c561346ab073c3d2133b9e5d35a62f1cd39cdcb986bff45c0ab0536
+ENV BOSH_CLI_VERSION 6.4.17
+ENV BOSH_CLI_SUM d0917d3ad0ff544a4c69a7986e710fe48e8cb2207717f77db31905d639e28c18
 ENV BOSH_CLI_FILENAME bosh-cli-${BOSH_CLI_VERSION}-linux-amd64
 
 ENV DEBIAN_PACKAGES "ca-certificates wget git openssh-client file jq"
@@ -24,7 +24,6 @@ RUN wget -nv https://s3.amazonaws.com/bosh-cli-artifacts/${BOSH_CLI_FILENAME} \
   && chmod +x ${BOSH_CLI_FILENAME} \
   && mv ${BOSH_CLI_FILENAME} /usr/local/bin/bosh
 
-
 ENV CREDHUB_CLI_VERSION 2.9.1
 ENV CREDHUB_CLI_SUM df8aa256d4563d741bda71e4e0baff077addce8438dba4f9157504b387b93d9f
 ENV CREDHUB_CLI_FILENAME credhub-linux-${CREDHUB_CLI_VERSION}.tgz
@@ -35,8 +34,8 @@ RUN wget -nv https://github.com/cloudfoundry-incubator/credhub-cli/releases/down
   && chmod +x credhub \
   && mv credhub /usr/local/bin/credhub
 
-ENV YQ_VERSION 4.9.6
-ENV YQ_SUM a1cfa39a9538e27f11066aa5659b32f9beae1eea93369d395bf45bcfc8a181dc
+ENV YQ_VERSION 4.22.1
+ENV YQ_SUM 54bbc804b90595c62685e8d4f19330b968cd716f72edc03cbda91adbc808036e
 ENV YQ_FILENAME yq_linux_amd64
 
 RUN wget -nv https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/${YQ_FILENAME} \

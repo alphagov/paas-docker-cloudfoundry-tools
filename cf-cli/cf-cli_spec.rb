@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-CF_CLI_VERSION="7.4.0"
+CF_CLI_VERSION="8.3.0"
 SPRUCE_BIN = "/usr/local/bin/spruce"
 SPRUCE_VERSION = "1.29.0"
 
@@ -93,8 +93,8 @@ describe "cf-cli image" do
     ).to eq(0)
   end
 
-  it "has the cf cli app autoscaler plugin" do
+  it "has not the cf cli app autoscaler plugin" do
     plugins = command("cf aasp -h")
-    expect(plugins.exit_status).to eq(0)
+    expect(plugins.exit_status).to eq(1)
   end
 end
