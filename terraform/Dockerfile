@@ -1,8 +1,8 @@
-FROM alpine:3.13
+FROM alpine:3.16
 
 ENV PATH $PATH:/usr/local/bin
-ENV TERRAFORM_VER 1.0.8
-ENV TERRAFORM_SUM a73459d406067ce40a46f026dce610740d368c3b4a3d96591b10c7a577984c2e
+ENV TERRAFORM_VER 1.2.0
+ENV TERRAFORM_SUM b87de03adbdfdff3c2552c8c8377552d0eecd787154465100cf4e29de4a7be1f
 ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
 
 RUN apk add --no-cache openssl openssh-client ca-certificates
