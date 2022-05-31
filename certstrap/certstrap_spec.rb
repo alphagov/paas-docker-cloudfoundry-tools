@@ -8,11 +8,11 @@ CERTSTRAP_PACKAGES = "openssl curl"
 
 describe "certstrap image" do
   before(:all) {
-    set :docker_image, find_image_id('certstrap:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "installs the right version of Ubuntu Linux" do
-    expect(os_version).to include("Ubuntu 20.04.2")
+    expect(os_version).to include("Ubuntu 20.04")
     expect(os_version).to include("LTS")
   end
 

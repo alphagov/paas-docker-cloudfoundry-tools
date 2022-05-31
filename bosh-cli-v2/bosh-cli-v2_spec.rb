@@ -10,7 +10,7 @@ BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-d
 
 describe "bosh-cli-v2 image" do
   before(:all) {
-    set :docker_image, find_image_id('bosh-cli-v2:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "installs required packages" do

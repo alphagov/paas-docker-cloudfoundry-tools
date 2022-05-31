@@ -6,7 +6,7 @@ PSQL_PACKAGE = 'postgresql-client'
 
 describe "psql image" do
   before(:all) {
-    set :docker_image, find_image_id('psql:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "installs the right version of Alpine" do

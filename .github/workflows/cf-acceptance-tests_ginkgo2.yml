@@ -1,0 +1,20 @@
+name: "Image: cf-acceptance-tests (ginkgo v2)"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "cf-acceptance-tests/**"
+      - ".github/workflows/cf-acceptance-tests_ginkgo2.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: cf-acceptance-tests
+      dockerfile: Dockerfile.ginkgo-v2
+      tag_suffix: ginkgo-v2
+      has_acceptance_tests: true

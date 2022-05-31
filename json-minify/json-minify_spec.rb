@@ -6,7 +6,7 @@ JSON_MINIFY_VERSION="0.0.2"
 
 describe "json-minify image" do
   before(:all) {
-    set :docker_image, find_image_id('json-minify:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "has the expected version of the json-minify gem" do

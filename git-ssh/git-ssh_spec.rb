@@ -8,7 +8,7 @@ OPENSSH_VERSION = "7.2p2"
 
 describe "image" do
   before(:all) {
-    set :docker_image, find_image_id('git-ssh:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "installs Alpine" do

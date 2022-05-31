@@ -7,7 +7,7 @@ AWSCLI_VERSION = "1.17.2"
 
 describe "self-update-pipelines image" do
   before(:all) {
-    set :docker_image, find_image_id('self-update-pipelines:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "has ruby 2.7 available" do
