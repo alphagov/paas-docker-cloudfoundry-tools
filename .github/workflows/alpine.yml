@@ -1,0 +1,17 @@
+name: "Image: alpine"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "alpine/**"
+      - ".github/workflows/alpine.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: alpine

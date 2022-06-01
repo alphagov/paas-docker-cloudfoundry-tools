@@ -1,0 +1,18 @@
+name: "Image: git-ssh"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "git-ssh/**"
+      - ".github/workflows/git-ssh.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: git-ssh
+      has_acceptance_tests: true

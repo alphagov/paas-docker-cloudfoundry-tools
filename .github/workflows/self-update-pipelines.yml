@@ -1,0 +1,18 @@
+name: "Image: self-update-pipelines"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "self-update-pipelines/**"
+      - ".github/workflows/self-update-pipelines.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: self-update-pipelines
+      has_acceptance_tests: true

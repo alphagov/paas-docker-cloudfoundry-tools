@@ -1,0 +1,18 @@
+name: "Image: psql"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "psql/**"
+      - ".github/workflows/psql.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: psql
+      has_acceptance_tests: true

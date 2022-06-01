@@ -1,0 +1,17 @@
+name: "Image: node-chromium"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "node-chromium/**"
+      - ".github/workflows/node-chromium.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: node-chromium

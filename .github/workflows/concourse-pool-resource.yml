@@ -1,0 +1,17 @@
+name: "Image: concourse-pool-resource"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "concourse-pool-resource/**"
+      - ".github/workflows/concourse-pool-resource.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: concourse-pool-resource
