@@ -44,7 +44,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ github.repository }}/${{ inputs.image }}
+          images: ghcr.io/paas/${{ inputs.image }}
           tags: |
             type=sha,format=long,prefix=,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
             type=ref,event=branch,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
