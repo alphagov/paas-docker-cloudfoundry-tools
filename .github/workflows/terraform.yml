@@ -1,5 +1,8 @@
 name: "Image: terraform"
 
+permissions:
+  packages: write
+
 on:
   workflow_dispatch:
   push:

@@ -1,5 +1,8 @@
 name: "Image: node"
 
+permissions:
+  packages: write
+
 on:
   workflow_dispatch:
   push:

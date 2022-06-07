@@ -1,5 +1,8 @@
 name: "Image: olhtbr-metadata-resource"
 
+permissions:
+  packages: write
+
 on:
   workflow_dispatch:
   push:

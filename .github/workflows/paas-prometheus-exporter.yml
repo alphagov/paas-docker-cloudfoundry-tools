@@ -1,5 +1,8 @@
 name: "Image: paas-prometheus-exporter"
 
+permissions:
+  packages: write
+
 on:
   workflow_dispatch:
   push:

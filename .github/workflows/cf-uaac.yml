@@ -1,5 +1,8 @@
 name: "Image: cf-uaac"
 
+permissions:
+  packages: write
+
 on:
   workflow_dispatch:
   push:

@@ -1,5 +1,8 @@
 name: "Image: concourse-pool-resource"
 
+permissions:
+  packages: write
+
 on:
   workflow_dispatch:
   push:
