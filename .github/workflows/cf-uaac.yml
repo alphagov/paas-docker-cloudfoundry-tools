@@ -1,0 +1,18 @@
+name: "Image: cf-uaac"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "cf-uaac/**"
+      - ".github/workflows/cf-uaac.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: cf-uaac
+      has_acceptance_tests: true

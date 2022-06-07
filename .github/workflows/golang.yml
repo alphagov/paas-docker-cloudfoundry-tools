@@ -1,0 +1,17 @@
+name: "Image: golang"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "golang/**"
+      - ".github/workflows/golang.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: golang

@@ -8,7 +8,7 @@ SPRUCE_VERSION = "1.27.0"
 
 describe "cf-cli image" do
   before(:all) {
-    set :docker_image, find_image_id('cf-cli:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "has the expected version of the CF CLI (#{CF_CLI_VERSION})" do

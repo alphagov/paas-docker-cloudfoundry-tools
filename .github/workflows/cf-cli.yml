@@ -1,0 +1,18 @@
+name: "Image: cf-cli"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "cf-cli/**"
+      - ".github/workflows/cf-cli.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: cf-cli
+      has_acceptance_tests: true

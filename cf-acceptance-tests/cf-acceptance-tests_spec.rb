@@ -2,13 +2,13 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-GO_VERSION="1.14"
-CF_CLI_VERSION="7.0.2"
+GO_VERSION="1.17"
+CF_CLI_VERSION="7.4.0"
 LOG_CACHE_CLI_VERSION="2.1.0"
 
 describe "cf-acceptance-tests image" do
   before(:all) {
-    set :docker_image, find_image_id('cf-acceptance-tests:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "has the expected version of Go" do

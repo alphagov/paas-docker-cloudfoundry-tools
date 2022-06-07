@@ -6,7 +6,7 @@ UAAC_VERSION="3.2.0"
 
 describe "cf-uaac image" do
   before(:all) {
-    set :docker_image, find_image_id('cf-uaac:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "has the expected version of uaac" do

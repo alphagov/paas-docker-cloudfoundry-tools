@@ -4,7 +4,7 @@ require 'serverspec'
 
 describe "Terraform image" do
   before(:all) {
-    set :docker_image, find_image_id('terraform:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "installs Alpine" do

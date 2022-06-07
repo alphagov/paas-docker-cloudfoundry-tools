@@ -1,0 +1,17 @@
+name: "Image: olhtbr-metadata-resource"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "olhtbr-metadata-resource/**"
+      - ".github/workflows/olhtbr-metadata-resource.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: olhtbr-metadata-resource
