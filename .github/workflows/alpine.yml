@@ -1,5 +1,8 @@
 name: "Image: alpine"
 
+permissions:
+  packages: write
+
 on:
   workflow_dispatch:
   push:
