@@ -1,8 +1,5 @@
 name: "Image: node-chromium"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:

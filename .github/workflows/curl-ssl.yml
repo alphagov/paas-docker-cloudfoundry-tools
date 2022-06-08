@@ -1,8 +1,5 @@
 name: "Image: curl-ssl"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:

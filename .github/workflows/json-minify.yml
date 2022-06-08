@@ -1,8 +1,5 @@
 name: "Image: json-minify"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:

@@ -1,8 +1,5 @@
 name: "Image: golang"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:
