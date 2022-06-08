@@ -1,8 +1,5 @@
 name: "Image: cf-cli"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:

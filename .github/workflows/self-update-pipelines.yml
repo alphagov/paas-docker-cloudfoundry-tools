@@ -1,8 +1,5 @@
 name: "Image: self-update-pipelines"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:

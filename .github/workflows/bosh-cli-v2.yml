@@ -1,8 +1,5 @@
 name: "Image: bosh-cli-v2"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:

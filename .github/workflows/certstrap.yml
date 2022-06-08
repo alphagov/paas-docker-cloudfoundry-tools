@@ -1,8 +1,5 @@
 name: "Image: certstrap"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:

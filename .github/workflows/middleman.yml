@@ -1,8 +1,5 @@
 name: "Image: middleman"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:
