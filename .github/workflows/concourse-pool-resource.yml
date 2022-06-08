@@ -15,3 +15,4 @@ jobs:
     uses: ./.github/workflows/build-image-base.yml
     with:
       image: concourse-pool-resource
+    secrets: inherit

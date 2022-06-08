@@ -16,3 +16,4 @@ jobs:
     with:
       image: json-minify
       has_acceptance_tests: true
+    secrets: inherit

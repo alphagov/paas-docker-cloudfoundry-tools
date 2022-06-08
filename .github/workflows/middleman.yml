@@ -16,3 +16,4 @@ jobs:
     with:
       image: middleman
       has_acceptance_tests: true
+    secrets: inherit

@@ -21,6 +21,11 @@ on:
         default: true
         type: boolean
         description: "Disable pushing to ghcr"
+    secrets:
+      CI_USER_USERNAME:
+        required: true
+      CI_USER_CONTAINER_REGISTRY_TOKEN:
+        required: true
 
 env:
   TEST_TAG: paas-tool:latest

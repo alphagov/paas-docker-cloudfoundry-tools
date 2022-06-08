@@ -16,3 +16,4 @@ jobs:
     with:
       image: awscli
       has_acceptance_tests: true
+    secrets: inherit
