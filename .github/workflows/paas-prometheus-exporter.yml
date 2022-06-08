@@ -16,3 +16,4 @@ jobs:
     with:
       image: paas-prometheus-exporter
       has_acceptance_tests: true
+    secrets: inherit

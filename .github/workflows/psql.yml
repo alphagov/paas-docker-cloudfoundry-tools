@@ -16,3 +16,4 @@ jobs:
     with:
       image: psql
       has_acceptance_tests: true
+    secrets: inherit

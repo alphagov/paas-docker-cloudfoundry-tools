@@ -16,3 +16,4 @@ jobs:
     with:
       image: self-update-pipelines
       has_acceptance_tests: true
+    secrets: inherit

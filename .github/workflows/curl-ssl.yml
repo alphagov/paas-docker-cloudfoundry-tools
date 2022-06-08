@@ -16,3 +16,4 @@ jobs:
     with:
       image: curl-ssl
       has_acceptance_tests: true
+    secrets: inherit

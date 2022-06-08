@@ -16,3 +16,4 @@ jobs:
     with:
       image: cf-acceptance-tests
       has_acceptance_tests: true
+    secrets: inherit

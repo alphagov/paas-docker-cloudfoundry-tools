@@ -17,3 +17,4 @@ jobs:
       dockerfile: Dockerfile.ginkgo-v2
       tag_suffix: ginkgo-v2
       has_acceptance_tests: true
+    secrets: inherit
