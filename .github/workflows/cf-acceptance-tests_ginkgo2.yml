@@ -1,8 +1,5 @@
 name: "Image: cf-acceptance-tests (ginkgo v2)"
 
-permissions:
-  packages: write
-
 on:
   workflow_dispatch:
   push:
