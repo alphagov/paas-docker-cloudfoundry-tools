@@ -1,3 +1,4 @@
+---
 name: Deploy
 on:
   workflow_call:
@@ -13,10 +14,6 @@ on:
       tag_suffix:
         type: string
         description: "Optional suffix for all tags"
-      has_acceptance_tests:
-        default: false
-        type: boolean
-        description: "Specify if acceptance tests are needed for this image"
       push:
         default: true
         type: boolean
@@ -47,6 +44,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -97,7 +98,14 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Check if there are acceptance tests
+        id: check_for_tests
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "./${{ inputs.image }}/${{ inputs.image }}_spec.rb"
+
       - name: Build for acceptance test
+        if: steps.check_for_tests.outputs.files_exist == 'true'
         uses: docker/build-push-action@v3.0.0
         with:
           context: ./${{ inputs.image }}
@@ -108,18 +116,17 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: ${{ inputs.platforms }}
-        if: ${{ inputs.has_acceptance_tests }}
 
       - name: Set up ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-        if: ${{ inputs.has_acceptance_tests }}
+        if: steps.check_for_tests.outputs.files_exist == 'true'
       - name: Acceptance Tests
         env:
           DOCKER_IMAGE: "${{ env.TEST_TAG }}"
         run: bundle exec rspec ./${{ inputs.image }}/${{ inputs.image }}_spec.rb
-        if: ${{ inputs.has_acceptance_tests }}
+        if: steps.check_for_tests.outputs.files_exist == 'true'
 
       - name: Build and push to ghcr
         uses: docker/build-push-action@v3.0.0

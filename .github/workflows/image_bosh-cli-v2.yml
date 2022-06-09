@@ -1,4 +1,7 @@
+---
 name: "Image: bosh-cli-v2"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
 
 on:
   workflow_dispatch:
@@ -9,11 +12,17 @@ on:
       - "bosh-cli-v2/**"
       - ".github/workflows/bosh-cli-v2.yml"
       - ".github/workflows/build-image-base.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "bosh-cli/**"
+      - ".github/workflows/bosh-cli.yml"
+      - ".github/workflows/build-image-base.yml"
 
 jobs:
   workflows:
     uses: ./.github/workflows/build-image-base.yml
     with:
       image: bosh-cli-v2
-      has_acceptance_tests: true
     secrets: inherit
