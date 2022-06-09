@@ -1,14 +1,12 @@
-FROM node:lts-alpine
+FROM ghcr.io/alphagov/paas/node:main
 
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    harfbuzz \
-    ca-certificates \
-    ttf-freefont
+RUN apk add --no-cache \
+        chromium \
+        nss \
+        freetype \
+        harfbuzz \
+        ca-certificates \
+        ttf-freefont
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
