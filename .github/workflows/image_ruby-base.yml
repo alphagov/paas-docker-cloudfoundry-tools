@@ -1,0 +1,29 @@
+---
+name: "Image: ruby-base"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "ruby-base/**"
+      - ".github/workflows/ruby-base.yml"
+      - ".github/workflows/build-image-base.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "ruby-base/**"
+      - ".github/workflows/ruby-base.yml"
+      - ".github/workflows/build-image-base.yml"
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: ruby-base
+      platforms: linux/amd64,linux/arm64
+    secrets: inherit
