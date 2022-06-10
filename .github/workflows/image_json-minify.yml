@@ -1,8 +1,18 @@
+---
 name: "Image: json-minify"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
 
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
+    paths:
+      - "json-minify/**"
+      - ".github/workflows/json-minify.yml"
+      - ".github/workflows/build-image-base.yml"
+  pull_request:
     branches:
       - main
     paths:
@@ -15,5 +25,4 @@ jobs:
     uses: ./.github/workflows/build-image-base.yml
     with:
       image: json-minify
-      has_acceptance_tests: true
     secrets: inherit

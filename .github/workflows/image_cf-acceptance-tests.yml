@@ -1,8 +1,18 @@
+---
 name: "Image: cf-acceptance-tests"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
 
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
+    paths:
+      - "cf-acceptance-tests/**"
+      - ".github/workflows/cf-acceptance-tests.yml"
+      - ".github/workflows/build-image-base.yml"
+  pull_request:
     branches:
       - main
     paths:
@@ -15,5 +25,4 @@ jobs:
     uses: ./.github/workflows/build-image-base.yml
     with:
       image: cf-acceptance-tests
-      has_acceptance_tests: true
     secrets: inherit

@@ -1,8 +1,18 @@
+---
 name: "Image: concourse-pool-resource"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
 
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
+    paths:
+      - "concourse-pool-resource/**"
+      - ".github/workflows/concourse-pool-resource.yml"
+      - ".github/workflows/build-image-base.yml"
+  pull_request:
     branches:
       - main
     paths:

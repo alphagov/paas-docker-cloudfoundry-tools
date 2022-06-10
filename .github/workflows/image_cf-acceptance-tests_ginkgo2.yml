@@ -1,7 +1,18 @@
+---
 name: "Image: cf-acceptance-tests (ginkgo v2)"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
+
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
+    paths:
+      - "cf-acceptance-tests/**"
+      - ".github/workflows/cf-acceptance-tests_ginkgo2.yml"
+      - ".github/workflows/build-image-base.yml"
+  pull_request:
     branches:
       - main
     paths:
@@ -16,5 +27,4 @@ jobs:
       image: cf-acceptance-tests
       dockerfile: Dockerfile.ginkgo-v2
       tag_suffix: ginkgo-v2
-      has_acceptance_tests: true
     secrets: inherit
