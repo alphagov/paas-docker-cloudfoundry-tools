@@ -25,4 +25,5 @@ jobs:
     uses: ./.github/workflows/build-image-base.yml
     with:
       image: json-minify
+      platforms: linux/amd64,linux/arm64
     secrets: inherit
