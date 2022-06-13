@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM ghcr.io/alphagov/paas/alpine:main
 
 ENV PATH $PATH:/usr/local/bin
 ENV TERRAFORM_VER 1.2.0
