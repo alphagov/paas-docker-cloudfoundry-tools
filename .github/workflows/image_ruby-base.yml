@@ -1,5 +1,5 @@
 ---
-name: "Image: middleman"
+name: "Image: ruby-base"
 permissions:
   actions: write # so 'cancel-workflow-action' can function
 
@@ -9,21 +9,21 @@ on:
     branches:
       - main
     paths:
-      - "middleman/**"
-      - ".github/workflows/middleman.yml"
+      - "ruby-base/**"
+      - ".github/workflows/ruby-base.yml"
       - ".github/workflows/build-image-base.yml"
   pull_request:
     branches:
       - main
     paths:
-      - "middleman/**"
-      - ".github/workflows/middleman.yml"
+      - "ruby-base/**"
+      - ".github/workflows/ruby-base.yml"
       - ".github/workflows/build-image-base.yml"
 
 jobs:
   workflows:
     uses: ./.github/workflows/build-image-base.yml
     with:
-      image: middleman
+      image: ruby-base
       platforms: linux/amd64,linux/arm64
     secrets: inherit
