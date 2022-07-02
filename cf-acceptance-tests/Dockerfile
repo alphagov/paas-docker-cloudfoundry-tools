@@ -26,7 +26,8 @@ RUN \
   mkdir $GOPATH && \
   rm -rf /tmp/*
 
-RUN go get github.com/onsi/ginkgo/ginkgo
+RUN go get github.com/onsi/ginkgo/v2 && \
+    go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo@latest
 
 # Install the cf CLI
 RUN wget -q -O cf.deb "https://packages.cloudfoundry.org/stable?release=debian64&version=${CF_CLI_VERSION}&source=github-rel" && \
