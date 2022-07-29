@@ -1,5 +1,5 @@
 ---
-name: "Image: cf-acceptance-tests"
+name: "Image: cf-acceptance-tests (ginkgo v2)"
 permissions:
   actions: write # so 'cancel-workflow-action' can function
 
@@ -8,17 +8,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "cf-acceptance-tests/**"
-      - ".github/workflows/cf-acceptance-tests.yml"
-      - ".github/workflows/build-image-base.yml"
   pull_request:
     branches:
       - main
-    paths:
-      - "cf-acceptance-tests/**"
-      - ".github/workflows/cf-acceptance-tests.yml"
-      - ".github/workflows/build-image-base.yml"
 
 jobs:
   workflows:

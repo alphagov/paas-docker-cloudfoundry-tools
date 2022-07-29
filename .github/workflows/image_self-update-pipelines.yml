@@ -8,17 +8,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "self-update-pipelines/**"
-      - ".github/workflows/self-update-pipelines.yml"
-      - ".github/workflows/build-image-base.yml"
   pull_request:
     branches:
       - main
-    paths:
-      - "self-update-pipelines/**"
-      - ".github/workflows/self-update-pipelines.yml"
-      - ".github/workflows/build-image-base.yml"
 
 jobs:
   workflows:

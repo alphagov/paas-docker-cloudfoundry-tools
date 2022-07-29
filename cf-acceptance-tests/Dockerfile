@@ -16,7 +16,7 @@ RUN \
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 
-ENV GO_VERSION "1.17"
+ENV GO_VERSION "1.18"
 ENV CF_CLI_VERSION "7.4.0"
 ENV CF_LOG_CACHE_VERSION "2.1.0"
 
@@ -26,7 +26,7 @@ RUN \
   mkdir $GOPATH && \
   rm -rf /tmp/*
 
-RUN go get github.com/onsi/ginkgo/ginkgo
+RUN go install github.com/onsi/ginkgo/v2/ginkgo@latest
 
 # Install the cf CLI
 RUN wget -q -O cf.deb "https://packages.cloudfoundry.org/stable?release=debian64&version=${CF_CLI_VERSION}&source=github-rel" && \

@@ -8,17 +8,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "psql/**"
-      - ".github/workflows/psql.yml"
-      - ".github/workflows/build-image-base.yml"
   pull_request:
     branches:
       - main
-    paths:
-      - "psql/**"
-      - ".github/workflows/psql.yml"
-      - ".github/workflows/build-image-base.yml"
 
 jobs:
   workflows:
