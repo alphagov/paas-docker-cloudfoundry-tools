@@ -8,17 +8,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "paas-prometheus-exporter/**"
-      - ".github/workflows/paas-prometheus-exporter.yml"
-      - ".github/workflows/build-image-base.yml"
   pull_request:
     branches:
       - main
-    paths:
-      - "paas-prometheus-exporter/**"
-      - ".github/workflows/paas-prometheus-exporter.yml"
-      - ".github/workflows/build-image-base.yml"
 
 jobs:
   workflows:

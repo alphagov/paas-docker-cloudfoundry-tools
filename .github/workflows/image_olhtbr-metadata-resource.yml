@@ -8,17 +8,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "olhtbr-metadata-resource/**"
-      - ".github/workflows/olhtbr-metadata-resource.yml"
-      - ".github/workflows/build-image-base.yml"
   pull_request:
     branches:
       - main
-    paths:
-      - "olhtbr-metadata-resource/**"
-      - ".github/workflows/olhtbr-metadata-resource.yml"
-      - ".github/workflows/build-image-base.yml"
 
 jobs:
   workflows:
