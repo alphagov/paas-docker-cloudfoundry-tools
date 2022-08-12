@@ -9,7 +9,7 @@ AWSCLI_VERSION = "1.17.2"
 
 describe "awscli image" do
   before(:all) {
-    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
+    set :docker_image, find_image_id('awscli:latest')
   }
 
   def os_version

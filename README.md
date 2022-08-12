@@ -7,9 +7,10 @@ Orange specifics:
  * terraform (overrides Alphagov)
 
 --------------------
+
 # PaaS Docker Cloud Foundry tools
 
-Contains Dockerfiles to build the Cloud foundry tools.
+Contains Dockerfiles to build docker images for Cloud Foundry tools and other tools we use regularly.
 
 Each directory with a Dockerfile relates to a container and will have
 repository of the same name in Docker Hub.

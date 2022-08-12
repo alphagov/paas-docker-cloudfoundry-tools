@@ -1,4 +1,4 @@
-FROM ghcr.io/alphagov/paas/ruby:main
+FROM ruby:3.1-slim
 
 RUN apt-get update \
     && apt-get install -y \

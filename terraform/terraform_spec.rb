@@ -53,20 +53,12 @@ describe "Terraform image" do
       end
     end
 
-    it "has the cloudflare provider" do
-      expect(@terraform_version_output).to include("provider.cloudflare v1.7.0")
-    end
-
     it "has the local provider" do
       expect(@terraform_version_output).to include("provider.local v1.4.0")
     end
 
     it "has the openstack provider" do
       expect(@terraform_version_output).to include("provider.openstack v1.25.0")
-    end
-
-    it "has the cloudstack provider" do
-      expect(@terraform_version_output).to include("provider.cloudstack v0.3.0")
     end
 
     it "has the powerdns provider" do
@@ -90,7 +82,7 @@ describe "Terraform image" do
     end
 
     it "has enough providers" do
-      EXPECTED_PROVIDER_COUNT = 14
+      EXPECTED_PROVIDER_COUNT = 12
       expect(@terraform_version_output.scan('provider.').length).to eq(EXPECTED_PROVIDER_COUNT)
     end
   end

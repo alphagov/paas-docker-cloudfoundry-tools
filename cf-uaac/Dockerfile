@@ -1,4 +1,5 @@
-FROM ghcr.io/alphagov/paas/ruby-base:main
+FROM ruby:3.1-alpine3.16
+
 
 RUN apk add --no-cache musl-dev gcc make g++
 

@@ -8,7 +8,7 @@ CURL_SSL_PACKAGES = 'jq gettext curl openssl ca-certificates'
 
 describe 'curl-ssl image' do
   before(:all) do
-    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
+    set :docker_image, find_image_id('curl-ssl:latest')
   end
 
   it 'installs the right version of Alpine' do

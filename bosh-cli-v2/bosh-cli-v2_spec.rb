@@ -10,7 +10,7 @@ BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-d
 
 describe "bosh-cli-v2 image" do
   before(:all) {
-    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
+    set :docker_image, find_image_id('bosh-cli-v2:latest')
   }
 
   it "installs required packages" do
@@ -82,10 +82,10 @@ describe "bosh-cli-v2 image" do
     end
   end
 
-  it "has ruby 2.7 available" do
+  it "has ruby 3.1 available" do
     cmd = command("ruby -v")
     expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^ruby 2.7/)
+    expect(cmd.stdout).to match(/^ruby 3.1/)
   end
 
   it "does not contain the compiled CPI packages" do
