@@ -1,8 +1,8 @@
 FROM ghcr.io/alphagov/paas/alpine:main
 
 ENV PATH $PATH:/usr/local/bin
-ENV TERRAFORM_VER 1.2.0
-ENV TERRAFORM_SUM b87de03adbdfdff3c2552c8c8377552d0eecd787154465100cf4e29de4a7be1f
+ENV TERRAFORM_VER 1.2.7
+ENV TERRAFORM_SUM dfd7c44a5b6832d62860a01095a15b53616fb3ea4441ab89542f9364e3fca718
 ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
 
 RUN apk add --no-cache openssl openssh-client ca-certificates
