@@ -1,7 +1,5 @@
-FROM ruby:2.7-alpine3.11
+FROM ruby:3.1-alpine3.16
 
-# TODO: remove after https://github.com/docker-library/ruby/pull/209 was fixed.
-ENV PATH "/usr/local/bundle/bin:${PATH}"
 
 RUN apk add --no-cache musl-dev gcc make g++
 

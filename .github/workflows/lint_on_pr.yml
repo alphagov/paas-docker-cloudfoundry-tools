@@ -1,0 +1,45 @@
+---
+name: Lint codebase
+
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
+  statuses: write # so 'super-linter' can write individual check statuses to the pr / commit
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Lint Code Base (Blocking) # Blow up on gitleaks / github actions errors (ie. things which may / will cause issues)
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISABLE_ERRORS: false
+          VALIDATE_GITLEAKS: true
+          VALIDATE_GITHUB_ACTIONS: true
+
+      - name: Lint Code Base (Information only) # Run linter on everything else, but in 'information-only' mode.
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISABLE_ERRORS: true
+          VALIDATE_GITLEAKS: false
+          VALIDATE_GITHUB_ACTIONS: false

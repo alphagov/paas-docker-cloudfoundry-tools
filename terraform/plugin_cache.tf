@@ -1,9 +1,3 @@
-provider "cloudflare" {
-version = "~> 1.7.0"
-}
-provider "cloudstack" {
-version = "~> 0.3.0"
-}
 provider "flexibleengine" {
 version = "~> 1.11.1"
 }

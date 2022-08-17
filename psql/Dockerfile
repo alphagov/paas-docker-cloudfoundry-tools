@@ -1,5 +1,6 @@
-FROM alpine:3.13
+FROM ghcr.io/alphagov/paas/alpine:main
 
 ENV PACKAGES "postgresql-client"
 
-RUN apk add --no-cache $PACKAGES
+RUN apk add --no-cache \
+        postgresql14-client=14.4-r0
