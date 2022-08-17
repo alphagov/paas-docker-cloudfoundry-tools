@@ -61,12 +61,12 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ghcr.io/${{ github.repository }}/${{ inputs.image }}
-          tags: &image_tags |
+          tags: |
             type=sha,format=long,prefix=,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
             type=ref,event=branch,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
             type=ref,event=pr,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
             type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
-          labels: &image_labels |
+          labels: |
             org.opencontainers.image.url=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
             org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
             org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/${{ inputs.image }}/README.md
@@ -76,8 +76,16 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.DOCKERHUB_ORG }}/${{ inputs.image }}
-          tags: *image_tags
-          labels: *image_labels
+          tags: |
+            type=sha,format=long,prefix=,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=ref,event=branch,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=ref,event=pr,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+          labels: |
+            org.opencontainers.image.url=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
+            org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/${{ inputs.image }}/README.md
+            org.opencontainers.image.title=Orange ${{ inputs.image }} (GOV.UK PaaS fork)
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
