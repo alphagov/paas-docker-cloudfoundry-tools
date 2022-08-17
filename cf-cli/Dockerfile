@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine3.11
+FROM ghcr.io/alphagov/paas/ruby-base:main
 
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq gettext make"
 ENV CF_CLI_VERSION "8.3.0"

@@ -8,14 +8,15 @@ RUN mkdir -p $REPO_PATH
 WORKDIR $REPO_PATH
 
 RUN git clone $REPO_URL . && \
-    git checkout $COMMIT_SHA
+  git checkout $COMMIT_SHA
 
 RUN CGO_ENABLED=0 GOOS=linux go install
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN grep 'version[^=]*=.*"[^"]*"' $REPO_PATH/main.go \
-      | grep -o '"[^"]*"' | tr -d '"' > /tmp/version
+  | grep -o '"[^"]*"' | tr -d '"' > /tmp/version
 
-FROM alpine:3.13 AS run
+FROM ghcr.io/alphagov/paas/alpine:main AS run
 
 COPY --from=build /tmp/version /opt/paas-prometheus-exporter.version
 

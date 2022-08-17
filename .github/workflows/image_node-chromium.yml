@@ -1,0 +1,21 @@
+---
+name: "Image: node-chromium"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: node-chromium
+      platforms: linux/amd64,linux/arm64
+    secrets: inherit

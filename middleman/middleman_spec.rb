@@ -4,7 +4,7 @@ require 'serverspec'
 
 describe "middleman image" do
   before(:all) {
-    set :docker_image, find_image_id('middleman:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   it "can run middleman" do

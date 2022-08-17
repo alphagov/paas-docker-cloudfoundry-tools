@@ -1,0 +1,159 @@
+---
+name: Deploy
+on:
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
+        description: "Image to build"
+      dockerfile:
+        default: Dockerfile
+        type: string
+        description: "Dockerfile name"
+      tag_suffix:
+        type: string
+        description: "Optional suffix for all tags"
+      push:
+        default: true
+        type: boolean
+        description: "Push to registries"
+      platforms:
+        default: linux/amd64
+        type: string
+        description: "Platforms to build for"
+
+    secrets:
+      CI_USER_USERNAME:
+        required: true
+        description: Username for logging into ghcr.io
+      CI_USER_CONTAINER_REGISTRY_TOKEN:
+        required: true
+        description: Token for logging into ghcr.io
+      DOCKERHUB_USERNAME:
+        required: true
+        description: Username for logging into dockerhub
+      DOCKERHUB_PASSWORD:
+        required: true
+        description: Password for logging into dockerhub
+
+env:
+  TEST_TAG: paas-tool:latest
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Log in to ghcr.io Container registry
+        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.CI_USER_USERNAME }}
+          password: ${{ secrets.CI_USER_CONTAINER_REGISTRY_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for ghcr
+        id: meta-ghcr
+        uses: docker/metadata-action@v4
+        with:
+          images: ghcr.io/alphagov/paas/${{ inputs.image }}
+          tags: |
+            type=sha,format=long,prefix=,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=ref,event=branch,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=ref,event=pr,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+          labels: |
+            org.opencontainers.image.url=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
+            org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/${{ inputs.image }}/README.md
+            org.opencontainers.image.title=GOV.UK PaaS ${{ inputs.image }}
+      - name: Extract metadata (tags, labels) for docker hub
+        id: meta-dockerhub
+        uses: docker/metadata-action@v4
+        with:
+          images: governmentpaas/${{ inputs.image }}
+          tags: |
+            type=sha,format=long,prefix=,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=ref,event=branch,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=ref,event=pr,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+            type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
+          labels: |
+            org.opencontainers.image.url=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
+            org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/${{ inputs.image }}/README.md
+            org.opencontainers.image.title=GOV.UK PaaS ${{ inputs.image }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: ${{ inputs.platforms }}
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Check if there are acceptance tests
+        id: check_for_tests
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "./${{ inputs.image }}/${{ inputs.image }}_spec.rb"
+
+      - name: Build for acceptance test
+        if: steps.check_for_tests.outputs.files_exist == 'true'
+        uses: docker/build-push-action@v3.0.0
+        with:
+          context: ./${{ inputs.image }}
+          file: ./${{ inputs.image }}/${{inputs.dockerfile}}
+          load: true
+          tags: ${{ env.TEST_TAG }}
+          labels: ${{ steps.meta-ghcr.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: ${{ inputs.platforms }}
+
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+        if: steps.check_for_tests.outputs.files_exist == 'true'
+      - name: Acceptance Tests
+        env:
+          DOCKER_IMAGE: "${{ env.TEST_TAG }}"
+        run: bundle exec rspec ./${{ inputs.image }}/${{ inputs.image }}_spec.rb
+        if: steps.check_for_tests.outputs.files_exist == 'true'
+
+      - name: Build and push to ghcr
+        uses: docker/build-push-action@v3.0.0
+        with:
+          context: ./${{ inputs.image }}
+          platforms: ${{ inputs.platforms }}
+          file: ./${{ inputs.image }}/${{inputs.dockerfile}}
+          push: ${{ inputs.push }}
+          tags: ${{ steps.meta-ghcr.outputs.tags }}
+          labels: ${{ steps.meta-ghcr.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Log in to docker hub Container registry
+        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push to docker hub
+        uses: docker/build-push-action@v3.0.0
+        with:
+          context: ./${{ inputs.image }}
+          platforms: ${{ inputs.platforms }}
+          file: ./${{ inputs.image }}/${{inputs.dockerfile}}
+          push: ${{ inputs.push }}
+          tags: ${{ steps.meta-dockerhub.outputs.tags }}
+          labels: ${{ steps.meta-dockerhub.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

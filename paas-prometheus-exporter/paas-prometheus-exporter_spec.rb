@@ -4,7 +4,7 @@ require 'serverspec'
 
 describe "paas-prometheus-exporter" do
   before(:all) {
-    set :docker_image, find_image_id('paas-prometheus-exporter:latest')
+    set :docker_image, find_image_id(ENV['DOCKER_IMAGE'])
   }
 
   let(:version) { '0.0.4' }

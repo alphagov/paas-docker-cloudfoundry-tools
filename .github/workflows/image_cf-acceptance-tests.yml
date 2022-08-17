@@ -1,0 +1,20 @@
+---
+name: "Image: cf-acceptance-tests (ginkgo v2)"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: cf-acceptance-tests
+    secrets: inherit
