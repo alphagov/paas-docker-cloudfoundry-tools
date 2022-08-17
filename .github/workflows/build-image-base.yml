@@ -24,12 +24,6 @@ on:
         description: "Platforms to build for"
 
     secrets:
-      CI_USER_USERNAME:
-        required: true
-        description: Username for logging into ghcr.io
-      CI_USER_CONTAINER_REGISTRY_TOKEN:
-        required: true
-        description: Token for logging into ghcr.io
       DOCKERHUB_USERNAME:
         required: true
         description: Username for logging into dockerhub
@@ -39,6 +33,9 @@ on:
 
 env:
   TEST_TAG: paas-tool:latest
+  DOCKERHUB_ORG: orangecloudfoundry
+  BASE_IMAGES: cf-cli curl-ssl git-ssh k8s-tools terraform bosh-cli-v2 spruce spiff
+  IMAGES_WITH_DEPENDENCIES: awscli bosh-cli-v2-cf-cli
 
 jobs:
   deploy:
@@ -56,39 +53,31 @@ jobs:
         uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
         with:
           registry: ghcr.io
-          username: ${{ secrets.CI_USER_USERNAME }}
-          password: ${{ secrets.CI_USER_CONTAINER_REGISTRY_TOKEN }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for ghcr
         id: meta-ghcr
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ github.repository }}/test/${{ inputs.image }}
-          tags: |
+          images: ghcr.io/${{ github.repository }}/${{ inputs.image }}
+          tags: &image_tags |
             type=sha,format=long,prefix=,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
             type=ref,event=branch,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
             type=ref,event=pr,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
             type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
-          labels: |
+          labels: &image_labels |
             org.opencontainers.image.url=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
             org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
             org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/${{ inputs.image }}/README.md
-            org.opencontainers.image.title=GOV.UK PaaS ${{ inputs.image }}
+            org.opencontainers.image.title=Orange ${{ inputs.image }} (GOV.UK PaaS fork)
       - name: Extract metadata (tags, labels) for docker hub
         id: meta-dockerhub
         uses: docker/metadata-action@v4
         with:
-          images: governmentpaas/${{ inputs.image }}
-          tags: |
-            type=sha,format=long,prefix=,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
-            type=ref,event=branch,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
-            type=ref,event=pr,suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
-            type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=${{ inputs.tag_suffix && format('-{0}', inputs.tag_suffix) }}
-          labels: |
-            org.opencontainers.image.url=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
-            org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}/${{ inputs.image }}
-            org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/${{ inputs.image }}/README.md
-            org.opencontainers.image.title=GOV.UK PaaS ${{ inputs.image }}
+          images: ${{ env.DOCKERHUB_ORG }}/${{ inputs.image }}
+          tags: *image_tags
+          labels: *image_labels
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
