@@ -1,17 +1,17 @@
-FROM ubuntu:xenial
+FROM ghcr.io/alphagov/paas/ubuntu:main
 
-RUN \
-  apt-get update && \
-  apt-get -y install \
-    build-essential \
-    wget \
-    curl \
-    openssh-client \
-    unzip \
-    python-pip \
-    jq \
-    git fossil mercurial bzr subversion \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt update \
+    && apt install -y \
+      build-essential \
+      openssh-client \
+      unzip \
+      python-pip \
+      jq \
+      git \
+      fossil \
+      mercurial \
+      bzr \
+      subversion
 
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
