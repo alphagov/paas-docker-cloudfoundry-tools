@@ -1,5 +1,5 @@
 ---
-name: "Image: middleman"
+name: "Image: ubuntu"
 permissions:
   actions: write # so 'cancel-workflow-action' can function
 
@@ -16,6 +16,6 @@ jobs:
   workflows:
     uses: ./.github/workflows/build-image-base.yml
     with:
-      image: middleman
-      platforms: linux/amd64
+      image: ubuntu
+      platforms: linux/amd64,linux/arm64
     secrets: inherit
