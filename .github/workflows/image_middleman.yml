@@ -17,5 +17,5 @@ jobs:
     uses: ./.github/workflows/build-image-base.yml
     with:
       image: middleman
-      platforms: linux/amd64,linux/arm64
+      platforms: linux/amd64
     secrets: inherit

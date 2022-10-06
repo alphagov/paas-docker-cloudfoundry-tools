@@ -1,11 +1,12 @@
 FROM ghcr.io/alphagov/paas/ruby:main
 
-RUN apt-get update \
-    && apt-get install -y \
+RUN apt update \
+    && apt install -y \
         build-essential \
         libffi-dev \
         git \
         libcurl4-openssl-dev \
-        nodejs \
-    && gem install \
+        nodejs
+
+RUN gem install \
         middleman
