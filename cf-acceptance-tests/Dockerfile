@@ -16,7 +16,7 @@ RUN apt update \
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 
-ENV GO_VERSION "1.18"
+ENV GO_VERSION "1.19"
 ENV CF_CLI_VERSION "7.4.0"
 ENV CF_LOG_CACHE_VERSION "2.1.0"
 
