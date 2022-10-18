@@ -106,7 +106,7 @@ jobs:
 
       - name: Build for acceptance test
         if: steps.check_for_tests.outputs.files_exist == 'true'
-        uses: docker/build-push-action@v3.0.0
+        uses: docker/build-push-action@v3.2.0
         with:
           context: ./${{ inputs.image }}
           file: ./${{ inputs.image }}/${{inputs.dockerfile}}
@@ -129,7 +129,7 @@ jobs:
         if: steps.check_for_tests.outputs.files_exist == 'true'
 
       - name: Build and push to ghcr
-        uses: docker/build-push-action@v3.0.0
+        uses: docker/build-push-action@v3.2.0
         with:
           context: ./${{ inputs.image }}
           platforms: ${{ inputs.platforms }}
@@ -147,7 +147,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push to docker hub
-        uses: docker/build-push-action@v3.0.0
+        uses: docker/build-push-action@v3.2.0
         with:
           context: ./${{ inputs.image }}
           platforms: ${{ inputs.platforms }}
