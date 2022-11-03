@@ -82,10 +82,10 @@ describe "bosh-cli-v2 image" do
     end
   end
 
-  it "has ruby 2.7 available" do
+  it "has ruby 3.1 available" do
     cmd = command("ruby -v")
     expect(cmd.exit_status).to eq(0)
-    expect(cmd.stdout).to match(/^ruby 2.7/)
+    expect(cmd.stdout).to match(/^ruby 3.1/)
   end
 
   it "contains the compiled CPI packages" do

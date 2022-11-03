@@ -1,4 +1,4 @@
-FROM ruby:2.7-slim-buster
+FROM ruby:3.1-slim-buster
 
 ENV BOSH_CLI_VERSION 6.4.4
 ENV BOSH_CLI_SUM c944dd694e5470686995c2365ac60c9ef06f655cab51994f7fefed4c89e764fb
