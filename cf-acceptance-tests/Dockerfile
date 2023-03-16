@@ -1,23 +1,23 @@
-FROM ubuntu:xenial
+FROM ghcr.io/alphagov/paas/ubuntu:main
 
-RUN \
-  apt-get update && \
-  apt-get -y install \
-    build-essential \
-    wget \
-    curl \
-    openssh-client \
-    unzip \
-    python-pip \
-    jq \
-    git fossil mercurial bzr subversion \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt update \
+    && apt install -y \
+      build-essential \
+      openssh-client \
+      unzip \
+      python-pip \
+      jq \
+      git \
+      fossil \
+      mercurial \
+      bzr \
+      subversion
 
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 
-ENV GO_VERSION "1.18"
-ENV CF_CLI_VERSION "7.4.0"
+ENV GO_VERSION "1.19"
+ENV CF_CLI_VERSION "8.6.0"
 ENV CF_LOG_CACHE_VERSION "2.1.0"
 
 RUN \
