@@ -98,7 +98,7 @@ jobs:
 
       - name: Check if there are acceptance tests
         id: check_for_tests
-        uses: andstor/file-existence-action@v1
+        uses: andstor/file-existence-action@v2
         with:
           files: "./${{ inputs.image }}/${{ inputs.image }}_spec.rb"
 
