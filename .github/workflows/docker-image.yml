@@ -209,7 +209,7 @@ jobs:
         run: |
           for image in $BASE_IMAGES $IMAGES_WITH_DEPENDENCIES;do
             echo "Processing $image"
-            docker manifest inspect orangecloudfoundry/$image:$GITHUB_SHA
+            docker manifest inspect $DOCKERHUB_ORG/$image:$GITHUB_SHA
           done
 
 
