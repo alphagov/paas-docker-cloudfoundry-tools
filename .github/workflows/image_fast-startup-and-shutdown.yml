@@ -1,5 +1,5 @@
 ---
-name: "Image: kipper"
+name: "Image: fast-startup-and-shutdown"
 permissions:
   actions: write # so 'cancel-workflow-action' can function
 
@@ -16,5 +16,5 @@ jobs:
   workflows:
     uses: ./.github/workflows/build-image-base.yml
     with:
-      image: kipper
+      image: fast-startup-and-shutdown
     secrets: inherit
