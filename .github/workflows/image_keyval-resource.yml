@@ -1,0 +1,20 @@
+---
+name: "Image: keyval-resource"
+permissions:
+  actions: write # so 'cancel-workflow-action' can function
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  workflows:
+    uses: ./.github/workflows/build-image-base.yml
+    with:
+      image: keyval-resource
+    secrets: inherit
