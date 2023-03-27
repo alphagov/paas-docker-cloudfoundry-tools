@@ -3,8 +3,9 @@ Orange: [![Build Status](https://travis-ci.org/orange-cloudfoundry/paas-docker-c
 AlphaGov: not using Travis anymore
 
 Orange specifics:
- * spiff (only in this repo)
- * terraform (overrides Alphagov)
+* [bosh-cli-v2-cf-cli](bosh-cli-v2-cf-cli)
+* [k8s-tools](k8s-tools)
+* [terraform](terraform) (overrides Alphagov)
 
 --------------------
 

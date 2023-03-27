@@ -10,7 +10,7 @@ on:
 env:
   #DOCKERHUB_ORG: orangecloudfoundry
   DOCKERHUB_ORG: elpaasoci
-  BASE_IMAGES: cf-cli curl-ssl git-ssh k8s-tools terraform bosh-cli-v2 spruce spiff
+  BASE_IMAGES: cf-cli curl-ssl git-ssh k8s-tools terraform bosh-cli-v2 spruce
   IMAGES_WITH_DEPENDENCIES: awscli bosh-cli-v2-cf-cli
 
 jobs:
