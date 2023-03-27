@@ -130,20 +130,6 @@ jobs:
           ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
       env:
         IMAGE: terraform
- 
-    -
-      name: publish spiff image
-      uses: docker/build-push-action@v4.0.0
-      with:
-        context: ${{env.IMAGE}}
-        push: true
-        tags: |
-          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:latest
-          ${{env.DOCKERHUB_ORG}}/${{env.IMAGE}}:${{github.sha}}
-          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:latest
-          ghcr.io/${{ github.repository }}/${{env.IMAGE}}:${{github.sha}}
-      env:
-        IMAGE: spiff
     -
       name: publish spruce image
       uses: docker/build-push-action@v4.0.0
