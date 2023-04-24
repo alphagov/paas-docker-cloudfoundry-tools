@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint Code Base (Blocking) # Blow up on gitleaks / github actions errors (ie. things which may / will cause issues)
-        uses: github/super-linter@v4
+        uses: github/super-linter@v5
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
@@ -35,7 +35,7 @@ jobs:
           VALIDATE_GITHUB_ACTIONS: true
 
       - name: Lint Code Base (Information only) # Run linter on everything else, but in 'information-only' mode.
-        uses: github/super-linter@v4
+        uses: github/super-linter@v5
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
