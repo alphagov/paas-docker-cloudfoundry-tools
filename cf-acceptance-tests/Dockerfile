@@ -40,4 +40,4 @@ ENV CF_PLUGIN_HOME /root/
 RUN cf install-plugin -f "https://github.com/cloudfoundry/log-cache-cli/releases/download/v${CF_LOG_CACHE_VERSION}/log-cache-cf-plugin-linux"
 
 # Install the AWS-CLI
-RUN pip install awscli=="1.14.10"
+RUN pip install awscli=="1.19.112"

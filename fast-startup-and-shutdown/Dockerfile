@@ -1,6 +1,6 @@
 FROM ghcr.io/alphagov/paas/bosh-cli-v2:main
 
-ENV AWSCLI_VERSION "1.27.90"
+ENV AWSCLI_VERSION "1.19.112"
 
 RUN apt-get update && apt-get install -y \
   curl \

@@ -1,4 +1,4 @@
-FROM golang:1.14 AS build
+FROM golang:1.18 AS build
 
 ENV COMMIT_SHA c02e5624a2098d7b4593ab2da56ad6f4cfbf8d24
 ENV REPO_URL https://github.com/alphagov/paas-prometheus-exporter.git

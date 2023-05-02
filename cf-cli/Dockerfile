@@ -2,7 +2,7 @@ FROM ghcr.io/alphagov/paas/ruby-base:main
 
 ENV PACKAGES "unzip curl openssl ca-certificates git libc6-compat bash jq gettext make"
 ENV CF_CLI_VERSION "8.6.0"
-ENV SPRUCE_VERSION "1.27.0"
+ENV SPRUCE_VERSION "1.30.2"
 
 RUN apk add --no-cache $PACKAGES
 

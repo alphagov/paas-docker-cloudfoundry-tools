@@ -3,7 +3,7 @@ require 'docker'
 require 'serverspec'
 
 AWSCLI_BIN = "/usr/local/bin/aws"
-AWSCLI_VERSION = "1.17.2"
+AWSCLI_VERSION = "1.19.112"
 
 describe "self-update-pipelines image" do
   before(:all) {
