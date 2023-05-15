@@ -3,7 +3,7 @@ require 'docker'
 require 'serverspec'
 
 PSQL_PACKAGE = 'postgresql-client'
-ALPINE_VERSION = "3.16"
+ALPINE_VERSION = "3.18"
 
 describe "psql image" do
   before(:all) {
