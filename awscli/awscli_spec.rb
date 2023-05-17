@@ -5,7 +5,7 @@ require 'serverspec'
 AWSCLI_PACKAGES = "curl openssl ca-certificates less"
 
 AWSCLI_BIN = "/usr/bin/aws"
-AWSCLI_VERSION = "1.17.2"
+AWSCLI_VERSION = "1.19.112"
 
 describe "awscli image" do
   before(:all) {

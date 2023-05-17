@@ -1,6 +1,6 @@
 FROM ruby:3.1-slim-buster
 
-ENV AWSCLI_VERSION "1.17.2"
+ENV AWSCLI_VERSION "1.19.112"
 ENV PACKAGES make python-setuptools python-pip groff less curl
 
 RUN apt-get update \
