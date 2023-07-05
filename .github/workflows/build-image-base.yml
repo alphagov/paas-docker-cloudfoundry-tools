@@ -106,7 +106,7 @@ jobs:
 
       - name: Build for acceptance test
         if: steps.check_for_tests.outputs.files_exists == 'true'
-        uses: docker/build-push-action@v4.1.1
+        uses: docker/build-push-action@v4
         with:
           context: ./${{ inputs.image }}
           file: ./${{ inputs.image }}/${{inputs.dockerfile}}
@@ -121,15 +121,15 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-        if: steps.check_for_tests.outputs.files_exist == 'true'
+        if: steps.check_for_tests.outputs.files_exists == 'true'
       - name: Acceptance Tests
         env:
           DOCKER_IMAGE: "${{ env.TEST_TAG }}"
         run: bundle exec rspec ./${{ inputs.image }}/${{ inputs.image }}_spec.rb
-        if: steps.check_for_tests.outputs.files_exist == 'true'
+        if: steps.check_for_tests.outputs.files_exists == 'true'
 
       - name: Build and push to ghcr
-        uses: docker/build-push-action@v4.1.1
+        uses: docker/build-push-action@v4
         with:
           context: ./${{ inputs.image }}
           platforms: ${{ inputs.platforms }}
