@@ -115,7 +115,8 @@ jobs:
           labels: ${{ steps.meta-ghcr.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          platforms: ${{ inputs.platforms }}
+#          platforms: ${{ inputs.platforms }}
+          platforms: "linux/amd64"
 
       - name: Set up ruby
         uses: ruby/setup-ruby@v1
