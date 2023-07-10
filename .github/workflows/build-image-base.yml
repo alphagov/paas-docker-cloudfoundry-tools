@@ -45,11 +45,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.1
+        uses: styfle/cancel-workflow-action@bb6001c4ea612bf59c3abfc4756fbceee4f870c7
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
         with:
           submodules: true
       - name: Log in to ghcr.io Container registry
@@ -61,7 +61,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for ghcr
         id: meta-ghcr
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@818d4b7b91585d195f67373fd9cb0332e31a7175
         with:
           images: ghcr.io/alphagov/paas/${{ inputs.image }}
           tags: |
@@ -76,7 +76,7 @@ jobs:
             org.opencontainers.image.title=GOV.UK PaaS ${{ inputs.image }}
       - name: Extract metadata (tags, labels) for docker hub
         id: meta-dockerhub
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@818d4b7b91585d195f67373fd9cb0332e31a7175
         with:
           images: governmentpaas/${{ inputs.image }}
           tags: |
@@ -91,22 +91,22 @@ jobs:
             org.opencontainers.image.title=GOV.UK PaaS ${{ inputs.image }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@2b82ce82d56a2a04d2637cd93a637ae1b359c0a7
         with:
           platforms: ${{ inputs.platforms }}
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@2a1a44ac4aa01993040736bd95bb470da1a38365
 
       - name: Check if there are acceptance tests
         id: check_for_tests
-        uses: andstor/file-existence-action@v1
+        uses: andstor/file-existence-action@20b4d2e596410855db8f9ca21e96fbe18e12930b
         with:
           files: "./${{ inputs.image }}/${{ inputs.image }}_spec.rb"
 
       - name: Build for acceptance test
         if: steps.check_for_tests.outputs.files_exist == 'true'
-        uses: docker/build-push-action@v3.2.0
+        uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825
         with:
           context: ./${{ inputs.image }}
           file: ./${{ inputs.image }}/${{inputs.dockerfile}}
@@ -118,7 +118,7 @@ jobs:
           platforms: ${{ inputs.platforms }}
 
       - name: Set up ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@d3c9825d67b0d8720afdfdde5af56c79fdb38d16
         with:
           bundler-cache: true
         if: steps.check_for_tests.outputs.files_exist == 'true'
@@ -129,7 +129,7 @@ jobs:
         if: steps.check_for_tests.outputs.files_exist == 'true'
 
       - name: Build and push to ghcr
-        uses: docker/build-push-action@v3.2.0
+        uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825
         with:
           context: ./${{ inputs.image }}
           platforms: ${{ inputs.platforms }}
@@ -147,7 +147,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push to docker hub
-        uses: docker/build-push-action@v3.2.0
+        uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825
         with:
           context: ./${{ inputs.image }}
           platforms: ${{ inputs.platforms }}

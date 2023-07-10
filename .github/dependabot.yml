@@ -6,6 +6,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+        prefix: "github-action"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:

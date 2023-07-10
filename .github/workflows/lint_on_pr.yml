@@ -16,16 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.1
+        uses: styfle/cancel-workflow-action@bb6001c4ea612bf59c3abfc4756fbceee4f870c7
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
         with:
           fetch-depth: 0
 
       - name: Lint Code Base (Blocking) # Blow up on gitleaks / github actions errors (ie. things which may / will cause issues)
-        uses: github/super-linter@v4
+        uses: github/super-linter@98b9f97a88465a982d87e5a4264a87a3d3958560
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
@@ -35,7 +35,7 @@ jobs:
           VALIDATE_GITHUB_ACTIONS: true
 
       - name: Lint Code Base (Information only) # Run linter on everything else, but in 'information-only' mode.
-        uses: github/super-linter@v4
+        uses: github/super-linter@98b9f97a88465a982d87e5a4264a87a3d3958560
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
