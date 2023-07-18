@@ -118,7 +118,7 @@ jobs:
           platforms: ${{ inputs.platforms }}
 
       - name: Set up ruby
-        uses: ruby/setup-ruby@d3c9825d67b0d8720afdfdde5af56c79fdb38d16
+        uses: ruby/setup-ruby@250fcd6a742febb1123a77a841497ccaa8b9e939
         with:
           bundler-cache: true
         if: steps.check_for_tests.outputs.files_exist == 'true'
