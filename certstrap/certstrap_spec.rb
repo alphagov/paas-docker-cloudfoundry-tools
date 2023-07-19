@@ -3,7 +3,7 @@ require 'docker'
 require 'serverspec'
 
 CERTSTRAP_BIN = "/usr/local/bin/certstrap"
-CERTSTRAP_VERSION = "1.2.0"
+CERTSTRAP_VERSION = "1.3.0"
 CERTSTRAP_PACKAGES = "openssl curl"
 
 describe "certstrap image" do
@@ -12,7 +12,7 @@ describe "certstrap image" do
   }
 
   it "installs the right version of Ubuntu Linux" do
-    expect(os_version).to include("Ubuntu 20.04")
+    expect(os_version).to include("Ubuntu 18.04.6")
     expect(os_version).to include("LTS")
   end
 

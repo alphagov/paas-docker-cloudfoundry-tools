@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-PSQL_PACKAGE = 'postgresql-client'
+PSQL_PACKAGE = 'postgresql14-client'
 ALPINE_VERSION = "3.16"
 
 describe "psql image" do
