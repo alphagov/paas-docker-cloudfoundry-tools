@@ -7,5 +7,5 @@ RUN apk add --no-cache \
         less>=590-r0 \
         python3~3.10 \
         py3-pip~22 \
-    && pip3 install \
+    && pip3 install --upgrade pip \
         awscli==$AWSCLI_VERSION
