@@ -8,5 +8,4 @@ RUN apk add --no-cache \
         python3~3.10 \
         py3-pip~22 \
     && pip3 install \
-        awscli==$AWSCLI_VERSION \
-        pyyaml~=6.0 --upgrade
+        awscli==$AWSCLI_VERSION
