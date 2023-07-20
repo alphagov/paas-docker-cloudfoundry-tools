@@ -18,4 +18,5 @@ jobs:
     with:
       image: ruby-base
       platforms: linux/amd64,linux/arm64
+      test_platform: linux/amd64
     secrets: inherit

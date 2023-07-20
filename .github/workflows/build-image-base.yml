@@ -22,6 +22,10 @@ on:
         default: linux/amd64
         type: string
         description: "Platforms to build for"
+      test_platform:
+        default: linux/amd64
+        type: string
+        description: "Platform to use for acceptance tests"
 
     secrets:
       CI_USER_USERNAME:
@@ -105,7 +109,7 @@ jobs:
           files: "./${{ inputs.image }}/${{ inputs.image }}_spec.rb"
 
       - name: Build for acceptance test
-        if: steps.check_for_tests.outputs.files_exist == 'true'
+        if: steps.check_for_tests.outputs.files_exists == 'true'
         uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825
         with:
           context: ./${{ inputs.image }}
@@ -115,18 +119,18 @@ jobs:
           labels: ${{ steps.meta-ghcr.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          platforms: ${{ inputs.platforms }}
+          platforms: ${{ inputs.test_platform }}
 
       - name: Set up ruby
         uses: ruby/setup-ruby@250fcd6a742febb1123a77a841497ccaa8b9e939
         with:
           bundler-cache: true
-        if: steps.check_for_tests.outputs.files_exist == 'true'
+        if: steps.check_for_tests.outputs.files_exists == 'true'
       - name: Acceptance Tests
         env:
           DOCKER_IMAGE: "${{ env.TEST_TAG }}"
         run: bundle exec rspec ./${{ inputs.image }}/${{ inputs.image }}_spec.rb
-        if: steps.check_for_tests.outputs.files_exist == 'true'
+        if: steps.check_for_tests.outputs.files_exists == 'true'
 
       - name: Build and push to ghcr
         uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-UAAC_VERSION="4.7.0"
+UAAC_VERSION="4.14.0"
 
 describe "cf-uaac image" do
   before(:all) {

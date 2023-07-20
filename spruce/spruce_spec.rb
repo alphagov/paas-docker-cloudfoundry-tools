@@ -3,7 +3,7 @@ require 'docker'
 require 'serverspec'
 
 SPRUCE_BIN = "/usr/local/bin/spruce"
-SPRUCE_VERSION = "1.27.0"
+SPRUCE_VERSION = "1.30.2"
 ALPINE_VERSION = "3.16"
 
 describe "spruce image" do
@@ -28,7 +28,7 @@ describe "spruce image" do
   end
 
   it "has the spruce version #{SPRUCE_VERSION}" do
-    expect(spruce_version).to match(/spruce - Version #{SPRUCE_VERSION}( \(master\))?/)
+    expect(spruce_version).to match(/spruce - Version v#{SPRUCE_VERSION}/)
   end
 
   def spruce_version
