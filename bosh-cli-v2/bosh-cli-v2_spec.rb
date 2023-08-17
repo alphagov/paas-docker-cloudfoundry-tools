@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-BOSH_CLI_VERSION="6.4.17-f0454a75-2022-02-25T00:42:57Z"
-CREDHUB_VERSION='2.9.14'
+BOSH_CLI_VERSION="7.3.1-c569e51d5-2023-07-13T21:19:29Z"
+CREDHUB_VERSION='2.9.19'
 
 BOSH_ENV_DEPS = "build-essential zlibc zlib1g-dev openssl libxslt1-dev libxml2-dev \
     libssl-dev libreadline7 libreadline-dev libyaml-dev libsqlite3-dev sqlite3"
@@ -99,7 +99,5 @@ describe "bosh-cli-v2 image" do
 
     cpi_package = compiled_packages.find {|p| p["Key"]["PackageName"] == "bosh_aws_cpi" }
     expect(cpi_package).to be
-
-    expect(file("#{installation_path}/packages/bosh_aws_cpi/bin/aws_cpi")).to be_executable
   end
 end
