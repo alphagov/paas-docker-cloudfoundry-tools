@@ -99,7 +99,5 @@ describe "bosh-cli-v2 image" do
 
     cpi_package = compiled_packages.find {|p| p["Key"]["PackageName"] == "bosh_aws_cpi" }
     expect(cpi_package).to be
-
-    expect(file("#{installation_path}/packages/bosh_aws_cpi/bin/aws_cpi")).to be_executable
   end
 end

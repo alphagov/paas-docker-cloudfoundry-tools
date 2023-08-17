@@ -23,4 +23,9 @@ set +e
 bosh create-env minimal.yml
 set -e
 
+# We only care about the compiled_packages.json and blobs folder.
+# Keeping this about can cause issues if the cpi has packages that
+# are not idempotent.
+rm -r /root/.bosh/installations/44f01911-a47a-4a24-6ca3-a3109b33f058/packages
+
 echo "...done"
