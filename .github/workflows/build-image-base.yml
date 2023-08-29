@@ -100,7 +100,7 @@ jobs:
           platforms: ${{ inputs.platforms }}
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@2a1a44ac4aa01993040736bd95bb470da1a38365
+        uses: docker/setup-buildx-action@885d1462b80bc1c1c7f0b00334ad271f09369c55
 
       - name: Check if there are acceptance tests
         id: check_for_tests
