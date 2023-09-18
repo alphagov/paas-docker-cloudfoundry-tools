@@ -57,7 +57,7 @@ jobs:
         with:
           submodules: true
       - name: Log in to ghcr.io Container registry
-        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
         with:
           registry: ghcr.io
           username: ${{ secrets.CI_USER_USERNAME }}
@@ -145,7 +145,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Log in to docker hub Container registry
-        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
