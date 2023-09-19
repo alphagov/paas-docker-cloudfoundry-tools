@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'docker'
 require 'serverspec'
 
-GO_VERSION="1.20"
+GO_VERSION="1.21.1"
 CF_CLI_VERSION="8.6.0"
 LOG_CACHE_CLI_VERSION="2.1.0"
 
