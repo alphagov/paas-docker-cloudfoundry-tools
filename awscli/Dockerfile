@@ -7,7 +7,7 @@ RUN apk add --no-cache \
         less>=590-r0 \
         python3~3.10 \
         py3-pip~22 \
-        openssh \
+        openssh-client \
     && pip3 install \
         awscli==$AWSCLI_VERSION \
         pyyaml==5.3.1
