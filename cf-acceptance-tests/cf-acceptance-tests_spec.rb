@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'docker'
 require 'serverspec'
+require 'pathname'
 
 GO_VERSION="1.21.1"
 CF_CLI_VERSION="8.6.0"
@@ -56,6 +57,16 @@ describe "cf-acceptance-tests image" do
     expect(
       command("jq --version").exit_status
     ).to eq(0)
+  end
+
+  it "has psql available" do
+    expect(
+      command("psql --version").exit_status
+    ).to eq(0)
+  end
+
+  it "has postgresql startup script" do
+    expect(Pathname.new('/usr/bin/pg_ctlcluster')).to exist
   end
 
   it "has the CF_PLUGIN_HOME variable set" do

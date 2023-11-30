@@ -1,17 +1,20 @@
 FROM ghcr.io/alphagov/paas/ubuntu:main
 
-RUN apt update \
-    && apt install -y \
-      build-essential \
-      openssh-client \
-      unzip \
-      python3-pip \
-      jq \
-      git \
-      fossil \
-      mercurial \
-      bzr \
-      subversion
+RUN wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc > /etc/apt/trusted.gpg.d/ACCC4CF8.asc \
+  && echo "deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+RUN apt update && apt install -y \
+  build-essential \
+  openssh-client \
+  unzip \
+  python3-pip \
+  jq \
+  git \
+  fossil \
+  mercurial \
+  bzr \
+  subversion \
+  postgresql-12 \
+  postgresql-client-12
 
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
@@ -30,8 +33,8 @@ RUN go install github.com/onsi/ginkgo/v2/ginkgo@latest
 
 # Install the cf CLI
 RUN wget -q -O cf.deb "https://packages.cloudfoundry.org/stable?release=debian64&version=${CF_CLI_VERSION}&source=github-rel" && \
-    dpkg -i cf.deb && \
-    rm -f cf.deb
+  dpkg -i cf.deb && \
+  rm -f cf.deb
 
 # Setup plugins
 ENV CF_PLUGIN_HOME /root/
