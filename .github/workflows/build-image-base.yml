@@ -65,7 +65,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for ghcr
         id: meta-ghcr
-        uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934
+        uses: docker/metadata-action@9dc751fe249ad99385a2583ee0d084c400eee04e
         with:
           images: ghcr.io/alphagov/paas/${{ inputs.image }}
           tags: |
@@ -80,7 +80,7 @@ jobs:
             org.opencontainers.image.title=GOV.UK PaaS ${{ inputs.image }}
       - name: Extract metadata (tags, labels) for docker hub
         id: meta-dockerhub
-        uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934
+        uses: docker/metadata-action@9dc751fe249ad99385a2583ee0d084c400eee04e
         with:
           images: governmentpaas/${{ inputs.image }}
           tags: |
