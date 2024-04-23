@@ -4,6 +4,7 @@ ENV AWSCLI_VERSION "1.19.112"
 
 RUN apt-get update && apt-get install -y \
   curl \
+  vim \
   python3 \
   python3-pip \
   && pip3 install \
