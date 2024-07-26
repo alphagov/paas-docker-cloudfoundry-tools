@@ -2,8 +2,8 @@ FROM ghcr.io/alphagov/paas/bosh-cli-v2:main
 
 ENV AWSCLI_VERSION "1.19.112"
 ENV PATH $PATH:/usr/local/bin
-ENV TERRAFORM_VER 1.5.2
-ENV TERRAFORM_SUM 781ffe0c8888d35b3f5bd0481e951cebe9964b9cfcb27e352f22687975401bcd
+ENV TERRAFORM_VER 1.9.2
+ENV TERRAFORM_SUM d5f5aaba0f8ebff88ef0b23935872e154e2abf3172596261be834605ba3ba714
 ENV TERRAFORM_ZIP terraform_${TERRAFORM_VER}_linux_amd64.zip
 
 RUN apt-get update && apt-get install -y \
