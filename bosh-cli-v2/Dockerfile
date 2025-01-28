@@ -12,8 +12,8 @@ ENV BOSH_ENV_DEPS "build-essential zlibc zlib1g-dev openssl libxslt1-dev \
 
 # These versions are used for caching so that we don't have to rebuild the cpi each time
 # we do the bosh-deploy. This will save around 3-4 mins each deploy
-ENV BOSH_AWS_CPI_URL https://bosh.io/d/github.com/cloudfoundry/bosh-aws-cpi-release?v=101
-ENV BOSH_AWS_CPI_CHECKSUM 12d320570e00636f1e455e588e0462465b02d86a
+ENV BOSH_AWS_CPI_URL https://bosh.io/d/github.com/cloudfoundry/bosh-aws-cpi-release?v=105.0.1
+ENV BOSH_AWS_CPI_CHECKSUM d048049ee85435991cdcb49206f06a8de4687b5b
 
 RUN apt-get update \
   && apt-get -y upgrade \
