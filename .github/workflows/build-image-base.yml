@@ -95,7 +95,7 @@ jobs:
             org.opencontainers.image.title=GOV.UK PaaS ${{ inputs.image }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3
+        uses: docker/setup-qemu-action@4574d27a4764455b42196d70a065bc6853246a25
         with:
           platforms: ${{ inputs.platforms }}
       - name: Set up Docker Buildx
