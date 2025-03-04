@@ -12,7 +12,7 @@ describe "certstrap image" do
   }
 
   it "installs the right version of Ubuntu Linux" do
-    expect(os_version).to include("Ubuntu 22.04.3")
+    expect(os_version).to include("Ubuntu 22.04.5")
     expect(os_version).to include("LTS")
   end
 
