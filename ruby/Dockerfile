@@ -1,1 +1,1 @@
-FROM ruby:3.1-slim
+FROM ruby:3.4-slim
