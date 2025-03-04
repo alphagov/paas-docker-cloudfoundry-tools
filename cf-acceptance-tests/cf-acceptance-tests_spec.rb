@@ -4,8 +4,8 @@ require 'serverspec'
 require 'pathname'
 
 GO_VERSION="1.24.0"
-CF_CLI_VERSION="8.6.0"
-LOG_CACHE_CLI_VERSION="2.1.0"
+CF_CLI_VERSION="8.10.0"
+LOG_CACHE_CLI_VERSION="6.2.1"
 
 describe "cf-acceptance-tests image" do
   before(:all) {
