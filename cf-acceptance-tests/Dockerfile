@@ -40,7 +40,7 @@ RUN wget -q -O cf.deb "https://packages.cloudfoundry.org/stable?release=debian64
 ENV CF_PLUGIN_HOME /root/
 
 # Install the log-cache-cli plugin
-RUN cf install-plugin -f "https://github.com/cloudfoundry/log-cache-cli/releases/download/v${CF_LOG_CACHE_VERSION}/log-cache-cf-plugin-linux"
+RUN cf install-plugin -f "https://github.com/cloudfoundry/log-cache-cli/releases/download/v${CF_LOG_CACHE_VERSION}/log-cache-cf-plugin_${CF_LOG_CACHE_VERSION}_linux_amd64"
 
 # Install the AWS-CLI
 RUN pip install awscli=="1.29.79"
