@@ -19,9 +19,9 @@ RUN apt update && apt install -y \
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 
-ENV GO_VERSION "1.21.1"
-ENV CF_CLI_VERSION "8.6.0"
-ENV CF_LOG_CACHE_VERSION "2.1.0"
+ENV GO_VERSION "1.24.0"
+ENV CF_CLI_VERSION "8.10.0"
+ENV CF_LOG_CACHE_VERSION "6.2.1"
 
 RUN \
   wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz -P /tmp && \
